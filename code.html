@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GKJT - Gereja Kristen Jawa Tengah | Warisan Budaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Marcellus&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1A365D", // Signature GKJ Blue (Deep Navy)
+                "accent-gold": "#C5A059",
+                "cream": "#F9F5F0",
+                "background-light": "#FFFDF9",
+                "neutral-900": "#0F172A",
+                "neutral-600": "#475569",
+                "neutral-100": "#E2E8F0",
+                "sogan-dark": "#361F1D",
+                "gkj-blue-dark": "#0F172A",
+                "gkj-blue-light": "#2B4C7E"
+              },
+              fontFamily: {
+                "display": ["Cinzel", "serif"],
+                "heritage": ["Marcellus", "serif"],
+                "serif-classic": ["Playfair Display", "serif"],
+                "sans": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+          body { font-family: 'Plus Jakarta Sans', sans-serif; }
+          h1, h2, h3, .nav-item { font-family: 'Cinzel', serif; }
+          .font-heritage { font-family: 'Marcellus', serif; }
+          .font-serif-classic { font-family: 'Playfair Display', serif; }
+        }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        :root {
+          --batik-pattern: url('https://www.transparenttextures.com/patterns/batik.png');
+          --batik-kelengan: url('https://www.transparenttextures.com/patterns/cubes.png');
+        }
+        .batik-overlay {
+          background-image: var(--batik-pattern);
+          opacity: 0.08;
+        }
+        .batik-blue-kelengan {
+          position: relative;
+          background-color: #1A365D;
+        }
+        .batik-blue-kelengan::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: var(--batik-pattern);
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        .batik-bg-subtle {
+          position: relative;
+        }
+        .batik-bg-subtle::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: var(--batik-pattern);
+          opacity: 0.04;
+          pointer-events: none;
+        }
+        .ukiran-border {
+            border: 2px solid #C5A059;
+            position: relative;
+            padding: 2rem;
+        }
+        .ukiran-border::before, .ukiran-border::after {
+            content: "✦";
+            position: absolute;
+            color: #C5A059;
+            font-size: 1.5rem;
+            background: #F9F5F0;
+            line-height: 1;
+            padding: 0 10px;
+        }
+        .ukiran-border::before { top: -0.9rem; left: 50%; transform: translateX(-50%); }
+        .ukiran-border::after { bottom: -0.9rem; left: 50%; transform: translateX(-50%); }
+        .carving-frame-javanese {
+            position: relative;
+            border: 3px double #1A365D;
+            padding: 3rem;
+            background-color: rgba(26, 54, 93, 0.02);
+        }
+        .corner-ornament {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #C5A059;
+        }
+        .corner-tl { top: -10px; left: -10px; border-right: 0; border-bottom: 0; }
+        .corner-tr { top: -10px; right: -10px; border-left: 0; border-bottom: 0; }
+        .corner-bl { bottom: -10px; left: -10px; border-right: 0; border-top: 0; }
+        .corner-br { bottom: -10px; right: -10px; border-left: 0; border-top: 0; }
+        .carving-icon-frame {
+            @apply relative flex items-center justify-center;
+            width: 80px;
+            height: 80px;
+            background: #1A365D;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+            border: 2px solid #C5A059;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-neutral-900 transition-colors duration-300">
+<header class="sticky top-0 z-50 w-full bg-white border-b border-neutral-100 px-6 lg:px-20 py-5">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-3">
+<img alt="Logo" class="w-12 h-12 object-contain rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1JlwvyF1U9ENOlMGtH4gmK_Onl3tk7SpyFRI_tZqF_DVxIb5N9bzTCPqWoo-JfEzmb9A2ZxOXDDMf403cfvtZEwdJyfsIi43EnV9FHfXjmIdz6ygCq6FtyEh2H-IjM3X0r5VWZU-lOW0rD1t1gfPl_yxc9ZMq-7TluxDWFlPUKaYAO5_2K9MfEmc7RWWRo1WZkuMxiZO1nrcSPuuTmJr3C6eoo1nH1ZicorbznkwLLcI8926983FjqT9ni1VqzP01rpQmBoS03R2n"/>
+<div class="flex flex-col">
+<span class="text-lg font-bold tracking-widest text-primary font-display leading-tight">GKJ TANGERANG</span>
+<span class="text-[10px] tracking-[0.2em] text-accent-gold font-bold">SINODE GKJT</span>
+</div>
+</div>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-[10px] font-bold tracking-widest text-primary hover:text-accent-gold transition-colors nav-item" href="#">BERANDA</a>
+<a class="text-[10px] font-bold tracking-widest text-neutral-600 hover:text-primary transition-colors nav-item" href="#tentang">TENTANG KAMI</a>
+<a class="text-[10px] font-bold tracking-widest text-neutral-600 hover:text-primary transition-colors nav-item" href="#renungan">RENUNGAN</a>
+<a class="text-[10px] font-bold tracking-widest text-neutral-600 hover:text-primary transition-colors nav-item" href="#pelayanan">PELAYANAN</a>
+<a class="text-[10px] font-bold tracking-widest text-neutral-600 hover:text-primary transition-colors nav-item" href="#kegiatan">KEGIATAN</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-white hover:bg-gkj-blue-dark text-[10px] font-bold py-2.5 px-8 tracking-widest transition-all">
+                DONASI
+            </button>
+</div>
+</div>
+</header>
+<main>
+<section class="relative h-[800px] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.95)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9P7_Qxe0xVwRUSd-ISFdXKCNUotv180ITVg4dujFWySTRXosG1vYKUYI4NqFA1e0TIQ1QDOty5d4T2weFtVYWUXMG-fT55voYuwqOkSIKKVkaBJo8fVUubu7DVcbMX47auKUVQuDlTbnYGwZaza9fHngZiV-vhU9ZkCqh-_10UNF4fVDtO8dbip9MvEQNdxKIaRr-USnq4gR_xGDEITBCdBfubMUByym1XUa3YXN_DaVqbgkcVAEi79nEQ4WtCyNWxKpPEBaoo3lG');">
+</div>
+<div class="absolute inset-0 batik-overlay z-[1] opacity-20"></div>
+<div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+<div class="flex items-center justify-center gap-6 mb-8">
+<div class="h-[1px] w-16 bg-accent-gold"></div>
+<span class="text-accent-gold text-sm font-bold tracking-[0.4em] uppercase font-heritage">Sugeng Rawuh — Selamat Datang</span>
+<div class="h-[1px] w-16 bg-accent-gold"></div>
+</div>
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-display text-white leading-tight mb-8">
+                Ngabekti Kanthi <br/><span class="text-accent-gold italic font-serif-classic">Tulus lan Asih</span>
+</h1>
+<p class="text-lg md:text-2xl text-white/80 font-serif-classic italic mb-12 max-w-3xl mx-auto leading-relaxed">
+                "Menjadi saksi Kristus yang menghidupi iman di tengah indahnya budaya Jawa Tengah."
+            </p>
+<div class="flex flex-col sm:flex-row gap-6 justify-center">
+<button class="bg-primary hover:bg-gkj-blue-dark text-white font-bold py-5 px-12 text-[10px] tracking-[0.3em] transition-all border border-primary">
+                    IBADAH LIVE
+                </button>
+<button class="bg-transparent hover:bg-white/10 text-white border-2 border-white/30 font-bold py-5 px-12 text-[10px] tracking-[0.3em] transition-all">
+                    JADWAL KEGIATAN
+                </button>
+</div>
+</div>
+</section>
+<section class="py-24 px-6 lg:px-20 bg-cream batik-bg-subtle relative overflow-hidden">
+<div class="max-w-4xl mx-auto">
+<div class="carving-frame-javanese">
+<div class="corner-ornament corner-tl"></div>
+<div class="corner-ornament corner-tr"></div>
+<div class="corner-ornament corner-bl"></div>
+<div class="corner-ornament corner-br"></div>
+<div class="text-center space-y-8 relative z-10">
+<div class="flex flex-col items-center gap-2">
+<span class="material-symbols-outlined text-primary text-4xl">calendar_month</span>
+<h2 class="text-3xl md:text-4xl font-display text-primary tracking-widest uppercase">Pratélan Ibadah mawi Basa Jawi</h2>
+<div class="w-24 h-[1px] bg-accent-gold mt-4"></div>
+</div>
+<div class="grid gap-6">
+<div class="flex flex-col md:flex-row items-center justify-between border-b border-primary/20 pb-4 group">
+<span class="text-xl font-serif-classic italic text-neutral-900 group-hover:text-primary transition-colors">Ibadah Minggu Enjing</span>
+<span class="text-lg font-heritage tracking-widest text-primary font-bold">Pkl 07.00 WIB</span>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between border-b border-primary/20 pb-4 group">
+<span class="text-xl font-serif-classic italic text-neutral-900 group-hover:text-primary transition-colors">Ibadah Minggu Sonten</span>
+<span class="text-lg font-heritage tracking-widest text-primary font-bold">Pkl 17.00 WIB</span>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between group">
+<span class="text-xl font-serif-classic italic text-neutral-900 group-hover:text-primary transition-colors">Pamulangan leresipun Sabda</span>
+<span class="text-lg font-heritage tracking-widest text-primary font-bold">Pkl 19.00 WIB</span>
+</div>
+</div>
+<p class="text-[10px] tracking-[0.3em] text-primary font-bold uppercase mt-8 italic">Sedaya titi laksana kaaturaken kanthi raos syukur</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-6 lg:px-20 batik-blue-kelengan text-white" id="tentang">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<div class="aspect-[4/5] overflow-hidden border-[12px] border-white shadow-2xl relative">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAo-8awlRlpWAsbLLkB-mpInA43pKjyG3HmOG1cFRzlt_XYbzSORjVy720VnjVsMveDuP8OdhgDa6b9cp1GlKgEEdHdtk_LKlVZjXnTsfW1XntHF-jdNLuAj8_LVwQlQ5AUcinHOQ1s5pN66rAX9XP84C5ecREuwl7gfDkMzGuCLmqM8c7nr69zvVZu11dBVGYZZ02ggftsh9cgmYIoEnfsCtJnkcLK_rm0ZEXDosvYDuQ5VbjF8cmokMS5cGJvcqCWAXg8hGM-B1EO');"></div>
+</div>
+<div class="absolute -bottom-10 -right-10 bg-white p-12 shadow-2xl border-2 border-primary hidden md:block">
+<p class="text-primary text-6xl font-display italic">50+</p>
+<p class="text-primary/80 text-[10px] tracking-[0.3em] uppercase mt-2 font-bold">Warsa Meladosi</p>
+</div>
+</div>
+<div class="flex flex-col gap-8 relative z-10">
+<span class="text-accent-gold font-bold tracking-[0.4em] text-xs font-heritage">WARISAN IMAN</span>
+<h2 class="text-4xl md:text-6xl font-display text-white leading-tight">Pasamuwan Kristen Jawa Tengah</h2>
+<p class="text-white/80 text-xl font-serif-classic italic leading-relaxed">
+                    GKJT minangka pasrawungan ingkang nengenaken kearifan lokal lan piwulang Injil ingkang murni.
+                </p>
+<p class="text-white/70 text-md leading-relaxed">
+                    Kami adalah persekutuan yang berakar pada tradisi leluhur Jawa, merawat kasih persaudaraan, dan menjadi terang di tengah masyarakat melalui pelayanan yang tulus.
+                </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-6">
+<div class="flex flex-col gap-4">
+<span class="material-symbols-outlined text-accent-gold text-5xl">potted_plant</span>
+<h3 class="font-bold text-xl text-white font-display">Misi Kami</h3>
+<p class="text-white/60 text-sm leading-relaxed">Ngrembakaaken pasrawungan ingkang laras kaliyan karsanipun Gusti.</p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="material-symbols-outlined text-accent-gold text-5xl">handshake</span>
+<h3 class="font-bold text-xl text-white font-display">Visi Kami</h3>
+<p class="text-white/60 text-sm leading-relaxed">Menjadi garam dan terang yang menyejukkan hati bagi seluruh warga.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-6 lg:px-20 bg-white" id="pelayanan">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col items-center text-center mb-24">
+<div class="w-24 h-[1px] bg-primary mb-6"></div>
+<h2 class="text-4xl md:text-6xl font-display text-primary mb-6 uppercase tracking-wider">Pelayanan Jemaat</h2>
+<p class="text-accent-gold max-w-2xl text-xl font-serif-classic italic">"Ladosan kanthi niyat ingkang tulus saha asih."</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="bg-cream p-12 border-b-8 border-accent-gold shadow-sm hover:shadow-2xl transition-all group text-center flex flex-col items-center">
+<div class="carving-icon-frame mb-10 group-hover:bg-accent-gold transition-colors duration-500">
+<span class="material-symbols-outlined text-white text-4xl">temple_hindu</span>
+</div>
+<h3 class="text-2xl font-display text-neutral-900 mb-6 uppercase tracking-widest">Ibadah Utama</h3>
+<p class="text-neutral-600 mb-10 text-sm leading-relaxed italic">Persekutuan khidmat yang menggabungkan liturgi Jawa dan kontemporer.</p>
+<div class="w-full pt-8 border-t border-neutral-100 flex justify-center gap-4 text-primary text-xs font-bold tracking-widest">
+<span class="material-symbols-outlined text-accent-gold text-lg">schedule</span>
+                        TABUH 07:00 &amp; 17:00 WIB
+                    </div>
+</div>
+<div class="bg-cream p-12 border-b-8 border-primary shadow-sm hover:shadow-2xl transition-all group text-center flex flex-col items-center">
+<div class="carving-icon-frame mb-10 group-hover:bg-accent-gold transition-colors duration-500">
+<span class="material-symbols-outlined text-white text-4xl">diversity_3</span>
+</div>
+<h3 class="text-2xl font-display text-neutral-900 mb-6 uppercase tracking-widest">Warga Jemaat</h3>
+<p class="text-neutral-600 mb-10 text-sm leading-relaxed italic">Wadah bagi pemuda, ibu, dan bapak untuk berbagi dalam persekutuan kasih.</p>
+<div class="w-full pt-8 border-t border-neutral-100 flex justify-center gap-4 text-primary text-xs font-bold tracking-widest">
+<span class="material-symbols-outlined text-accent-gold text-lg">calendar_month</span>
+                        JADWAL MINGGUAN
+                    </div>
+</div>
+<div class="bg-cream p-12 border-b-8 border-accent-gold shadow-sm hover:shadow-2xl transition-all group text-center flex flex-col items-center">
+<div class="carving-icon-frame mb-10 group-hover:bg-accent-gold transition-colors duration-500">
+<span class="material-symbols-outlined text-white text-4xl">auto_stories</span>
+</div>
+<h3 class="text-2xl font-display text-neutral-900 mb-6 uppercase tracking-widest">Paugeran Iman</h3>
+<p class="text-neutral-600 mb-10 text-sm leading-relaxed italic">Membangun keintiman melalui pendalaman Alkitab dan doa setiap harinya.</p>
+<div class="w-full pt-8 border-t border-neutral-100 flex justify-center gap-4 text-primary text-xs font-bold tracking-widest">
+<span class="material-symbols-outlined text-accent-gold text-lg">history_edu</span>
+                        SABEN DINTEN
+                    </div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-6 lg:px-20 bg-primary relative overflow-hidden" id="renungan">
+<div class="absolute inset-0 batik-overlay opacity-10"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="bg-white/5 backdrop-blur-sm border border-accent-gold/30 p-12 md:p-24 flex flex-col lg:flex-row items-center gap-16 shadow-2xl">
+<div class="flex-1 space-y-10">
+<div class="flex items-center gap-4 text-accent-gold font-bold tracking-[0.4em] uppercase text-[10px]">
+<span class="h-[1px] w-8 bg-accent-gold"></span>
+                        Renungan Harian
+                    </div>
+<div class="space-y-6">
+<h2 class="text-3xl md:text-5xl font-serif-classic italic text-white leading-tight">
+                            "Gusti Yesus Kristus punika mergi, sarta kayektan, tuwin gesang"
+                        </h2>
+<p class="text-xl text-accent-gold font-heritage tracking-wide italic">
+                            "Akulah jalan dan kebenaran dan hidup" — Yohanes 14:6
+                        </p>
+</div>
+<p class="text-lg text-white/70 leading-relaxed max-w-2xl font-serif-classic">
+                        Wonten ing gesang punika, kita asring kelangan arah. Nanging Gusti Yesus paring janji bilih Panjenenganipun punika margi ingkang leres. Marilah kita terus berjalan dalam tuntunan-Nya, menjaga iman tetap teguh di tengah badai duniawi.
+                    </p>
+<button class="bg-accent-gold hover:bg-white text-primary font-bold py-5 px-12 transition-all text-[10px] tracking-[0.3em]">
+                        MAOS SALAJENGIPUN
+                    </button>
+</div>
+<div class="w-full lg:w-1/3 group">
+<div class="aspect-[3/4] border-[12px] border-white/10 shadow-3xl overflow-hidden relative">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDzLrjQZR8-JH71akhr9xYjrHIACvw-bZ5uZaorENhrn_hSffKoEcCiNjHE5F9Xkjpd_ljFILPNhZH3X6-mVjOwKTSMl1zNeD7LnbiiuZm9q7qG1ofZqA9zvE3O_RJ5kEb5gYF09f9eW61lQOZUdr-9sleJ9f82cZRvwsdsFzezbpsu6Qs2c7f75dlVAVnASD_E2FEu-BrVc1pV2B_94heb9qyTq0JeUlPB-Ry7HPZQtWB9CFXd0QqoQMnBWicZcaSKzMcC0WN4Nzn6');"></div>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-6 lg:px-20 bg-background-light" id="galeri">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<span class="text-primary font-bold tracking-[0.4em] text-xs font-heritage block mb-4 uppercase">Kadhangan Budaya</span>
+<h2 class="text-4xl md:text-6xl font-display text-neutral-900 mb-6 uppercase">Galeri Warga</h2>
+<p class="text-neutral-600 font-serif-classic italic text-lg">Keharmonisan jemaat dalam balutan busana tradisi (Batik, Kebaya, &amp; Beskap).</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative group">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7b2IebQd6xlPu6TtGm9Un1vggGZzCQp2fsMM4bgc7X9a8W-2D1SBNJtu7hKjtdk7z2WzXvSIabvKBxXtdNUoJCzf5PAFiOFJGq8hauNPlaKd-uXufqtzJcxhLcsPxOhmqsSmaiIu-v6yJlehd3uMj_i-9HnVwHkvdg1ijLtpGLny8ryNQEaB8QIYzdlUFuiC1HDtxnMLS7WTVAeOaHSB45fWXKdWm22gLesXjLzICR57aCom-goqCwTT0hd0a3EfrsVrBGkVcQY53');"></div>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="text-white text-xs font-bold tracking-widest uppercase border border-white p-4">Ibadah Minggu</span>
+</div>
+</div>
+<div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative group">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpRTabc8qvT45kufgMsKwJfsWUBfJT0dI66JX0YrMDrPTgCRmqqKeo8Z-t320Zzyxlrsi1ZW-HGS__JIKsy9SPw1b-Zb4pgYHO4G2sLLIEGupajzw2ArBnwy_yippMB5vVJxUVmQMVxTYzZU11O3Xh2XnwefXHYbxex2n01lzkstdWkWpBmaPJWzEe8UfNMz5pm9ZkClIxg6cp04t7SM_kkvT7_JgI50EHqsIV5aai6iGxyWagnOlDedwFvyA-SNYEqC6-x-in7Cc8');"></div>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="text-white text-xs font-bold tracking-widest uppercase border border-white p-4">Pasamuwan</span>
+</div>
+</div>
+<div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative group">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_dl2hbYMHSUiFkt4Lnw_NN0C-cgtMWcfXBf8BEkHTz_tqEIs-lEitPXDRm3GBSHg0LEqc1fEizQofIXaAPONfli_LzcHNtu0IUkEQDk_Tuc3BPHVgI9fzvzXXqFC-yfH1JiXLjQBIaGXcNyMWCrvbVTIqcpEgQUauIiSNjH8JGO-nurzlp-NmrnUXTPceCzMrMY1RydzJAuzVK-L3xYie9MyzKwbKwGrB-Tv_hPSK_-EMy2c2Erhc99sMFpUggv7JxT5XjeFbQI-S');"></div>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="text-white text-xs font-bold tracking-widest uppercase border border-white p-4">Paduan Suara</span>
+</div>
+</div>
+<div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative group">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDjlSlIVIhegpd2PyDHbbkB2R2ZJBO0WfAuyy_MwuMICeK-kIkUV8loIa_oaZYS7SQnhZoXsKxzYdd7zAYWKnBHgghzeTbdUbbHAufJNWImnnilIN6uV8Gb44VsoyLqmPSXciJLUN57rgqWFwP95lXqJVvmjSzWwLgTvmSD7Ra1q755OgbL2CBFKgCuR8BlPJrbad2DoBRg5QzccgUA2IyGLWtk5USYJF6_fUWti0IDBrJU8MZvNhO5Lw2QaP4431mmF0dsYXh188tX');"></div>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="text-white text-xs font-bold tracking-widest uppercase border border-white p-4">Kegiatan Remaja</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 px-6 lg:px-20 bg-cream batik-bg-subtle" id="kegiatan">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col lg:flex-row gap-16">
+<div class="lg:w-2/3">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-3xl font-display text-primary mb-2 uppercase tracking-wider">Pawartos Jemaat</h2>
+<p class="text-neutral-600 font-serif-classic italic">Warta dan kegiatan terbaru komunitas GKJT.</p>
+</div>
+<button class="text-[10px] font-bold text-primary hover:text-accent-gold tracking-[0.2em] uppercase border-b border-primary pb-1 transition-all">
+                            LIHAT SEMUA
+                        </button>
+</div>
+<div class="space-y-8">
+<article class="flex flex-col md:flex-row gap-8 bg-white p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all border border-neutral-100">
+<div class="md:w-1/3 aspect-video md:aspect-square overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDzLrjQZR8-JH71akhr9xYjrHIACvw-bZ5uZaorENhrn_hSffKoEcCiNjHE5F9Xkjpd_ljFILPNhZH3X6-mVjOwKTSMl1zNeD7LnbiiuZm9q7qG1ofZqA9zvE3O_RJ5kEb5gYF09f9eW61lQOZUdr-9sleJ9f82cZRvwsdsFzezbpsu6Qs2c7f75dlVAVnASD_E2FEu-BrVc1pV2B_94heb9qyTq0JeUlPB-Ry7HPZQtWB9CFXd0QqoQMnBWicZcaSKzMcC0WN4Nzn6');"></div>
+</div>
+<div class="md:w-2/3 flex flex-col justify-center">
+<p class="text-primary text-[10px] font-bold mb-3 tracking-[0.3em] uppercase">12 OKTOBER 2023</p>
+<h3 class="text-2xl font-display text-neutral-900 group-hover:text-primary transition-colors leading-tight mb-4">Bakti Sosial: Berbagi Kasih di Lingkungan Sekitar</h3>
+<p class="text-neutral-600 text-sm leading-relaxed line-clamp-2 italic mb-4">"Nulung kanca, mring pepadhane."</p>
+<span class="text-primary text-[10px] font-bold tracking-widest uppercase">BACA SELENGKAPNYA →</span>
+</div>
+</article>
+<article class="flex flex-col md:flex-row gap-8 bg-white p-6 shadow-sm group cursor-pointer hover:shadow-xl transition-all border border-neutral-100">
+<div class="md:w-1/3 aspect-video md:aspect-square overflow-hidden">
+<div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkKBVc1VB09axZQ4zelvrPM9Seu8VHnwe95BqchYog8-I_JAurvPL8GpPjxYDlnRUwxW88gbi8Juk2CXiVuhpV77zQZZFTVK32gBqeb1Ptvwaz6msK1_GTNGy-CG10v_v7R03BqvScnPjIt3nzYtgSMyAYeMn6Vr03Xl1d8QXgZnJWDAY4bwj2i52CBxg6pKTzj8-98g-8TMootLX3khZ5TW0y4L6sPvzbFuEi6mkgxWxjk6oK-zueqOAmdxGbEA6XJ7xQg5HZmojC');"></div>
+</div>
+<div class="md:w-2/3 flex flex-col justify-center">
+<p class="text-primary text-[10px] font-bold mb-3 tracking-[0.3em] uppercase">05 OKTOBER 2023</p>
+<h3 class="text-2xl font-display text-neutral-900 group-hover:text-primary transition-colors leading-tight mb-4">Malam Pujian: Gemuruh Suara Kesaksian</h3>
+<p class="text-neutral-600 text-sm leading-relaxed line-clamp-2 italic mb-4">"Kidungan asih kagem Gusti."</p>
+<span class="text-primary text-[10px] font-bold tracking-widest uppercase">BACA SELENGKAPNYA →</span>
+</div>
+</article>
+</div>
+</div>
+<div class="lg:w-1/3">
+<div class="bg-primary p-10 text-white relative h-full flex flex-col">
+<div class="absolute inset-0 batik-overlay opacity-5"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="mb-10">
+<h2 class="text-3xl font-display mb-4 text-accent-gold uppercase tracking-wider">Kunjungi Kami</h2>
+<p class="text-white/70 text-sm leading-relaxed italic">"Sumonggo pinarak ing pasrawungan kito."</p>
+</div>
+<div class="mb-8 w-full h-[250px] shadow-2xl border-2 border-accent-gold overflow-hidden">
+<iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126743.58585984628!2d110.3470241857922!3d-7.009170247071167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708b4952618039%3A0x296f8742d4a5840d!2sSemarang%2C%20Semarang%20City%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1696860000000!5m2!1sen!2sid" style="border:0;" width="100%"></iframe>
+</div>
+<div class="space-y-6 flex-grow">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-accent-gold">location_on</span>
+<p class="text-white/70 text-[11px] leading-relaxed font-bold tracking-wider">Jl. Gereja No. 123, Mugassari, Kota Semarang</p>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-accent-gold">call</span>
+<p class="text-white/70 text-[11px] leading-relaxed font-bold tracking-wider">(024) 123-4567</p>
+</div>
+</div>
+<div class="pt-8 grid grid-cols-2 gap-4">
+<button class="bg-accent-gold text-primary font-bold py-4 text-[9px] tracking-[0.2em] transition-all hover:bg-white uppercase">MAPS</button>
+<button class="bg-transparent border border-white/30 text-white font-bold py-4 text-[9px] tracking-[0.2em] transition-all hover:bg-white/10 uppercase">WHATSAPP</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-gkj-blue-dark pt-32 pb-12 px-6 lg:px-20 text-white border-t-8 border-primary relative">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 border-b border-white/10 pb-20">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-4">
+<img alt="Logo" class="w-12 h-12 grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1JlwvyF1U9ENOlMGtH4gmK_Onl3tk7SpyFRI_tZqF_DVxIb5N9bzTCPqWoo-JfEzmb9A2ZxOXDDMf403cfvtZEwdJyfsIi43EnV9FHfXjmIdz6ygCq6FtyEh2H-IjM3X0r5VWZU-lOW0rD1t1gfPl_yxc9ZMq-7TluxDWFlPUKaYAO5_2K9MfEmc7RWWRo1WZkuMxiZO1nrcSPuuTmJr3C6eoo1nH1ZicorbznkwLLcI8926983FjqT9ni1VqzP01rpQmBoS03R2n"/>
+<span class="text-2xl font-display tracking-[0.2em] text-accent-gold">GKJT</span>
+</div>
+<p class="text-white/50 text-sm leading-relaxed font-serif-classic italic">
+                "Pasamuwaning Gusti ingkang ngrembaka ing satengahing kabudayan Jawi, merawat warisan, membangun masa depan."
+            </p>
+<div class="flex gap-4">
+<a class="size-12 bg-white/5 border border-white/10 flex items-center justify-center hover:border-accent-gold hover:bg-accent-gold transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="size-12 bg-white/5 border border-white/10 flex items-center justify-center hover:border-accent-gold hover:bg-accent-gold transition-all" href="#">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<h4 class="text-xs font-bold tracking-[0.4em] uppercase text-accent-gold font-heritage">Navigasi</h4>
+<nav class="flex flex-col gap-4 text-xs tracking-widest uppercase">
+<a class="text-white/40 hover:text-accent-gold transition-colors" href="#tentang">Tentang Kami</a>
+<a class="text-white/40 hover:text-accent-gold transition-colors" href="#pelayanan">Jadwal Ibadah</a>
+<a class="text-white/40 hover:text-accent-gold transition-colors" href="#renungan">Renungan Harian</a>
+<a class="text-white/40 hover:text-accent-gold transition-colors" href="#kegiatan">Warta Jemaat</a>
+</nav>
+</div>
+<div class="flex flex-col gap-8">
+<h4 class="text-xs font-bold tracking-[0.4em] uppercase text-accent-gold font-heritage">Kontak</h4>
+<div class="flex flex-col gap-6 text-xs tracking-widest uppercase text-white/40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-accent-gold">phone</span>
+<span>(024) 123-4567</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-accent-gold">mail</span>
+<span>info@gkjt.or.id</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<h4 class="text-xs font-bold tracking-[0.4em] uppercase text-accent-gold font-heritage">Warta Email</h4>
+<p class="text-xs text-white/40 leading-relaxed font-serif-classic italic">Berlangganan warta iman mingguan.</p>
+<div class="flex">
+<input class="bg-white/5 border-white/10 px-6 py-4 flex-1 focus:ring-accent-gold focus:border-accent-gold text-xs text-white placeholder-white/20" placeholder="EMAIL ANDA" type="email"/>
+<button class="bg-accent-gold px-8 py-4 text-primary text-[10px] font-bold tracking-[0.3em] transition-all hover:bg-white">DAFTAR</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-12 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] tracking-[0.4em] uppercase text-white/20">
+<p>© 2023 GEREJA KRISTEN JAWA TENGAH. SINODE GKJT.</p>
+<div class="flex gap-10">
+<a class="hover:text-white transition-colors" href="#">PRIVASI</a>
+<a class="hover:text-white transition-colors" href="#">SYARAT</a>
+</div>
+</div>
+</footer>
+
+</body></html>
