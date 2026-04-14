@@ -29,21 +29,22 @@ class Blog extends CI_Controller
 		$config['total_rows'] = $jum->num_rows();
 		$config['per_page'] = $limit;
 		$config['uri_segment'] = 3;
-		//Tambahan untuk styling
-		$config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+		//Tambahan untuk styling Tailwind
+		$config['full_tag_open']    = '<div class="w-full flex justify-center mt-4"><nav><ul class="flex items-center gap-2">';
 		$config['full_tag_close']   = '</ul></nav></div>';
-		$config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-		$config['num_tag_close']    = '</span></li>';
-		$config['cur_tag_open']     = '<li class="page-item"><span class="page-link">';
-		$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-		$config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-		$config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['prev_tagl_close']  = '</span>Next</li>';
-		$config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-		$config['first_tagl_close'] = '</span></li>';
-		$config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-		$config['last_tagl_close']  = '</span></li>';
+		$config['num_tag_open']     = '<li>';
+		$config['num_tag_close']    = '</li>';
+		$config['cur_tag_open']     = '<li><span class="flex h-10 w-10 items-center justify-center bg-secondary text-sm font-bold text-white shadow-soft">';
+		$config['cur_tag_close']    = '</span></li>';
+		$config['next_tag_open']    = '<li>';
+		$config['next_tagl_close']  = '</li>';
+		$config['prev_tag_open']    = '<li>';
+		$config['prev_tagl_close']  = '</li>';
+		$config['first_tag_open']   = '<li>';
+		$config['first_tagl_close'] = '</li>';
+		$config['last_tag_open']    = '<li>';
+		$config['last_tagl_close']  = '</li>';
+		$config['attributes']       = array('class' => 'flex h-10 px-4 items-center justify-center border border-primary/20 bg-white text-sm font-bold text-primary transition hover:bg-secondary hover:text-white hover:border-transparent');
 		$config['first_link'] = 'Awal';
 		$config['last_link'] = 'Akhir';
 		$config['next_link'] = 'Next >>';
@@ -55,9 +56,8 @@ class Blog extends CI_Controller
 		// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
 		$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 		$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-		$this->load->view('depan/v_menu', $x);
-		$this->load->view('depan/v_blog', $x);
-		$this->load->view('depan/v_footer', $x);
+		$x['content'] = 'depan/v_blog';
+		$this->load->view('layout/main', $x);
 	}
 	function detail($slugs)
 	{
@@ -87,9 +87,8 @@ class Blog extends CI_Controller
 			// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
 			$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 			$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_blog_detail', $x);
-			$this->load->view('depan/v_footer', $x);
+			$x['content'] = 'depan/v_blog_detail';
+			$this->load->view('layout/main', $x);
 		} else {
 			redirect('artikel');
 		}
@@ -110,9 +109,8 @@ class Blog extends CI_Controller
 			// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
 			$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 			$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_blog', $x);
-			$this->load->view('depan/v_footer', $x);
+			$x['content'] = 'depan/v_blog';
+			$this->load->view('layout/main', $x);
 		} else {
 			//  echo $this->session->set_flashdata('msg','<div class="alert alert-danger">Tidak Ada artikel untuk kategori <b>'.$kategori.'</b></div>');
 			//  redirect('blog');
@@ -122,9 +120,8 @@ class Blog extends CI_Controller
 			// $x['category']=$this->db->get('tbl_kategori');
 			$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 			$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_oops', $x);
-			$this->load->view('depan/v_footer', $x);
+			$x['content'] = 'depan/v_oops';
+			$this->load->view('layout/main', $x);
 		}
 	}
 
@@ -141,9 +138,8 @@ class Blog extends CI_Controller
 			$x['data'] = $query;
 			$x['category'] = $this->db->get('tbl_kategori');
 			$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_blog', $x);
-			$this->load->view('depan/v_footer', $x);
+			$x['content'] = 'depan/v_blog';
+			$this->load->view('layout/main', $x);
 		} else {
 			//  echo $this->session->set_flashdata('msg','<div class="alert alert-danger">Tidak dapat menemukan artikel dengan kata kunci <b>'.$keyword.'</b></div>');
 			//  redirect('blog');
@@ -154,9 +150,8 @@ class Blog extends CI_Controller
 			// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
 			$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 			$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_oops', $x);
-			$this->load->view('depan/v_footer', $x);
+			$x['content'] = 'depan/v_oops';
+			$this->load->view('layout/main', $x);
 		}
 	}
 

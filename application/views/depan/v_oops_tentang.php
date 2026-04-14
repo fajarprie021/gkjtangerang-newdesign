@@ -1,98 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
+<?php
+    if(!function_exists('limit_words')) {
         function limit_words($string, $word_limit){
             $words = explode(" ",$string);
             return implode(" ",array_splice($words,0,$word_limit));
         }
-    ?>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo "SORRY, PAGE NOT FOUND";?></title>
-    <!-- <link rel="shorcut icon" href="<?php echo base_url().'theme/images/icon.png'?>"> -->
-    <link rel="shorcut icon" href="<?php echo base_url().'theme/images/logo-gkj-tab.png'?>">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/bootstrap.min.css'?>">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/font-awesome.min.css'?>">
-    <!-- Simple Line Font -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/simple-line-icons.css'?>">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/owl.carousel.min.css'?>">
-    <!-- Main CSS -->
-    <link href="<?php echo base_url().'theme/css/style.css'?>" rel="stylesheet">
-    <!--Social Share-->
-    <link href="<?php echo base_url().'theme/css/jssocials.css'?>" rel="stylesheet">
-    <link href="<?php echo base_url().'theme/css/jssocials-theme-flat.css'?>" rel="stylesheet">
-    <style>
-    	.sharePopup{
-    		font-size: 11px;
-    	}
-      .sharePopup a{
-    		font-size: 11px;
-        color: #fff;
-        text-decoration: none;
-    	}
-    </style>
-
-</head>
-
-<body>
-  <!--============================= HEADER =============================-->
-  
-<!--//END HEADER -->
-<!--============================= BLOG =============================-->
-<section class="blog-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="blog-img_block">
-                    <img src="<?php echo base_url().'assets/images/error-404.jpg'?>" class="img-fluid" alt="blog-img">
-                </div>
-            </div>
-            <div class="col-md-4">
-
-            </div>
-        </div>
+    }
+?>
+<section class="bg-cream px-6 py-24 min-h-screen flex flex-col items-center justify-center">
+  <div class="mx-auto max-w-3xl text-center">
+    
+    <!-- Article Header -->
+    <div class="mb-12">
+        <?php 
+        $this->load->view('components/section_header_center', array(
+            'eyebrow' => 'Kesalahan URL',
+            'title'   => 'HALAMAN TIDAK DITEMUKAN'
+        )); 
+        ?>
     </div>
+
+    <!-- Error Content -->
+    <div class="bg-primary/10 border-t-4 border-primary p-12 shadow-soft mb-12">
+        <h4 class="font-headline text-2xl text-primary mb-4">Mohon Maaf</h4>
+        <p class="text-gray-700 font-serif leading-relaxed mb-8">
+            <?php echo isset($pesan) ? $pesan : 'Informasi profil, sejarah, atau halaman yang Anda tuju tidak tersedia atau telah dipindahkan.'; ?>
+        </p>
+        
+        <?php 
+        $this->load->view('components/cta_underline', array(
+            'url' => site_url(),
+            'text' => 'KEMBALI KE BERANDA'
+        )); 
+        ?>
+    </div>
+
+  </div>
 </section>
-<!--//END BLOG -->
-<!--============================= FOOTER =============================-->
-
-        <!--//END FOOTER -->
-        <!-- jQuery, Bootstrap JS. -->
-        <script src="<?php echo base_url().'theme/js/jquery.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/tether.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/bootstrap.min.js'?>"></script>
-        <!-- Plugins -->
-        <script src="<?php echo base_url().'theme/js/owl.carousel.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/validate.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/tweetie.min.js'?>"></script>
-        <!-- Subscribe -->
-        <script src="<?php echo base_url().'theme/js/subscribe.js'?>"></script>
-        <!-- Script JS -->
-        <script src="<?php echo base_url().'theme/js/script.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/jssocials.js'?>"></script>
-        <script>
-          $(document).ready(function(){
-            $(".sharePopup").jsSocials({
-                  showCount: true,
-            			showLabel: true,
-            			shareIn: "popup",
-            			shares: [
-            			{ share: "twitter", label: "Twitter" },
-            			{ share: "facebook", label: "Facebook" },
-            			{ share: "googleplus", label: "Google+" },
-            			{ share: "linkedin", label: "Linked In" },
-                  { share: "pinterest", label: "Pinterest" }
-            			]
-                });
-          });
-        </script>
-    </body>
-
-    </html>

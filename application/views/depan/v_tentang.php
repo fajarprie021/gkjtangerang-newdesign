@@ -1,126 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
+<?php
+    if(!function_exists('limit_words')) {
         function limit_words($string, $word_limit){
             $words = explode(" ",$string);
             return implode(" ",array_splice($words,0,$word_limit));
         }
-    ?>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo $title;?></title>
-    <!-- <link rel="shorcut icon" href="<?php echo base_url().'theme/images/icon.png'?>"> -->
-    <link rel="shorcut icon" href="<?php echo base_url().'theme/images/logo-gkj-tab.png'?>">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/bootstrap.min.css'?>">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/font-awesome.min.css'?>">
-    <!-- Simple Line Font -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/simple-line-icons.css'?>">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="<?php echo base_url().'theme/css/owl.carousel.min.css'?>">
-    <!-- Main CSS -->
-    <link href="<?php echo base_url().'theme/css/style.css'?>" rel="stylesheet">
-    <!--Social Share-->
-    <link href="<?php echo base_url().'theme/css/jssocials.css'?>" rel="stylesheet">
-    <link href="<?php echo base_url().'theme/css/jssocials-theme-flat.css'?>" rel="stylesheet">
-    <style>
-    	.sharePopup{
-    		font-size: 11px;
-    	}
-      .sharePopup a{
-    		font-size: 11px;
-        color: #fff;
-        text-decoration: none;
-    	}
-    </style>
-
-</head>
-
-<body>
-  <!--============================= HEADER =============================-->
-  
-<!--//END HEADER -->
-<!--============================= BLOG =============================-->
-<section class="blog-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="blog-img_block">
-                    <img src="<?php echo base_url().'assets/images/'.$image?>" class="img-fluid" alt="blog-img">
-                    <!-- <div class="blog-date">
-                        <span><?php echo $tanggal;?></span>
-                    </div> -->
-                </div>
-                <div class="blog-tiltle_block">
-                    <!-- <h4><a href="<?php echo site_url('artikel/'.$slug);?>"><?php echo $title;?></a></h4> -->
-                    <h2 class="event-title"><?php echo $title;?></h2>
-                    <!-- <h6> <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span><?php echo $author;?></span> </a>  |   <a href="#"><i class="fa fa-tags" aria-hidden="true"></i><span><?php echo $kategori;?></span></a></h6> -->
-                    <!-- <h6> <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span><?php echo $author;?></span> </a>  |   <a href="#"><i class="fa fa-tags" aria-hidden="true"></i><span><?php echo $title;?></span></a></h6> -->
-                    <h6> <a href="#"><i class="fa fa-user" aria-hidden="true"></i><span><?php echo $author;?></span> </a>  |   <a href="#"><i class="fa fa-tags" aria-hidden="true"></i><span><?php echo $kategori;?></span></a></h6>
-                    <?php echo $blog;?>
-                </div>
-
-                <div class="blog-tiltle_block">
-
-                    <div class="blog-icons">
-                        <div class="blog-share_block">
-                          <div class="pull-left"><h5>Bagikan Ke:</h5></div>
-                          <div class="sharePopup"></div>
-                        </div>
-                    </div>
-                    <!-- Nav tabs -->
-                    <div class="clearfix"></div>
-                    <?php echo $this->session->flashdata('msg');?>
-                    <div class="blogpost-tabs">
-                        <!-- Tab panes -->
-                        
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-
-            </div>
+    }
+?>
+<section class="bg-cream px-6 py-24 min-h-screen">
+  <div class="mx-auto max-w-4xl">
+    
+    <!-- Article Header -->
+    <div class="text-center mb-12">
+        <?php 
+        $this->load->view('components/section_header_center', array(
+            'eyebrow' => 'Informasi',
+            'title'   => isset($title) ? $title : 'Profil'
+        )); 
+        ?>
+        <?php if(isset($author) && isset($kategori)): ?>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm text-muted font-serif">
+            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">person</span> <?php echo $author;?></span>
+            <span class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-sm">label</span> <?php echo $kategori;?></span>
         </div>
+        <?php endif; ?>
     </div>
+
+    <!-- Featured Image -->
+    <?php if(!empty($image)): ?>
+    <div class="mb-16 overflow-hidden shadow-soft rounded-lg">
+        <img src="<?php echo base_url().'assets/images/'.$image?>" class="w-full h-auto object-cover" alt="Image">
+    </div>
+    <?php endif; ?>
+
+    <!-- Content -->
+    <?php if(!empty($blog)): ?>
+    <div class="prose max-w-none text-gray-700 leading-loose font-serif prose-headings:font-headline prose-headings:text-primary prose-a:text-secondary bg-white p-8 md:p-16 shadow-soft mb-12 border-t-4 border-secondary">
+        <?php echo $blog;?>
+    </div>
+    <?php endif; ?>
+
+    <!-- Share Block -->
+    <div class="border-t border-b border-primary/20 py-6 mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h5 class="font-headline text-primary tracking-widest text-sm uppercase">Bagikan Halaman Ini:</h5>
+        <div class="sharePopup"></div>
+    </div>
+    
+    <!-- Back CTA -->
+    <div class="text-center">
+        <?php 
+        $this->load->view('components/cta_underline', array(
+            'url' => site_url(),
+            'text' => 'KEMBALI KE BERANDA'
+        )); 
+        ?>
+    </div>
+
+  </div>
 </section>
-<!--//END BLOG -->
-<!--============================= FOOTER =============================-->
 
-        <!--//END FOOTER -->
-        <!-- jQuery, Bootstrap JS. -->
-        <script src="<?php echo base_url().'theme/js/jquery.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/tether.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/bootstrap.min.js'?>"></script>
-        <!-- Plugins -->
-        <script src="<?php echo base_url().'theme/js/owl.carousel.min.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/validate.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/tweetie.min.js'?>"></script>
-        <!-- Subscribe -->
-        <script src="<?php echo base_url().'theme/js/subscribe.js'?>"></script>
-        <!-- Script JS -->
-        <script src="<?php echo base_url().'theme/js/script.js'?>"></script>
-        <script src="<?php echo base_url().'theme/js/jssocials.js'?>"></script>
-        <script>
-          $(document).ready(function(){
-            $(".sharePopup").jsSocials({
-                  showCount: true,
-            			showLabel: true,
-            			shareIn: "popup",
-            			shares: [
-            			{ share: "twitter", label: "Twitter" },
-            			{ share: "facebook", label: "Facebook" },
-            			{ share: "googleplus", label: "Google+" },
-            			{ share: "linkedin", label: "Linked In" },
-                  { share: "pinterest", label: "Pinterest" }
-            			]
-                });
-          });
-        </script>
-    </body>
-
-    </html>
+<!-- Script/Plugins lokal untuk Social Share Detail Artikel -->
+<link href="<?php echo base_url().'theme/css/jssocials.css'?>" rel="stylesheet">
+<link href="<?php echo base_url().'theme/css/jssocials-theme-flat.css'?>" rel="stylesheet">
+<style>
+.sharePopup { font-size: 11px; }
+.sharePopup a { font-size: 11px; color: #fff; text-decoration: none; }
+</style>
+<script src="<?php echo base_url().'theme/js/jquery.min.js'?>"></script>
+<script src="<?php echo base_url().'theme/js/jssocials.js'?>"></script>
+<script>
+  $(document).ready(function(){
+    $(".sharePopup").jsSocials({
+          showCount: true,
+          showLabel: true,
+          shareIn: "popup",
+          shares: [
+          { share: "twitter", label: "Twitter" },
+          { share: "facebook", label: "Facebook" },
+          { share: "googleplus", label: "Google+" },
+          { share: "linkedin", label: "Linked In" },
+          { share: "whatsapp", label: "WhatsApp" }
+          ]
+    });
+  });
+</script>

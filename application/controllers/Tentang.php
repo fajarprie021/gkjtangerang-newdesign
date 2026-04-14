@@ -49,9 +49,8 @@ class Tentang extends CI_Controller{
             $x['page'] =$this->pagination->create_links();
 						$x['data']=$this->m_renungan->renungan_perpage($offset,$limit);
 						$x['title']='Informasi';
-						$this->load->view('depan/v_menu',$x);
-						$this->load->view('depan/v_tentang',$x);
-						$this->load->view('depan/v_footer',$x);
+						$x['content'] = 'depan/v_tentang';
+						$this->load->view('layout/main', $x);
 	}
 
 	function halaman($name_page){
@@ -84,14 +83,12 @@ class Tentang extends CI_Controller{
                 // $x['category']=$this->db->get('tbl_kategori');
                 $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
                 $x['populer']=$this->db->query("SELECT * FROM tbl_sejarah ORDER BY tulisan_views DESC LIMIT 5");
-                $this->load->view('depan/v_menu',$x);
-                $this->load->view('depan/v_tentang',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_tentang';
+                $this->load->view('layout/main', $x);
             }else{
                 $x['pesan']='Tidak Ada artikel untuk kategori <b>'.$kategori.'</b>';
-                $this->load->view('depan/v_menu',$x);
-                $this->load->view('depan/v_oops',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_oops';
+                $this->load->view('layout/main', $x);
             }
 		}elseif($name_page == "struktur-majelis"){
 			$x['menu']=$this->m_menu->get_all_menu();
@@ -120,15 +117,12 @@ class Tentang extends CI_Controller{
                 // $x['category']=$this->db->get('tbl_kategori');
                 $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
                 $x['populer']=$this->db->query("SELECT * FROM tbl_struktur_majelis ORDER BY tulisan_views DESC LIMIT 5");
-                $this->load->view('depan/v_menu',$x);
-                $this->load->view('depan/v_tentang',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_tentang';
+                $this->load->view('layout/main', $x);
             }else{
                 $x['pesan']='Tidak Ada artikel untuk kategori <b>'.$kategori.'</b>';
-                $this->load->view('depan/v_menu',$x);
-                // $this->load->view('depan/v_oops',$x);
-                $this->load->view('depan/v_oops_tentang',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_oops_tentang';
+                $this->load->view('layout/main', $x);
             }
 		}else{
 			$x['menu']=$this->m_menu->get_all_menu();
@@ -157,15 +151,12 @@ class Tentang extends CI_Controller{
                 // $x['category']=$this->db->get('tbl_kategori');
                 $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
                 $x['populer']=$this->db->query("SELECT * FROM tbl_visi_misi ORDER BY tulisan_views DESC LIMIT 5");
-                $this->load->view('depan/v_menu',$x);
-                $this->load->view('depan/v_tentang',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_tentang';
+                $this->load->view('layout/main', $x);
             }else{
                 $x['pesan']='Tidak Ada artikel untuk kategori <b>'.$kategori.'</b>';
-                $this->load->view('depan/v_menu',$x);
-                // $this->load->view('depan/v_oops',$x);
-                $this->load->view('depan/v_oops_tentang',$x);
-                $this->load->view('depan/v_footer',$x);
+                $x['content'] = 'depan/v_oops_tentang';
+                $this->load->view('layout/main', $x);
             }
 		}
 	}

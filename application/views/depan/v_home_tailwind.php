@@ -101,11 +101,13 @@ if (!function_exists('limit_sentences')) {
     <section id="jadwal" class="relative overflow-hidden bg-cream px-6 py-24">
       <div class="batik-overlay absolute inset-0"></div>
       <div class="relative z-10 mx-auto max-w-4xl">
-        <div class="mb-16 text-center">
-          <h2 class="font-headline text-4xl tracking-widest text-primary">JADWAL IBADAH</h2>
-          <p class="mt-3 font-serif italic text-muted">Pratélan Ibadah mingguan GKJ Tangerang</p>
-          <div class="mx-auto mt-5 h-1 w-24 bg-secondary"></div>
-        </div>
+        <?php 
+        $this->load->view('components/section_header_center', array(
+            'title'    => 'JADWAL IBADAH',
+            'subtitle' => 'Pratélan Ibadah mingguan GKJ Tangerang',
+            'divider'  => true
+        )); 
+        ?>
 
         <div class="heritage-frame shadow-soft">
           <div class="space-y-8">
@@ -138,8 +140,12 @@ if (!function_exists('limit_sentences')) {
         </div>
 
         <div>
-          <span class="mb-4 block text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">Tentang GKJ Tangerang</span>
-          <h2 class="font-headline text-5xl leading-tight text-primary">BERTUMBUH BERSAMA DALAM IMAN DAN PELAYANAN</h2>
+          <?php 
+          $this->load->view('components/section_header_left', array(
+              'eyebrow' => 'Tentang GKJ Tangerang',
+              'title'   => 'BERTUMBUH BERSAMA DALAM IMAN DAN PELAYANAN'
+          )); 
+          ?>
           <div class="mt-8 text-lg leading-relaxed text-muted font-serif">
             <?php foreach ($sejarah->result() as $row) : ?>
                 <p class="mb-6"><?php echo limit_sentences($row->tulisan_isi, 3); ?></p>
@@ -156,7 +162,13 @@ if (!function_exists('limit_sentences')) {
             </div>
           </div>
           <div class="mt-8">
-            <a href="<?php echo site_url('tentang/halaman/sejarah'); ?>" class="inline-flex text-[10px] font-bold uppercase tracking-[0.3em] text-primary border-b border-primary pb-1 hover:text-secondary hover:border-secondary">Baca Sejarah Lengkap</a>
+            <?php 
+            $this->load->view('components/cta_underline', array(
+                'url'            => site_url('tentang/halaman/sejarah'),
+                'text'           => 'Baca Sejarah Lengkap',
+                'class_override' => 'inline-flex'
+            )); 
+            ?>
           </div>
         </div>
       </div>
@@ -166,7 +178,14 @@ if (!function_exists('limit_sentences')) {
     <section id="renungan" class="relative overflow-hidden bg-primary px-6 py-28 text-white">
       <div class="batik-overlay absolute inset-0 opacity-10"></div>
       <div class="relative z-10 mx-auto max-w-4xl text-center">
-        <span class="mb-6 block text-xs font-bold uppercase tracking-[0.5em] text-secondary">Renungan Harian</span>
+        <?php 
+        $this->load->view('components/section_header_center', array(
+            'eyebrow'         => 'Renungan Harian',
+            'title'           => '',
+            'divider'         => false,
+            'container_class' => 'text-center'
+        )); 
+        ?>
         <span class="material-symbols-outlined mb-8 text-5xl text-secondary">format_quote</span>
         <?php foreach ($renungan->result() as $index => $row) : ?>
             <?php if ($index == 0) : ?>
@@ -188,28 +207,33 @@ if (!function_exists('limit_sentences')) {
     <section id="berita" class="bg-white px-6 py-24">
       <div class="mx-auto max-w-7xl">
         <div class="mb-16 flex items-end justify-between">
-          <div>
-            <span class="mb-2 block text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">Informasi Terbaru</span>
-            <h2 class="font-headline text-4xl uppercase tracking-widest text-primary">WARTA JEMAAT</h2>
-          </div>
-          <a class="hidden border-b-2 border-primary pb-1 text-xs font-bold tracking-[0.2em] text-primary hover:text-secondary md:block" href="<?php echo site_url('blog'); ?>">Lihat Semua Warta</a>
+          <?php 
+          $this->load->view('components/section_header_left', array(
+              'eyebrow' => 'Informasi Terbaru',
+              'title'   => 'WARTA JEMAAT'
+          )); 
+          ?>
+          <?php 
+          $this->load->view('components/cta_underline', array(
+              'url'            => site_url('blog'),
+              'text'           => 'Lihat Semua Warta',
+              'class_override' => 'hidden md:block'
+          )); 
+          ?>
         </div>
 
         <div class="grid grid-cols-1 gap-10 md:grid-cols-3 lg:grid-cols-4">
             <?php foreach ($berita->result() as $index => $row) : ?>
-                <article class="group cursor-pointer" onclick="window.location.href='<?php echo site_url('artikel/' . $row->tulisan_slug); ?>'">
-                    <div class="relative mb-6 aspect-video overflow-hidden">
-                    <img class="h-full w-full object-cover transition duration-700 group-hover:scale-105" src="<?php echo base_url() . 'assets/images/' . $row->tulisan_gambar; ?>" alt="Artikel Thumbnail" />
-                    </div>
-                    <a class="block" href="<?php echo site_url('artikel/' . $row->tulisan_slug); ?>">
-                        <h3 class="font-headline text-lg text-primary transition group-hover:text-secondary leading-snug line-clamp-3"><?php echo $row->tulisan_judul; ?></h3>
-                    </a>
-                    <p class="mt-4 text-[10px] font-bold tracking-widest uppercase text-secondary">BACA SELENGKAPNYA →</p>
-                </article>
+                <?php $this->load->view('components/card_artikel', array('item' => $row)); ?>
             <?php endforeach; ?>
         </div>
         <div class="mt-12 text-center md:hidden">
-            <a class="inline-block border-b-2 border-primary pb-1 text-xs font-bold tracking-[0.2em] text-primary" href="<?php echo site_url('blog'); ?>">LIHAT SEMUA WARTA</a>
+            <?php 
+            $this->load->view('components/cta_underline', array(
+                'url'  => site_url('blog'),
+                'text' => 'LIHAT SEMUA WARTA'
+            )); 
+            ?>
         </div>
       </div>
     </section>

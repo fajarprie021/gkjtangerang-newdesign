@@ -1,0 +1,15 @@
+# CI3 config (jangan upload credential)
+application/config/database.php
+application/config/config.php
+application/config/autoload.php
+
+# Environment
+.env
+
+# Dependency
+/vendor/
+/node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
