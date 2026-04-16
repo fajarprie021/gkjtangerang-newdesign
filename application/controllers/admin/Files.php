@@ -14,9 +14,10 @@ class Files extends CI_Controller{
 
 
 	function index(){
-		
+		$x['title'] = 'Data Download';
 		$x['data']=$this->m_files->get_all_files();
-		$this->load->view('admin/v_files',$x);
+		$x['content'] = 'admin/v_files';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function download(){
