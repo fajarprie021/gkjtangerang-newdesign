@@ -41,4 +41,24 @@ class M_profil extends CI_Model{
 		return $hsl;
 	}
 
+	function update_identitas($id, $nama, $website){
+		$this->db->query("UPDATE tbl_identitas_gereja SET nama_identitas='$nama', website_identitas='$website' WHERE id_identitas='$id'");
+	}
+
+	function update_alamat($id, $nama, $alamat){
+		$this->db->query("UPDATE tbl_alamat_gereja SET nama_gereja='$nama', alamat_gereja='$alamat' WHERE id_alamat='$id'");
+	}
+
+	function update_tlp($id, $tlp){
+		$this->db->query("UPDATE tbl_tlp_gereja SET no_tlp='$tlp' WHERE id_tlp='$id'");
+	}
+
+	function update_email($id, $email){
+		$this->db->query("UPDATE tbl_email_gereja SET alamat_email='$email' WHERE id_email='$id'");
+	}
+
+	function update_sosmed($id, $href){
+		$this->db->query("UPDATE tbl_sosial_media SET sosial_media_href='$href' WHERE id_sosial_media='$id'");
+	}
+
 }

@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>M-Sekolah | List Berita</title>
+  <title>GKJ Tangerang | List Berita</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
@@ -124,7 +124,7 @@
                   <td style="text-align:right;">
                         <!-- <a class="btn" href="<?php echo base_url().'admin/sejarah/get_edit/'.$tulisan_id;?>"><span class="fa fa-pencil"></span></a> -->
                         <!-- <a class="btn" data-toggle="modal" data-target="#ModalEdit<?php echo $tulisan_id;?>"><span class="fa fa-pencil"></span></a> -->
-                        <button class="btn btn-primary edit-btn" data-id="<?php echo $i->tulisan_id; ?>" data-title="<?php echo $i->tulisan_judul; ?>" data-description="<?php echo $i->tulisan_isi; ?>" data-categori-id="<?php echo $i->tulisan_kategori_id; ?>" data-categori-name="<?php echo $i->tulisan_kategori_nama; ?>">Edit</button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#ModalEdit<?php echo $tulisan_id;?>"><span class="fa fa-pencil"></span> Edit</a>
                         <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $tulisan_id;?>"><span class="fa fa-trash"></span></a>
                   </td>
                 </tr>
@@ -352,6 +352,7 @@
     $tulisan_gambar=$i['tulisan_gambar'];
     $tulisan_kategori_id=$i['tulisan_kategori_id'];
     $tulisan_isi=$i['tulisan_isi'];
+    $tulisan_author=$i['tulisan_author'];
 ?>
 <div class="modal fade" id="ModalEdit<?php echo $tulisan_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -397,9 +398,17 @@
           </div>
 
           <div class="form-group">
-            <label for="inputUserName" class="col-sm-4 control-label">Gambar</label>
+            <label class="col-sm-4 control-label">Author</label>
+            <div class="col-sm-7">
+              <input type="text" name="xauthor" class="form-control" value="<?php echo htmlspecialchars($tulisan_author);?>" placeholder="Nama author" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Gambar</label>
             <div class="col-sm-7">
               <input type="file" name="filefoto"/>
+              <p class="help-block">Biarkan kosong jika tidak mengganti gambar. Gambar saat ini: <code><?php echo $tulisan_gambar;?></code></p>
             </div>
           </div>
         </div>

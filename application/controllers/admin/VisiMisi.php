@@ -41,6 +41,7 @@ class VisiMisi extends CI_Controller{
 		$this->load->view('admin/v_menu_admin',$x);
 		$this->load->view('admin/v_add_sejarah',$x);
 	}
+	/* LEGACY CODE DISABLED
 	function get_edit(){
 		$kode=$this->uri->segment(4);
 		// $x['data']=$this->m_tulisan->get_tulisan_by_kode($kode);
@@ -50,6 +51,7 @@ class VisiMisi extends CI_Controller{
 		$this->load->view('admin/v_menu_admin',$x);
 		$this->load->view('admin/v_edit_sejarah',$x);
 	}
+	*/
 	function simpan_visimisi(){
 				$config['upload_path'] = './assets/images/'; //path folder
 	            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan
@@ -169,7 +171,7 @@ class VisiMisi extends CI_Controller{
 													$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
 													$trim     = trim($string);
 													// $slug     = strtolower(str_replace(" ", "-", $trim));
-													$slug     = 'sejarah';
+													$slug     = 'visi-misi';
 													$kategori_id=strip_tags($this->input->post('xkategori'));
 													$data=$this->m_kategori->get_kategori_byid($kategori_id);
 													$q=$data->row_array();
@@ -180,7 +182,8 @@ class VisiMisi extends CI_Controller{
 													$user=$this->m_pengguna->get_pengguna_login($kode);
 													$p=$user->row_array();
 													$user_id=$p['pengguna_id'];
-													$user_nama=$p['pengguna_nama'];
+													$xauthor=strip_tags($this->input->post('xauthor'));
+													$user_nama=!empty($xauthor) ? $xauthor : $p['pengguna_nama'];
 													// $this->m_tulisan->update_tulisan($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
 													$this->m_tentang->update_visi_misi($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
 													echo $this->session->set_flashdata('msg','info');
@@ -198,7 +201,7 @@ class VisiMisi extends CI_Controller{
 									$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
 									$trim     = trim($string);
 									// $slug     = strtolower(str_replace(" ", "-", $trim));
-									$slug     = 'sejarah';
+									$slug     = 'visi-misi';
 									$kategori_id=strip_tags($this->input->post('xkategori'));
 									$data=$this->m_kategori->get_kategori_byid($kategori_id);
 									$q=$data->row_array();
@@ -209,7 +212,8 @@ class VisiMisi extends CI_Controller{
 									$user=$this->m_pengguna->get_pengguna_login($kode);
 									$p=$user->row_array();
 									$user_id=$p['pengguna_id'];
-									$user_nama=$p['pengguna_nama'];
+									$xauthor=strip_tags($this->input->post('xauthor'));
+									$user_nama=!empty($xauthor) ? $xauthor : $p['pengguna_nama'];
 									// $this->m_tulisan->update_tulisan_tanpa_img($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$slug);
 									$this->m_tentang->update_visi_misi_tanpa_img($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$slug);
 									echo $this->session->set_flashdata('msg','info');
@@ -218,6 +222,7 @@ class VisiMisi extends CI_Controller{
 
 	}
 
+	/* LEGACY AJAX CODE DISABLED
 	function get_category_name() {
 		$category_id = $this->input->post('category_id');
 		$category_name = $this->m_tentang->get_category_name_by_id($category_id);
@@ -273,6 +278,7 @@ class VisiMisi extends CI_Controller{
 	
 		echo json_encode(array("status" => TRUE));
 	}
+	*/
 
 	function hapus_visimisi(){
 		$kode=$this->input->post('kode');

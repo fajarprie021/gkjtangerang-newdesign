@@ -71,3 +71,9 @@ $route['artikel/(:any)']='blog/detail/$1';
 // $route['renungan/(:any)']='renungan/detail/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// Map multiple identitas menu components to unified Identitas page
+$route['admin/alamat'] = 'admin/identitas';
+$route['admin/tlp'] = 'admin/identitas';
+$route['admin/email'] = 'admin/identitas';
+$route['admin/socialmedia'] = 'admin/identitas';

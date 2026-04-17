@@ -15,8 +15,8 @@ class Agenda extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_agenda->get_all_agenda();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_agenda',$x);
+		$x['content']='admin/v_agenda';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function simpan_agenda(){

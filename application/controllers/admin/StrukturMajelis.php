@@ -167,7 +167,7 @@ class StrukturMajelis extends CI_Controller{
 													$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
 													$trim     = trim($string);
 													// $slug     = strtolower(str_replace(" ", "-", $trim));
-													$slug     = 'sejarah';
+													$slug     = 'struktur-majelis';
 													$kategori_id=strip_tags($this->input->post('xkategori'));
 													$data=$this->m_kategori->get_kategori_byid($kategori_id);
 													$q=$data->row_array();
@@ -178,7 +178,8 @@ class StrukturMajelis extends CI_Controller{
 													$user=$this->m_pengguna->get_pengguna_login($kode);
 													$p=$user->row_array();
 													$user_id=$p['pengguna_id'];
-													$user_nama=$p['pengguna_nama'];
+													$xauthor=strip_tags($this->input->post('xauthor'));
+													$user_nama=!empty($xauthor) ? $xauthor : $p['pengguna_nama'];
 													// $this->m_tulisan->update_tulisan($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
 													$this->m_tentang->update_struktur_majelis($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
 													echo $this->session->set_flashdata('msg','info');
@@ -196,7 +197,7 @@ class StrukturMajelis extends CI_Controller{
 									$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
 									$trim     = trim($string);
 									// $slug     = strtolower(str_replace(" ", "-", $trim));
-									$slug     = 'sejarah';
+									$slug     = 'struktur-majelis';
 									$kategori_id=strip_tags($this->input->post('xkategori'));
 									$data=$this->m_kategori->get_kategori_byid($kategori_id);
 									$q=$data->row_array();
@@ -207,7 +208,8 @@ class StrukturMajelis extends CI_Controller{
 									$user=$this->m_pengguna->get_pengguna_login($kode);
 									$p=$user->row_array();
 									$user_id=$p['pengguna_id'];
-									$user_nama=$p['pengguna_nama'];
+									$xauthor=strip_tags($this->input->post('xauthor'));
+									$user_nama=!empty($xauthor) ? $xauthor : $p['pengguna_nama'];
 									// $this->m_tulisan->update_tulisan_tanpa_img($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$slug);
 									$this->m_tentang->update_struktur_majelis_tanpa_img($tulisan_id,$judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$slug);
 									echo $this->session->set_flashdata('msg','info');

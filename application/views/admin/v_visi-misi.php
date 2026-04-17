@@ -10,7 +10,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>M-Sekolah | List Berita</title>
+  <title>GKJ Tangerang | List Berita</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
@@ -124,7 +124,7 @@
                   <td style="text-align:right;">
                         <!-- <a class="btn" href="<?php echo base_url().'admin/sejarah/get_edit/'.$tulisan_id;?>"><span class="fa fa-pencil"></span></a> -->
                         <!-- <a class="btn" data-toggle="modal" data-target="#ModalEdit<?php echo $tulisan_id;?>"><span class="fa fa-pencil"></span></a> -->
-                        <button class="btn btn-primary edit-btn" data-id="<?php echo $i->tulisan_id; ?>" data-title="<?php echo $i->tulisan_judul; ?>" data-description="<?php echo $i->tulisan_isi; ?>" data-categori-id="<?php echo $i->tulisan_kategori_id; ?>" data-categori-name="<?php echo $i->tulisan_kategori_nama; ?>">Edit</button>
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#ModalEdit<?php echo $tulisan_id;?>"><span class="fa fa-pencil"></span> Edit</a>
                         <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $tulisan_id;?>"><span class="fa fa-trash"></span></a>
                   </td>
                 </tr>
@@ -441,13 +441,14 @@
     $tulisan_gambar=$i['tulisan_gambar'];
     $tulisan_kategori_id=$i['tulisan_kategori_id'];
     $tulisan_isi=$i['tulisan_isi'];
+    $tulisan_author=$i['tulisan_author'];
 ?>
 <div class="modal fade" id="ModalEdit<?php echo $tulisan_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-        <h4 class="modal-title" id="myModalLabel">Update Sejarah</h4>
+        <h4 class="modal-title" id="myModalLabel">Update Visi & Misi</h4>
       </div>
       <form class="form-horizontal" action="<?php echo base_url().'admin/visimisi/update_visimisi'?>" method="post" enctype="multipart/form-data">
         <div class="modal-body">
@@ -486,9 +487,17 @@
           </div>
 
           <div class="form-group">
-            <label for="inputUserName" class="col-sm-4 control-label">Gambar</label>
+            <label class="col-sm-4 control-label">Author</label>
+            <div class="col-sm-7">
+              <input type="text" name="xauthor" class="form-control" value="<?php echo htmlspecialchars($tulisan_author);?>" placeholder="Nama author" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Gambar</label>
             <div class="col-sm-7">
               <input type="file" name="filefoto"/>
+              <p class="help-block">Biarkan kosong jika tidak mengganti gambar. Gambar saat ini: <code><?php echo $tulisan_gambar;?></code></p>
             </div>
           </div>
         </div>
@@ -502,57 +511,7 @@
 </div>
 <?php endforeach;?>
 
-<div id="editModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Text</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form id="editForm">
-                    <input type="hidden" id="edit-id" name="id">
-                    <div class="form-group">
-                        <label for="edit-title">Judul</label>
-                        <input type="text" id="edit-title" name="title" class="form-control">
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="edit-categori_name">Kategori</label>
-                        <select class="form-control" id="edit-category_id"  name="category_id">
-                          <option value="">-Pilih-</option>
-                          <?php
-                          foreach ($kat->result_array() as $i) {
-                            $kategori_id=$i['kategori_id'];
-                            $kategori_nama=$i['kategori_nama'];
-                            if($tulisan_kategori_id==$kategori_id)
-                              echo "<option value='$kategori_id' selected>$kategori_nama</option>";
-                            else
-                              echo "<option value='$kategori_id'>$kategori_nama</option>";
-                          }?>
-                        </select>
-                    </div> -->
-                    <div class="form-group">
-                        <label for="edit-categori_name">Kategori</label>
-                        <select class="form-control" id="edit-category_id"  name="category_id" required>
-                          <option value="">-Pilih-</option>
-                          <?php foreach ($x['kat2'] as $kategori) : ?>
-                              <option value="<?php echo $kategori['kategori_id']; ?>" <?php echo ($kategori['kategori_id'] == $x['selected_category_id']) ? 'selected' : ''; ?>>
-                                  <?php echo $kategori['kategori_nama']; ?>
-                              </option>
-                          <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit-description">Description</label>
-                        <textarea id="edit-description" name="description" class="form-control"></textarea>
-                    </div>
-                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- LEGACY EDIT MODAL AND AJAX DISABLED -->
 
 <!-- jQuery 2.2.3 -->
 <script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
@@ -591,76 +550,6 @@
 
 
   });
-</script>
-<script>
-    $(document).ready(function() {
-        $('.edit-btn').on('click', function() {
-            var id = $(this).data('id');
-            var title = $(this).data('title');
-            var description = $(this).data('description');
-            // var tulisan_id = $(this).data('tulisan_id');
-            // var tulisan_judul = $(this).data('tulisan_judul');
-            // var tulisan_isi = $(this).data('tulisan_isi');
-            var category_id = $(this).data('category_id');
-            var category_name = $(this).data('category_name');
-
-            // $('#edit-id').val(id);
-            // $('#edit-title').val(title);
-            // // $('#edit-id').val(tulisan_id);
-            // // $('#edit-title').val(tulisan_judul);
-            // CKEDITOR.instances['edit-description'].setData(description);
-            // // CKEDITOR.instances['edit-description'].setData(tulisan_isi);
-            // $('#edit-category_id').val(category_id);
-            // // $('#edit-category_name').val(category_name);
-
-            // Mengambil category_name berdasarkan category_id
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url('admin/visimisi/get_category_name'); ?>',
-                data: { category_id: category_id },
-                success: function(response) {
-                    $('#edit-id').val(id);
-                    $('#edit-title').val(title);
-                    CKEDITOR.instances['edit-description'].setData(description);
-                    $('#edit-category_id').val(category_id);
-                    $('#edit-category_name').val(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(xhr.responseText);
-                }
-            });
-
-            $('#editModal').modal('show');
-        });
-    });
-
-    // Inisialisasi CKEditor
-    CKEDITOR.replace('edit-description');
-</script>
-<script>
-    $('#editForm').on('submit', function(e) {
-        e.preventDefault();
-
-        for (instance in CKEDITOR.instances) {
-            CKEDITOR.instances[instance].updateElement();
-        }
-
-        $.ajax({
-            // url: 'your_controller/update', // Ganti dengan URL update yang sesuai
-            url: '<?php echo base_url('admin/visimisi/update'); ?>', // Ganti dengan URL update yang sesuai
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                // Lakukan sesuatu setelah berhasil disimpan
-                $('#editModal').modal('hide');
-                location.reload(); // Muat ulang halaman untuk melihat perubahan
-            },
-            error: function(response) {
-                // Tangani kesalahan
-                console.log(response);
-            }
-        });
-    });
 </script>
 <style>
     .disabled {

@@ -12,8 +12,8 @@ class Renungan extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_renungan->get_all_renungan_admin();
         $x['menu']=$this->m_menu->get_all_menu_admin();
-        $this->load->view('admin/v_menu_admin',$x);
-        $this->load->view('admin/v_renungan',$x);
+        $x['content']='admin/v_renungan';
+        $this->load->view('admin/layout/main',$x);
 	}
 
     function simpan_renungan(){

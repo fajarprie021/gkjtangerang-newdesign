@@ -1,582 +1,320 @@
-<!--Counter Inbox-->
-<?php
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
-    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
-    $jum_comment=$query2->num_rows();
-    $jum_pesan=$query->num_rows();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>M-Sekolah | Agenda</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/timepicker/bootstrap-timepicker.min.css'?>">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datepicker/datepicker3.css'?>">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
+<section class="bg-cream px-6 py-24 min-h-screen">
+    <div class="mx-auto max-w-7xl space-y-10">
 
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-   <?php
-    $this->load->view('admin/v_header');
-  ?>
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Data Agenda
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Agenda</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#myModal"><span class="fa fa-plus"></span> Add Renungan</a>
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+                <?php
+                $this->load->view('components/section_header_left', array(
+                    'eyebrow' => 'Administrator',
+                    'title'   => 'Data Renungan'
+                ));
+                ?>
+                <p class="mt-2 max-w-2xl text-gray-600 font-serif">
+                    Kelola daftar renungan harian dengan tampilan admin yang konsisten dengan modul baru.
+                </p>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:12px;">
-                <thead>
-                <tr>
-					          <th style="width:70px;">#</th>
-                    <!-- <th>Agenda</th> -->
-                    <!-- <th>Tanggal</th> -->
-                    <!-- <th>Tempat</th> -->
-                    <!-- <th>Waktu</th> -->
-                    <!-- <th>Author</th> -->
-                    <th>Judul</th>
-                    <th>Deskripsi</th>
-                    <th>Tanggal Post</th>
-                    <th>Author</th>
-                    <th style="text-align:right;">Aksi</th>
-                </tr>
-                </thead>
-                <tbody>
-				<?php
-					$no=0;
-  					foreach ($data->result_array() as $i) :
-  					   $no++;
-                      //  $agenda_id=$i['renungan_id'];
-                      //  $agenda_nama=$i['agenda_nama'];
-                      //  $agenda_deskripsi=$i['agenda_deskripsi'];
-                      //  $agenda_mulai=$i['agenda_mulai'];
-                      //  $agenda_selesai=$i['agenda_selesai'];
-                      //  $agenda_tempat=$i['agenda_tempat'];
-                      //  $agenda_waktu=$i['agenda_waktu'];
-                      //  $agenda_keterangan=$i['agenda_keterangan'];
-                      //  $agenda_author=$i['agenda_author'];
-                      //  $tanggal=$i['tanggal'];
-                       $renungan_id=$i['renungan_id'];
-                       $renungan_judul=$i['renungan_judul'];
-                       $renungan_deskripsi=$i['renungan_deskripsi'];
-                       $renungan_author=$i['renungan_author'];
-                       $tanggal=$i['tanggal'];
 
-                    ?>
-                <tr>
-                  <!-- <td><?php echo $tanggal;?></td> -->
-                  <!-- <td><?php echo $agenda_nama;?></td> -->
-                  <!-- <td><?php echo $agenda_mulai.' s/d '.$agenda_selesai;?></td> -->
-                  <!-- <td><?php echo $agenda_tempat;?></td> -->
-                  <!-- <td><?php echo $agenda_waktu;?></td> -->
-                  <!-- <td><?php echo $agenda_author;?></td> -->
-                  <td><?php echo $no;?></td>
-                  <td><?php echo $renungan_judul;?></td>
-                  <td><?php echo $renungan_deskripsi;?></td>
-                  <td><?php echo $tanggal;?></td>
-                  <td><?php echo $renungan_author;?></td>
-                  <td style="text-align:right;">
-                        <a class="btn" data-toggle="modal" data-target="#ModalEdit<?php echo $renungan_id;?>"><span class="fa fa-pencil"></span></a>
-                        <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $renungan_id;?>"><span class="fa fa-trash"></span></a>
-                  </td>
-                </tr>
-				<?php endforeach;?>
-                </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+            <button
+                type="button"
+                onclick="document.getElementById('myModal').classList.remove('hidden')"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-headline uppercase tracking-[0.2em] text-white shadow-soft transition hover:bg-primary"
+            >
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                Tambah Renungan
+            </button>
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+
+        <?php $total_renungan = $data->num_rows(); ?>
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div class="rounded-xl border border-primary/10 bg-white p-6 shadow-soft">
+                <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-primary/70">Total Renungan</p>
+                <div class="mt-3 flex items-end justify-between gap-4">
+                    <p class="font-headline text-4xl text-primary"><?php echo $total_renungan; ?></p>
+                    <span class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/5 text-secondary">
+                        <span class="material-symbols-outlined">menu_book</span>
+                    </span>
+                </div>
+            </div>
+            <div class="rounded-xl border border-primary/10 bg-white p-6 shadow-soft">
+                <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-primary/70">Status Modul</p>
+                <p class="mt-3 font-serif text-lg text-gray-700">Sudah mengikuti baseline admin baru.</p>
+            </div>
+            <div class="rounded-xl border border-primary/10 bg-white p-6 shadow-soft">
+                <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-primary/70">Fokus Konten</p>
+                <p class="mt-3 font-serif text-lg text-gray-700">Judul, deskripsi, tanggal post, dan author.</p>
+            </div>
+        </div>
+
+        <div class="overflow-hidden rounded-xl border-t-4 border-primary bg-white shadow-soft">
+            <div class="flex flex-col gap-3 border-b border-gray-100 px-6 py-5 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h3 class="font-headline text-lg tracking-[0.16em] text-primary">Daftar Renungan</h3>
+                    <p class="mt-1 text-sm text-gray-500">List data aktif yang tersedia di modul admin.</p>
+                </div>
+                <div class="inline-flex items-center gap-2 rounded-full bg-primary/5 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                    <span class="material-symbols-outlined text-[16px] text-secondary">inventory_2</span>
+                    <?php echo $total_renungan; ?> item
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-[860px] w-full border-collapse text-left">
+                    <thead>
+                        <tr class="border-b border-primary/15 bg-primary/5 text-primary">
+                            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em]">#</th>
+                            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em]">Judul</th>
+                            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em]">Deskripsi</th>
+                            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em]">Tanggal Post</th>
+                            <th class="px-6 py-4 text-[11px] font-bold uppercase tracking-[0.2em]">Author</th>
+                            <th class="px-6 py-4 text-right text-[11px] font-bold uppercase tracking-[0.2em]">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-serif text-sm text-gray-700">
+                        <?php
+                        $no=0;
+                        foreach ($data->result_array() as $i) :
+                            $no++;
+                            $renungan_id=$i['renungan_id'];
+                            $renungan_judul=$i['renungan_judul'];
+                            $renungan_deskripsi=$i['renungan_deskripsi'];
+                            $renungan_author=$i['renungan_author'];
+                            $tanggal=$i['tanggal'];
+                        ?>
+                        <tr class="border-b border-gray-100 align-top transition hover:bg-gray-50/70">
+                            <td class="px-6 py-5 text-gray-400"><?php echo $no; ?></td>
+                            <td class="px-6 py-5">
+                                <p class="font-bold text-primary"><?php echo $renungan_judul; ?></p>
+                            </td>
+                            <td class="px-6 py-5 text-gray-600">
+                                <div class="max-w-xl leading-6">
+                                    <?php echo strip_tags($renungan_deskripsi); ?>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5 text-gray-500"><?php echo $tanggal; ?></td>
+                            <td class="px-6 py-5">
+                                <span class="inline-flex items-center gap-2 rounded-full bg-secondary/10 px-3 py-1 text-xs text-primary">
+                                    <span class="material-symbols-outlined text-[16px] text-secondary">person</span>
+                                    <?php echo $renungan_author; ?>
+                                </span>
+                            </td>
+                            <td class="px-6 py-5 text-right">
+                                <div class="inline-flex items-center gap-2">
+                                    <button
+                                        type="button"
+                                        onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.remove('hidden')"
+                                        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition hover:bg-blue-100 hover:text-blue-700"
+                                        title="Edit"
+                                    >
+                                        <span class="material-symbols-outlined text-[18px]">edit</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onclick="document.getElementById('ModalHapus<?php echo $renungan_id; ?>').classList.remove('hidden')"
+                                        class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-50 text-red-600 transition hover:bg-red-100 hover:text-red-700"
+                                        title="Hapus"
+                                    >
+                                        <span class="material-symbols-outlined text-[18px]">delete</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+
+                        <?php if($no == 0): ?>
+                        <tr>
+                            <td colspan="6" class="px-6 py-12 text-center text-base text-gray-500">
+                                Belum ada data renungan.
+                            </td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <strong>Copyright &copy; 2017 <a href="http://mfikri.com">M Fikri Setiadi</a>.</strong> All rights reserved.
-  </footer>
+</section>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+<div id="myModal" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div class="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
+        <form action="<?php echo base_url().'admin/renungan/simpan_renungan'?>" method="post" enctype="multipart/form-data" class="flex h-full flex-col">
+            <div class="flex items-center justify-between bg-primary px-6 py-4 text-white">
+                <h4 class="font-headline text-lg tracking-[0.16em]">Tambah Renungan</h4>
+                <button
+                    type="button"
+                    onclick="document.getElementById('myModal').classList.add('hidden')"
+                    class="text-white/80 transition hover:text-white"
+                >
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+            <div class="space-y-5 overflow-y-auto p-6 font-serif">
+                <div>
+                    <label class="mb-2 block text-sm font-headline text-primary">Judul Renungan</label>
+                    <input
+                        type="text"
+                        name="xrenungan_judul"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary"
+                        placeholder="Masukkan judul renungan"
+                        required
+                    >
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-headline text-primary">Deskripsi</label>
+                    <textarea
+                        name="xdeskripsi"
+                        rows="8"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary"
+                        placeholder="Tulis isi renungan di sini..."
+                        required
+                    ></textarea>
+                </div>
+            </div>
 
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
+            <div class="flex justify-end gap-3 border-t border-gray-100 bg-gray-50 px-6 py-4">
+                <button
+                    type="button"
+                    onclick="document.getElementById('myModal').classList.add('hidden')"
+                    class="px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-gray-600 transition hover:text-gray-800"
+                >
+                    Batal
+                </button>
+                <button
+                    type="submit"
+                    class="rounded-md bg-secondary px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-white shadow-sm transition hover:bg-primary"
+                >
+                    Simpan
+                </button>
+            </div>
         </form>
-      </div>
-      <!-- /.tab-pane -->
     </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
-<!--Modal Add Pengguna-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Add Renungan</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/renungan/simpan_renungan'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
+<?php foreach ($data->result_array() as $i) :
+    $renungan_id=$i['renungan_id'];
+    $renungan_judul=$i['renungan_judul'];
+    $renungan_deskripsi=$i['renungan_deskripsi'];
+?>
+<div id="ModalEdit<?php echo $renungan_id; ?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div class="flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
+        <form action="<?php echo base_url().'admin/renungan/update_renungan'?>" method="post" enctype="multipart/form-data" class="flex h-full flex-col">
+            <div class="flex items-center justify-between bg-primary px-6 py-4 text-white">
+                <h4 class="font-headline text-lg tracking-[0.16em]">Edit Renungan</h4>
+                <button
+                    type="button"
+                    onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.add('hidden')"
+                    class="text-white/80 transition hover:text-white"
+                >
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
 
-                            <div class="form-group">
-                                <label for="inputUserName" class="col-sm-4 control-label">Judul Renungan</label>
-                                <div class="col-sm-7">
-                                  <input type="text" name="xrenungan_judul" class="form-control" id="inputUserName" placeholder="Judul Renungan" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputUserName" class="col-sm-4 control-label">Deskripsi</label>
-                                <div class="col-sm-7">
-                                  <textarea class="form-control" rows="3" name="xdeskripsi" placeholder="Deskripsi ..." required></textarea>
-                                </div>
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
-                    </div>
-                    </form>
+            <div class="space-y-5 overflow-y-auto p-6 font-serif">
+                <input type="hidden" name="kode" value="<?php echo $renungan_id; ?>">
+                <div>
+                    <label class="mb-2 block text-sm font-headline text-primary">Judul Renungan</label>
+                    <input
+                        type="text"
+                        name="xrenungan_judul"
+                        value="<?php echo $renungan_judul; ?>"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary"
+                        required
+                    >
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-headline text-primary">Deskripsi</label>
+                    <textarea
+                        name="xdeskripsi"
+                        rows="8"
+                        class="w-full rounded-lg border border-gray-300 px-4 py-2.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary"
+                        required
+                    ><?php echo $renungan_deskripsi; ?></textarea>
                 </div>
             </div>
-        </div>
 
+            <div class="flex justify-end gap-3 border-t border-gray-100 bg-gray-50 px-6 py-4">
+                <button
+                    type="button"
+                    onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.add('hidden')"
+                    class="px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-gray-600 transition hover:text-gray-800"
+                >
+                    Batal
+                </button>
+                <button
+                    type="submit"
+                    class="rounded-md bg-secondary px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-white shadow-sm transition hover:bg-primary"
+                >
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
-		<?php foreach ($data->result_array() as $i) :
-              // $agenda_id=$i['agenda_id'];
-              // $agenda_nama=$i['agenda_nama'];
-              // $agenda_deskripsi=$i['agenda_deskripsi'];
-              // $agenda_mulai=$i['agenda_mulai'];
-              // $agenda_selesai=$i['agenda_selesai'];
-              // $agenda_tempat=$i['agenda_tempat'];
-              // $agenda_waktu=$i['agenda_waktu'];
-              // $agenda_keterangan=$i['agenda_keterangan'];
-              // $agenda_author=$i['agenda_author'];
-              // $tangal=$i['tanggal'];
-              $renungan_id=$i['renungan_id'];
-              $renungan_judul=$i['renungan_judul'];
-              $renungan_deskripsi=$i['renungan_deskripsi'];
-              $renungan_author=$i['renungan_author'];
-              $tanggal=$i['tanggal'];
-            ?>
-	<!--Modal Edit Pengguna-->
-        <div class="modal fade" id="ModalEdit<?php echo $renungan_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Renungan</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/renungan/update_renungan'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-
-                            <div class="form-group">
-                                <label for="inputUserName" class="col-sm-4 control-label">Judul Renungan</label>
-                                <div class="col-sm-7">
-                                  <input type="hidden" name="kode" value="<?php echo $renungan_id;?>">
-                                  <input type="text" name="xrenungan_judul" class="form-control" value="<?php echo $renungan_judul;?>" id="inputUserName" placeholder="Judul Renungan" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputUserName" class="col-sm-4 control-label">Deskripsi</label>
-                                <div class="col-sm-7">
-                                  <textarea class="form-control" rows="3" name="xdeskripsi" placeholder="Deskripsi ..." required><?php echo $renungan_deskripsi;?></textarea>
-                                </div>
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Update</button>
-                    </div>
-                    </form>
+<div id="ModalHapus<?php echo $renungan_id; ?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
+    <div class="w-full max-w-md overflow-hidden rounded-xl bg-white shadow-2xl">
+        <form action="<?php echo base_url().'admin/renungan/hapus_renungan'?>" method="post" enctype="multipart/form-data">
+            <div class="p-6 text-center font-serif">
+                <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-600">
+                    <span class="material-symbols-outlined text-3xl">warning</span>
+                </div>
+                <h4 class="font-headline text-xl text-primary">Hapus Renungan?</h4>
+                <p class="mt-2 text-gray-600">
+                    Apakah Anda yakin ingin menghapus renungan <strong><?php echo $renungan_judul; ?></strong>?
+                </p>
+                <input type="hidden" name="kode" value="<?php echo $renungan_id; ?>"/>
+                <div class="mt-6 flex justify-center gap-3">
+                    <button
+                        type="button"
+                        onclick="document.getElementById('ModalHapus<?php echo $renungan_id; ?>').classList.add('hidden')"
+                        class="rounded-md bg-gray-100 px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-gray-700 transition hover:bg-gray-200"
+                    >
+                        Batal
+                    </button>
+                    <button
+                        type="submit"
+                        class="rounded-md bg-red-600 px-6 py-2.5 text-sm font-headline uppercase tracking-[0.2em] text-white shadow-sm transition hover:bg-red-700"
+                    >
+                        Ya, Hapus
+                    </button>
                 </div>
             </div>
-        </div>
-	<?php endforeach;?>
+        </form>
+    </div>
+</div>
+<?php endforeach; ?>
 
-	<?php foreach ($data->result_array() as $i) :
-              // $agenda_id=$i['agenda_id'];
-              // $agenda_nama=$i['agenda_nama'];
-              // $agenda_deskripsi=$i['agenda_deskripsi'];
-              // $agenda_mulai=$i['agenda_mulai'];
-              // $agenda_selesai=$i['agenda_selesai'];
-              // $agenda_tempat=$i['agenda_tempat'];
-              // $agenda_waktu=$i['agenda_waktu'];
-              // $agenda_keterangan=$i['agenda_keterangan'];
-              // $agenda_author=$i['agenda_author'];
-              // $tangal=$i['tanggal'];
-              $renungan_id=$i['renungan_id'];
-              $renungan_judul=$i['renungan_judul'];
-              $renungan_deskripsi=$i['renungan_deskripsi'];
-              $renungan_author=$i['renungan_author'];
-              $tanggal=$i['tanggal'];
-            ?>
-	<!--Modal Hapus Pengguna-->
-        <div class="modal fade" id="ModalHapus<?php echo $renungan_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Hapus Agenda</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/renungan/hapus_renungan'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-							<input type="hidden" name="kode" value="<?php echo $renungan_id;?>"/>
-                            <p>Apakah Anda yakin mau menghapus Pengguna <b><?php echo $renungan_judul;?></b> ?</p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-	<?php endforeach;?>
-
-
-
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
-<!-- DataTables -->
-<script src="<?php echo base_url().'assets/plugins/datatables/jquery.dataTables.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.min.js'?>"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/datepicker/bootstrap-datepicker.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/timepicker/bootstrap-timepicker.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.js'?>"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
-<script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
-<!-- page script -->
+<?php
+$msg = $this->session->flashdata('msg');
+if($msg):
+    $toastClass = 'bg-green-500';
+    $toastIcon = 'check_circle';
+    $toastText = 'Tindakan berhasil.';
+    if($msg == 'success') {
+        $toastText = 'Renungan berhasil disimpan.';
+    } elseif($msg == 'success-hapus') {
+        $toastClass = 'bg-red-500';
+        $toastIcon = 'delete';
+        $toastText = 'Renungan berhasil dihapus.';
+    } elseif($msg == 'info') {
+        $toastClass = 'bg-blue-500';
+        $toastIcon = 'info';
+        $toastText = 'Renungan berhasil diupdate.';
+    }
+?>
+<div id="toast-msg" class="fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-xl px-6 py-4 font-serif text-white shadow-2xl <?php echo $toastClass; ?>">
+    <span class="material-symbols-outlined"><?php echo $toastIcon; ?></span>
+    <span><?php echo $toastText; ?></span>
+</div>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-
-    $('#datepicker').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    });
-    $('#datepicker2').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    });
-    $('.datepicker3').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    });
-    $('.datepicker4').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    });
-    $(".timepicker").timepicker({
-      showInputs: true
-    });
-
-  });
+    setTimeout(function () {
+        var toast = document.getElementById('toast-msg');
+        if (toast) {
+            toast.style.opacity = '0';
+            setTimeout(function () {
+                toast.remove();
+            }, 300);
+        }
+    }, 4000);
 </script>
-<?php if($this->session->flashdata('msg')=='error'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Error',
-                    text: "Password dan Ulangi Password yang Anda masukan tidak sama.",
-                    showHideTransition: 'slide',
-                    icon: 'error',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#FF4859'
-                });
-        </script>
-
-    <?php elseif($this->session->flashdata('msg')=='success'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Agenda Berhasil disimpan ke database.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='info'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Info',
-                    text: "Agenda berhasil di update",
-                    showHideTransition: 'slide',
-                    icon: 'info',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#00C9E6'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Agenda Berhasil dihapus.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php else:?>
-
-    <?php endif;?>
-</body>
-</html>
+<?php endif; ?>
