@@ -44,7 +44,7 @@
 
   <!--Header-->
   <?php
-    $this->load->view('admin/v_header');
+    
   ?>
 
   <!-- Left side column. contains the logo and sidebar -->

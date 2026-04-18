@@ -8,13 +8,16 @@ class Guru extends CI_Controller{
         };
 		$this->load->model('m_guru');
 		$this->load->model('m_pengguna');
+		$this->load->model('m_menu');
 		$this->load->library('upload');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_guru->get_all_guru();
-		$this->load->view('admin/v_guru',$x);
+		$x['menu']=$this->m_menu->get_all_menu_admin();
+		$x['content']='admin/v_guru';
+		$this->load->view('admin/layout/main',$x);
 	}
 	
 	function simpan_guru(){

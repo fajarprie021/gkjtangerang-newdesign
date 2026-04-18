@@ -7,13 +7,16 @@ class Pengumuman extends CI_Controller{
             redirect($url);
         };
 		$this->load->model('m_pengumuman');
+		$this->load->model('m_menu');
 		$this->load->library('upload');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_pengumuman->get_all_pengumuman();
-		$this->load->view('admin/v_pengumuman',$x);
+		$x['menu']=$this->m_menu->get_all_menu_admin();
+		$x['content']='admin/v_pengumuman';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function simpan_pengumuman(){

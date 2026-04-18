@@ -1,702 +1,314 @@
-<!--Counter Inbox-->
-<?php
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
-    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
-    $jum_comment=$query2->num_rows();
-    $jum_pesan=$query->num_rows();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GKJ Tangerang | Data Pengguna</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
+<section class="bg-cream px-6 py-24 min-h-screen">
+  <div class="mx-auto max-w-7xl">
+    
+    <!-- Admin Header -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+        <div>
+            <?php 
+            $this->load->view('components/section_header_left', array(
+                'eyebrow' => 'Administrator',
+                'title'   => 'Data Pengguna'
+            )); 
+            ?>
+            <p class="text-gray-600 font-serif mt-2 text-sm max-w-xl">Kelola akun administrator dan penulis website GKJ Tangerang.</p>
+        </div>
+        <button onclick="document.getElementById('myModal').classList.remove('hidden')" class="bg-secondary text-white px-6 py-3 rounded-full font-headline tracking-widest text-sm hover:bg-primary transition-colors shadow-soft whitespace-nowrap">
+            + Tambah Pengguna
+        </button>
+    </div>
 
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-   <?php
-    $this->load->view('admin/v_header');
-  ?>
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Data Pengguna
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Pengguna</a></li>
-        <li class="active">Data Pengguna</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#myModal"><span class="fa fa-user-plus"></span> Add Pengguna</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:13px;">
+    <!-- Table -->
+    <div class="bg-white rounded-xl shadow-soft overflow-hidden border-t-4 border-primary">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[1000px]">
                 <thead>
-                <tr>
-					<th>Photo</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Password</th>
-                    <th>Kontak</th>
-                    <th>Level</th>
-                    <th style="text-align:center;">Aksi</th>
-                </tr>
+                    <tr class="bg-primary/5 text-primary font-headline text-sm tracking-wide border-b border-primary/20">
+                        <th class="p-4 w-20 text-center">Photo</th>
+                        <th class="p-4">Nama & Username</th>
+                        <th class="p-4">Email & Kontak</th>
+                        <th class="p-4 w-32">Jenis Kelamin</th>
+                        <th class="p-4 w-32">Level</th>
+                        <th class="p-4 w-32 text-right">Aksi</th>
+                    </tr>
                 </thead>
-                <tbody>
-				<?php foreach ($data->result_array() as $i) :
+                <tbody class="text-gray-700 font-serif text-sm">
+                    <?php foreach ($data->result_array() as $i) :
                        $pengguna_id=$i['pengguna_id'];
                        $pengguna_nama=$i['pengguna_nama'];
                        $pengguna_jenkel=$i['pengguna_jenkel'];
                        $pengguna_email=$i['pengguna_email'];
                        $pengguna_username=$i['pengguna_username'];
-                       $pengguna_password=$i['pengguna_password'];
                        $pengguna_nohp=$i['pengguna_nohp'];
                        $pengguna_level=$i['pengguna_level'];
                        $pengguna_photo=$i['pengguna_photo'];
                     ?>
-                <tr>
-                  <td><img width="40" height="40" class="img-circle" src="<?php echo base_url().'assets/images/'.$pengguna_photo;?>"></td>
-                  <td><?php echo $pengguna_nama;?></td>
-                  <td><?php echo $pengguna_email;?></td>
-                  <?php if($pengguna_jenkel=='L'):?>
-                        <td>Laki-Laki</td>
-                  <?php else:?>
-                        <td>Perempuan</td>
-                  <?php endif;?>
-                  <td><?php echo $pengguna_password;?></td>
-                  <td><?php echo $pengguna_nohp;?></td>
-                  <?php if($pengguna_level=='1'):?>
-                        <td>Administrator</td>
-                  <?php else:?>
-                        <td>Author</td>
-                  <?php endif;?>
-                  <td style="text-align:right;">
-                        <a class="btn" data-toggle="modal" data-target="#ModalEdit<?php echo $pengguna_id;?>"><span class="fa fa-pencil"></span></a>
-                        <a class="btn" href="<?php echo base_url().'admin/pengguna/reset_password/'.$pengguna_id;?>"><span class="fa fa-refresh"></span></a>
-                        <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $pengguna_id;?>"><span class="fa fa-trash"></span></a>
-                  </td>
-                </tr>
-				<?php endforeach;?>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="p-4 flex justify-center">
+                            <img class="w-12 h-12 rounded-full object-cover border-2 border-primary/10 shadow-sm" src="<?php echo base_url().'assets/images/'.$pengguna_photo;?>" alt="User Photo">
+                        </td>
+                        <td class="p-4">
+                            <span class="font-bold text-primary block leading-tight"><?php echo $pengguna_nama;?></span>
+                            <span class="text-xs text-gray-500 font-sans tracking-wider uppercase">@<?php echo $pengguna_username;?></span>
+                        </td>
+                        <td class="p-4">
+                            <span class="block text-gray-600 leading-relaxed"><?php echo $pengguna_email;?></span>
+                            <span class="text-xs text-secondary font-sans"><?php echo $pengguna_nohp;?></span>
+                        </td>
+                        <td class="p-4 italic">
+                            <?php echo ($pengguna_jenkel=='L') ? 'Laki-Laki' : 'Perempuan';?>
+                        </td>
+                        <td class="p-4">
+                            <?php if($pengguna_level=='1'):?>
+                                <span class="bg-red-50 text-red-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border border-red-100">Administrator</span>
+                            <?php else:?>
+                                <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border border-blue-100">Author</span>
+                            <?php endif;?>
+                        </td>
+                        <td class="p-4 text-right space-x-1.5 whitespace-nowrap">
+                            <button onclick="document.getElementById('ModalEdit<?php echo $pengguna_id;?>').classList.remove('hidden')" class="text-indigo-600 hover:text-indigo-800 transition-colors bg-indigo-50 p-2 rounded-md" title="Edit">
+                                <span class="material-symbols-outlined text-sm">edit</span>
+                            </button>
+                            <a href="<?php echo base_url().'admin/pengguna/reset_password/'.$pengguna_id;?>" class="inline-block text-amber-600 hover:text-amber-800 transition-colors bg-amber-50 p-2 rounded-md" title="Reset Password">
+                                <span class="material-symbols-outlined text-sm">refresh</span>
+                            </a>
+                            <button onclick="document.getElementById('ModalHapus<?php echo $pengguna_id;?>').classList.remove('hidden')" class="text-red-600 hover:text-red-800 transition-colors bg-red-50 p-2 rounded-md" title="Hapus">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
                 </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+            </table>
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
+    </div>
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
-    </div>
-    <strong>Copyright &copy; 2017 <a href="http://mfikri.com">M Fikri Setiadi</a>.</strong> All rights reserved.
-  </footer>
+</section>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
+<!-- Modal Add -->
+<div id="myModal" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <form action="<?php echo base_url().'admin/pengguna/simpan_pengguna'?>" method="post" enctype="multipart/form-data" class="flex flex-col h-full">
+            <div class="bg-primary px-6 py-4 flex justify-between items-center text-white shrink-0">
+                <h4 class="font-headline tracking-widest text-lg uppercase">Tambah Pengguna Baru</h4>
+                <button type="button" onclick="document.getElementById('myModal').classList.add('hidden')" class="text-white/80 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-6 font-serif overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <input type="text" name="xnama" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="xemail" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Username <span class="text-red-500">*</span></label>
+                    <input type="text" name="xusername" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Level <span class="text-red-500">*</span></label>
+                    <select name="xlevel" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                        <option value="1">Administrator</option>
+                        <option value="2">Author</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Password <span class="text-red-500">*</span></label>
+                    <input type="password" name="xpassword" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Konfirmasi Password <span class="text-red-500">*</span></label>
+                    <input type="password" name="xpassword2" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Jenis Kelamin <span class="text-red-500">*</span></label>
+                    <div class="flex gap-4 mt-1">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" value="L" name="xjenkel" checked class="text-secondary focus:ring-secondary"> Laki-Laki
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" value="P" name="xjenkel" class="text-secondary focus:ring-secondary"> Perempuan
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Kontak / HP <span class="text-red-500">*</span></label>
+                    <input type="text" name="xkontak" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required placeholder="08xxxx">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Photo <span class="text-red-500">*</span></label>
+                    <input type="file" name="filefoto" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-headline file:bg-primary/5 file:text-primary hover:file:bg-primary/10" required>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3 border-t border-gray-100 shrink-0">
+                <button type="button" onclick="document.getElementById('myModal').classList.add('hidden')" class="px-6 py-2.5 text-gray-500 hover:text-gray-700 font-headline text-xs uppercase tracking-widest transition-colors">Batal</button>
+                <button type="submit" class="px-8 py-3 bg-secondary text-white rounded-md hover:bg-primary font-headline text-xs uppercase tracking-widest shadow-sm transition-colors">Simpan</button>
+            </div>
         </form>
-      </div>
-      <!-- /.tab-pane -->
     </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
 
-<!--Modal Add Pengguna-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Add Pengguna</h4>
+<?php foreach ($data->result_array() as $i) :
+    $pengguna_id=$i['pengguna_id'];
+    $pengguna_nama=$i['pengguna_nama'];
+    $pengguna_jenkel=$i['pengguna_jenkel'];
+    $pengguna_email=$i['pengguna_email'];
+    $pengguna_username=$i['pengguna_username'];
+    $pengguna_nohp=$i['pengguna_nohp'];
+    $pengguna_level=$i['pengguna_level'];
+?>
+<!-- Modal Edit: <?php echo $pengguna_nama; ?> -->
+<div id="ModalEdit<?php echo $pengguna_id;?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        <form action="<?php echo base_url().'admin/pengguna/update_pengguna'?>" method="post" enctype="multipart/form-data" class="flex flex-col h-full">
+            <div class="bg-primary px-6 py-4 flex justify-between items-center text-white shrink-0">
+                <h4 class="font-headline tracking-widest text-lg uppercase">Edit Pengguna</h4>
+                <button type="button" onclick="document.getElementById('ModalEdit<?php echo $pengguna_id;?>').classList.add('hidden')" class="text-white/80 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-6 font-serif overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-5">
+                <input type="hidden" name="kode" value="<?php echo $pengguna_id;?>">
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Nama Lengkap <span class="text-red-500">*</span></label>
+                    <input type="text" name="xnama" value="<?php echo $pengguna_nama;?>" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="xemail" value="<?php echo $pengguna_email;?>" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Username <span class="text-red-500">*</span></label>
+                    <input type="text" name="xusername" value="<?php echo $pengguna_username;?>" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Level <span class="text-red-500">*</span></label>
+                    <select name="xlevel" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                        <option value="1" <?php echo ($pengguna_level=='1')?'selected':'';?>>Administrator</option>
+                        <option value="2" <?php echo ($pengguna_level=='2')?'selected':'';?>>Author</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Password (Kosongkan jika tidak berubah)</label>
+                    <input type="password" name="xpassword" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Konfirmasi Password</label>
+                    <input type="password" name="xpassword2" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Jenis Kelamin <span class="text-red-500">*</span></label>
+                    <div class="flex gap-4 mt-1">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" value="L" name="xjenkel" <?php echo ($pengguna_jenkel=='L')?'checked':'';?> class="text-secondary focus:ring-secondary"> Laki-Laki
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" value="P" name="xjenkel" <?php echo ($pengguna_jenkel=='P')?'checked':'';?> class="text-secondary focus:ring-secondary"> Perempuan
+                        </label>
                     </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/pengguna/simpan_pengguna'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Nama</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="xnama" class="form-control" id="inputUserName" placeholder="Nama Lengkap" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
-                                        <div class="col-sm-7">
-                                            <input type="email" name="xemail" class="form-control" id="inputEmail3" placeholder="Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Jenis Kelamin</label>
-                                        <div class="col-sm-7">
-                                           <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="L" name="xjenkel" checked>
-                                                <label for="inlineRadio1"> Laki-Laki </label>
-                                            </div>
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="P" name="xjenkel">
-                                                <label for="inlineRadio2"> Perempuan </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Username</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="xusername" class="form-control" id="inputUserName" placeholder="Username" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-                                        <div class="col-sm-7">
-                                            <input type="password" name="xpassword" class="form-control" id="inputPassword3" placeholder="Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword4" class="col-sm-4 control-label">Ulangi Password</label>
-                                        <div class="col-sm-7">
-                                            <input type="password" name="xpassword2" class="form-control" id="inputPassword4" placeholder="Ulangi Password" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Kontak Person</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="xkontak" class="form-control" id="inputUserName" placeholder="Kontak Person" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Level</label>
-                                        <div class="col-sm-7">
-                                            <select class="form-control" name="xlevel" required>
-                                                <option value="1">Administrator</option>
-                                                <option value="2">Author</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Photo</label>
-                                        <div class="col-sm-7">
-                                            <input type="file" name="filefoto" required/>
-                                        </div>
-                                    </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
-                    </div>
-                    </form>
+                </div>
+                <div>
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Kontak / HP <span class="text-red-500">*</span></label>
+                    <input type="text" name="xkontak" value="<?php echo $pengguna_nohp;?>" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all" required>
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-primary font-headline text-sm mb-2 uppercase tracking-wider">Photo (Kosongkan jika tidak ganti)</label>
+                    <input type="file" name="filefoto" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-headline file:bg-primary/5 file:text-primary hover:file:bg-primary/10">
                 </div>
             </div>
+            <div class="bg-gray-50 px-6 py-4 flex justify-end gap-3 border-t border-gray-100 shrink-0">
+                <button type="button" onclick="document.getElementById('ModalEdit<?php echo $pengguna_id;?>').classList.add('hidden')" class="px-6 py-2.5 text-gray-500 hover:text-gray-700 font-headline text-xs uppercase tracking-widest transition-colors">Batal</button>
+                <button type="submit" class="px-8 py-3 bg-secondary text-white rounded-md hover:bg-primary font-headline text-xs uppercase tracking-widest shadow-sm transition-colors">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Hapus -->
+<div id="ModalHapus<?php echo $pengguna_id;?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden p-8 text-center font-serif">
+        <form action="<?php echo base_url().'admin/pengguna/hapus_pengguna'?>" method="post">
+            <div class="w-16 h-16 mx-auto bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-3xl">warning</span>
+            </div>
+            <h4 class="font-headline text-xl text-primary mb-2 uppercase tracking-wider">Hapus Pengguna?</h4>
+            <p class="text-gray-600 text-sm mb-8 px-4 font-serif leading-relaxed">Apakah Anda yakin mau menghapus Pengguna <strong><?php echo $pengguna_nama;?></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+            
+            <input type="hidden" name="kode" value="<?php echo $pengguna_id;?>"/>
+            
+            <div class="flex justify-center gap-3">
+                <button type="button" onclick="document.getElementById('ModalHapus<?php echo $pengguna_id;?>').classList.add('hidden')" class="px-6 py-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 font-headline tracking-widest text-xs uppercase transition-colors">Batal</button>
+                <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-headline tracking-widest text-xs uppercase shadow-sm transition-colors">Ya, Hapus</button>
+            </div>
+        </form>
+    </div>
+</div>
+<?php endforeach;?>
+
+<!-- Trigger Reset Password Modal -->
+<?php if($this->session->flashdata('msg')=='show-modal'):?>
+<div id="ModalResetPassword" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-md overflow-hidden p-8 font-serif">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 mx-auto bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-3xl">lock_reset</span>
+            </div>
+            <h4 class="font-headline text-xl text-primary uppercase tracking-wider">Password Direset</h4>
+            <p class="text-gray-500 text-sm mt-1">Harap catat kredensial baru di bawah ini.</p>
         </div>
-
-
-		<?php foreach ($data->result_array() as $i) :
-              $pengguna_id=$i['pengguna_id'];
-              $pengguna_nama=$i['pengguna_nama'];
-              $pengguna_jenkel=$i['pengguna_jenkel'];
-              $pengguna_email=$i['pengguna_email'];
-              $pengguna_username=$i['pengguna_username'];
-              $pengguna_password=$i['pengguna_password'];
-              $pengguna_nohp=$i['pengguna_nohp'];
-              $pengguna_level=$i['pengguna_level'];
-              $pengguna_photo=$i['pengguna_photo'];
-            ?>
-	<!--Modal Edit Pengguna-->
-        <div class="modal fade" id="ModalEdit<?php echo $pengguna_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Edit Pengguna</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/pengguna/update_pengguna'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Nama</label>
-                                        <div class="col-sm-7">
-											<input type="hidden" name="kode" value="<?php echo $pengguna_id;?>"/>
-                                            <input type="text" name="xnama" class="form-control" id="inputUserName" value="<?php echo $pengguna_nama;?>" placeholder="Nama Lengkap" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
-                                        <div class="col-sm-7">
-                                            <input type="email" name="xemail" class="form-control" value="<?php echo $pengguna_email;?>" id="inputEmail3" placeholder="Email" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Jenis Kelamin</label>
-                                        <div class="col-sm-7">
-										<?php if($pengguna_jenkel=='L'):?>
-                                           <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="L" name="xjenkel" checked>
-                                                <label for="inlineRadio1"> Laki-Laki </label>
-                                            </div>
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="P" name="xjenkel">
-                                                <label for="inlineRadio2"> Perempuan </label>
-                                            </div>
-										<?php else:?>
-											<div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="L" name="xjenkel">
-                                                <label for="inlineRadio1"> Laki-Laki </label>
-                                            </div>
-                                            <div class="radio radio-info radio-inline">
-                                                <input type="radio" id="inlineRadio1" value="P" name="xjenkel" checked>
-                                                <label for="inlineRadio2"> Perempuan </label>
-                                            </div>
-										<?php endif;?>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Username</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="xusername" class="form-control" value="<?php echo $pengguna_username;?>" id="inputUserName" placeholder="Username" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-                                        <div class="col-sm-7">
-                                            <input type="password" name="xpassword" class="form-control" id="inputPassword3" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword4" class="col-sm-4 control-label">Ulangi Password</label>
-                                        <div class="col-sm-7">
-                                            <input type="password" name="xpassword2" class="form-control" id="inputPassword4" placeholder="Ulangi Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Kontak Person</label>
-                                        <div class="col-sm-7">
-                                            <input type="text" name="xkontak" class="form-control" value="<?php echo $pengguna_nohp;?>" id="inputUserName" placeholder="Kontak Person" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Level</label>
-                                        <div class="col-sm-7">
-                                            <select class="form-control" name="xlevel" required>
-											<?php if($pengguna_level=='1'):?>
-                                                <option value="1" selected>Administrator</option>
-                                                <option value="2">Author</option>
-											<?php else:?>
-												<option value="1">Administrator</option>
-                                                <option value="2" selected>Author</option>
-											<?php endif;?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputUserName" class="col-sm-4 control-label">Photo</label>
-                                        <div class="col-sm-7">
-                                            <input type="file" name="filefoto"/>
-                                        </div>
-                                    </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Update</button>
-                    </div>
-                    </form>
-                </div>
+        
+        <div class="bg-gray-50 rounded-lg p-5 space-y-3 border border-gray-100 mb-6 font-mono text-sm">
+            <div class="flex justify-between border-b border-gray-200 pb-2">
+                <span class="text-gray-400">Username</span>
+                <span class="font-bold text-primary"><?php echo $this->session->flashdata('uname');?></span>
+            </div>
+            <div class="flex justify-between pt-1">
+                <span class="text-gray-400">Password Baru</span>
+                <span class="font-bold text-secondary text-base"><?php echo $this->session->flashdata('upass');?></span>
             </div>
         </div>
-	<?php endforeach;?>
+        
+        <button onclick="document.getElementById('ModalResetPassword').remove()" class="w-full py-3 bg-primary text-white rounded-md font-headline tracking-widest uppercase text-xs hover:bg-ink transition shadow-soft">Tutup</button>
+    </div>
+</div>
+<?php endif;?>
 
-	<?php foreach ($data->result_array() as $i) :
-              $pengguna_id=$i['pengguna_id'];
-              $pengguna_nama=$i['pengguna_nama'];
-              $pengguna_jenkel=$i['pengguna_jenkel'];
-              $pengguna_email=$i['pengguna_email'];
-              $pengguna_username=$i['pengguna_username'];
-              $pengguna_password=$i['pengguna_password'];
-              $pengguna_nohp=$i['pengguna_nohp'];
-              $pengguna_level=$i['pengguna_level'];
-              $pengguna_photo=$i['pengguna_photo'];
-            ?>
-	<!--Modal Hapus Pengguna-->
-        <div class="modal fade" id="ModalHapus<?php echo $pengguna_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Hapus Pengguna</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/pengguna/hapus_pengguna'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-							<input type="hidden" name="kode" value="<?php echo $pengguna_id;?>"/>
-                            <p>Apakah Anda yakin mau menghapus Pengguna <b><?php echo $pengguna_nama;?></b> ?</p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-	<?php endforeach;?>
-
-	<!--Modal Reset Password-->
-        <div class="modal fade" id="ModalResetPassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Reset Password</h4>
-                    </div>
-
-                    <div class="modal-body">
-
-                            <table>
-                                <tr>
-                                    <th style="width:120px;">Username</th>
-                                    <th>:</th>
-                                    <th><?php echo $this->session->flashdata('uname');?></th>
-                                </tr>
-                                <tr>
-                                    <th style="width:120px;">Password Baru</th>
-                                    <th>:</th>
-                                    <th><?php echo $this->session->flashdata('upass');?></th>
-                                </tr>
-                            </table>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
-<!-- DataTables -->
-<script src="<?php echo base_url().'assets/plugins/datatables/jquery.dataTables.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.min.js'?>"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
-<script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
-<!-- page script -->
+<!-- Toasts -->
+<?php 
+$msg = $this->session->flashdata('msg');
+if($msg && $msg != 'show-modal'): 
+    $toastClass = "bg-green-500";
+    $toastIcon = "check_circle";
+    $toastText = "Berhasil!";
+    
+    if($msg == 'success') {
+        $toastText = "Pengguna berhasil disimpan.";
+    } elseif($msg == 'info') {
+        $toastText = "Pengguna berhasil diupdate.";
+    } elseif($msg == 'success-hapus') {
+        $toastClass = "bg-red-600";
+        $toastIcon = "delete_sweep";
+        $toastText = "Pengguna berhasil dihapus.";
+    } elseif($msg == 'error') {
+        $toastClass = "bg-red-500";
+        $toastIcon = "error";
+        $toastText = "Password konfirmasi tidak sama.";
+    } elseif($msg == 'warning') {
+        $toastClass = "bg-amber-500";
+        $toastIcon = "warning";
+        $toastText = "Upload gambar gagal atau limit.";
+    }
+?>
+<div id="toast-msg" class="fixed bottom-6 right-6 <?php echo $toastClass; ?> text-white px-6 py-4 rounded-xl shadow-2xl font-serif z-[100] flex items-center gap-3 transition-opacity duration-300">
+    <span class="material-symbols-outlined text-2xl"><?php echo $toastIcon; ?></span>
+    <span class="text-sm font-bold uppercase tracking-widest"><?php echo $toastText; ?></span>
+</div>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+    setTimeout(() => {
+        const toast = document.getElementById('toast-msg');
+        if(toast) { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }
+    }, 4000);
 </script>
-<?php if($this->session->flashdata('msg')=='error'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Error',
-                    text: "Password dan Ulangi Password yang Anda masukan tidak sama.",
-                    showHideTransition: 'slide',
-                    icon: 'error',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#FF4859'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='warning'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Warning',
-                    text: "Gambar yang Anda masukan terlalu besar.",
-                    showHideTransition: 'slide',
-                    icon: 'warning',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#FFC017'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='success'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Pengguna Berhasil disimpan ke database.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='info'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Info',
-                    text: "Pengguna berhasil di update",
-                    showHideTransition: 'slide',
-                    icon: 'info',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#00C9E6'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Pengguna Berhasil dihapus.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='show-modal'):?>
-        <script type="text/javascript">
-                $('#ModalResetPassword').modal('show');
-        </script>
-    <?php else:?>
-
-    <?php endif;?>
-</body>
-</html>
+<?php endif; ?>

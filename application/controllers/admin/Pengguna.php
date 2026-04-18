@@ -17,8 +17,8 @@ class Pengguna extends CI_Controller{
 		$x['user']=$this->m_pengguna->get_pengguna_login($kode);
 		$x['data']=$this->m_pengguna->get_all_pengguna();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_pengguna',$x);
+		$x['content']='admin/v_pengguna';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function simpan_pengguna(){

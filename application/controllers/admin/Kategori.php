@@ -15,8 +15,8 @@ class Kategori extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_kategori',$x);
+		$x['content']='admin/v_kategori';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function simpan_kategori(){

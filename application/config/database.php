@@ -74,10 +74,10 @@ $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
-	'dsn'	=> '',
+	'dsn' => '',
 	'hostname' => 'localhost',
-	'username' => 'gkjtangerang_290897',
-	'password' => 'gkjt_290897',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'gkjtangerang_2024',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

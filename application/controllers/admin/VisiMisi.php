@@ -31,27 +31,17 @@ class VisiMisi extends CI_Controller{
 			$selected_category_id = $x['datatentang']->tulisan_kategori_id;
 		}
 		$x['selected_category_id'] = $selected_category_id;
-		$this->load->view('admin/v_menu_admin',$x);
-		// $this->load->view('admin/v_visi-misi',$x);
-		$this->load->view('admin/v_visi-misi', compact('x', 'selected_category_id'));
+		
+		$x['content'] = 'admin/v_visi-misi';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function add_sejarah(){
 		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_add_sejarah',$x);
+		$x['content']='admin/v_add_sejarah';
+		$this->load->view('admin/layout/main',$x);
 	}
-	/* LEGACY CODE DISABLED
-	function get_edit(){
-		$kode=$this->uri->segment(4);
-		// $x['data']=$this->m_tulisan->get_tulisan_by_kode($kode);
-        $x['data']=$this->m_tentang->get_sejarah_by_kode($kode);
-		$x['kat']=$this->m_kategori->get_all_kategori();
-		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_edit_sejarah',$x);
-	}
-	*/
+	/* get_edit handled by common update logic or disabled */
 	function simpan_visimisi(){
 				$config['upload_path'] = './assets/images/'; //path folder
 	            $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa anda sesuaikan

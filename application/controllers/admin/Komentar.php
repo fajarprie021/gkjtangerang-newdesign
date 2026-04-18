@@ -7,11 +7,14 @@ class Komentar extends CI_Controller{
               redirect($url);
           };
     	$this->load->model('m_kategori');
+    	$this->load->model('m_menu');
     }
 
     function index(){
         $x['data']=$this->db->query("SELECT tbl_komentar.*,tulisan_judul,tulisan_slug FROM tbl_komentar JOIN tbl_tulisan ON komentar_tulisan_id=tulisan_id ORDER BY komentar_id DESC");
-        $this->load->view('admin/v_komentar',$x);
+        $x['menu']=$this->m_menu->get_all_menu_admin();
+        $x['content']='admin/v_komentar';
+        $this->load->view('admin/layout/main',$x);
     }
 
     function publish(){

@@ -1,90 +1,38 @@
-<!--Counter Inbox-->
-<?php
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
-    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
-    $jum_comment=$query2->num_rows();
-    $jum_pesan=$query->num_rows();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GKJ Tangerang | List Berita</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.css'?>">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.css'?>"/>
+<section class="bg-cream px-6 py-24 min-h-screen">
+  <div class="mx-auto max-w-7xl">
+    
+    <!-- Admin Header -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
+        <div>
+            <?php 
+            $this->load->view('components/section_header_left', array(
+                'eyebrow' => 'Administrator',
+                'title'   => 'Daftar Berita'
+            )); 
+            ?>
+            <p class="text-gray-600 font-serif mt-2">Kelola semua artikel, berita, dan tulisan yang dipublikasikan.</p>
+        </div>
+        <a href="<?php echo base_url().'admin/tulisan/add_tulisan'?>" class="bg-secondary text-white px-6 py-3 rounded-full font-headline tracking-widest text-sm hover:bg-primary transition-colors shadow-soft whitespace-nowrap">
+            + Post Tulisan Baru
+        </a>
+    </div>
 
-	<?php
-            function limit_words($string, $word_limit){
-                $words = explode(" ",$string);
-                return implode(" ",array_splice($words,0,$word_limit));
-            }
-
-    ?>
-
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-   <?php
-    $this->load->view('admin/v_header');
-  ?>
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        List Berita
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Berita</a></li>
-        <li class="active">List Berita</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-
-          <div class="box">
-            <div class="box-header">
-              <a class="btn btn-success btn-flat" href="<?php echo base_url().'admin/tulisan/add_tulisan'?>"><span class="fa fa-plus"></span> Post Tulisan</a>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example1" class="table table-striped" style="font-size:13px;">
+    <!-- Table -->
+    <div class="bg-white rounded-xl shadow-soft overflow-hidden border-t-4 border-primary">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[1000px]">
                 <thead>
-                <tr>
-      					<th>Gambar</th>
-      					<th>Judul</th>
-      					<th>Tanggal</th>
-      					<th>Author</th>
-      					<th>Baca</th>
-                    <th>Kategori</th>
-                    <th style="text-align:right;">Aksi</th>
-                </tr>
+                    <tr class="bg-primary/5 text-primary font-headline text-sm tracking-wide border-b border-primary/20">
+                        <th class="p-4 w-32 text-center">Gambar</th>
+                        <th class="p-4">Judul & Kategori</th>
+                        <th class="p-4 w-40">Tanggal</th>
+                        <th class="p-4 w-40">Penulis</th>
+                        <th class="p-4 w-24 text-center">Views</th>
+                        <th class="p-4 w-28 text-right">Aksi</th>
+                    </tr>
                 </thead>
-                <tbody>
-          				<?php
+                <tbody class="text-gray-700 font-serif text-sm">
+                    <?php
           					$no=0;
           					foreach ($data->result_array() as $i) :
           					   $no++;
@@ -95,357 +43,105 @@
           					   $tulisan_author=$i['tulisan_author'];
           					   $tulisan_gambar=$i['tulisan_gambar'];
           					   $tulisan_views=$i['tulisan_views'];
-                       $kategori_id=$i['tulisan_kategori_id'];
-                       $kategori_nama=$i['tulisan_kategori_nama'];
-
+                               $kategori_id=$i['tulisan_kategori_id'];
+                               $kategori_nama=$i['tulisan_kategori_nama'];
                     ?>
-                <tr>
-                  <td><img src="<?php echo base_url().'assets/images/'.$tulisan_gambar;?>" style="width:90px;"></td>
-                  <td><?php echo $tulisan_judul;?></td>
-
-        				  <td><?php echo $tulisan_tanggal;?></td>
-        				  <td><?php echo $tulisan_author;?></td>
-        				  <td><?php echo $tulisan_views;?></td>
-        				  <td><?php echo $kategori_nama;?></td>
-                  <td style="text-align:right;">
-                        <a class="btn" href="<?php echo base_url().'admin/tulisan/get_edit/'.$tulisan_id;?>"><span class="fa fa-pencil"></span></a>
-                        <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $tulisan_id;?>"><span class="fa fa-trash"></span></a>
-                  </td>
-                </tr>
-				<?php endforeach;?>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="p-4">
+                            <img src="<?php echo base_url().'assets/images/'.$tulisan_gambar;?>" class="w-24 h-16 object-cover rounded-lg shadow-sm border border-gray-100 mx-auto">
+                        </td>
+                        <td class="p-4">
+                            <span class="font-bold text-primary block text-base mb-1 truncate max-w-md"><?php echo $tulisan_judul;?></span>
+                            <span class="inline-block px-2 py-0.5 rounded-full bg-secondary/10 text-secondary text-[10px] font-headline uppercase tracking-wider"><?php echo $kategori_nama;?></span>
+                        </td>
+                        <td class="p-4 text-gray-500 italic"><?php echo $tulisan_tanggal;?></td>
+                        <td class="p-4">
+                            <span class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-secondary text-base">person</span>
+                                <?php echo $tulisan_author;?>
+                            </span>
+                        </td>
+                        <td class="p-4 text-center">
+                            <span class="flex items-center justify-center gap-1.5 text-gray-500 font-bold">
+                                <span class="material-symbols-outlined text-base">visibility</span>
+                                <?php echo $tulisan_views;?>
+                            </span>
+                        </td>
+                        <td class="p-4 text-right space-x-2 whitespace-nowrap">
+                            <a href="<?php echo base_url().'admin/tulisan/get_edit/'.$tulisan_id;?>" class="inline-block text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 p-2 rounded-md" title="Edit">
+                                <span class="material-symbols-outlined text-sm">edit</span>
+                            </a>
+                            <button onclick="document.getElementById('ModalHapus<?php echo $tulisan_id;?>').classList.remove('hidden')" class="text-red-600 hover:text-red-800 transition-colors bg-red-50 p-2 rounded-md" title="Hapus">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                    
+                    <?php if($no == 0): ?>
+                    <tr>
+                        <td colspan="6" class="p-12 text-center text-gray-400 italic font-serif text-lg">Belum ada berita yang dipublikasikan.</td>
+                    </tr>
+                    <?php endif; ?>
                 </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
+            </table>
         </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
+    </div>
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
-    </div>
-    <strong>Copyright &copy; 2017 <a href="http://mfikri.com">M Fikri Setiadi</a>.</strong> All rights reserved.
-  </footer>
+</section>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-
-
-	<?php foreach ($data->result_array() as $i) :
-              $tulisan_id=$i['tulisan_id'];
-              $tulisan_judul=$i['tulisan_judul'];
-              $tulisan_gambar=$i['tulisan_gambar'];
-            ?>
-	<!--Modal Hapus Pengguna-->
-        <div class="modal fade" id="ModalHapus<?php echo $tulisan_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
-                        <h4 class="modal-title" id="myModalLabel">Hapus Berita</h4>
-                    </div>
-                    <form class="form-horizontal" action="<?php echo base_url().'admin/tulisan/hapus_tulisan'?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-							       <input type="hidden" name="kode" value="<?php echo $tulisan_id;?>"/>
-                     <input type="hidden" value="<?php echo $tulisan_gambar;?>" name="gambar">
-                            <p>Apakah Anda yakin mau menghapus Posting <b><?php echo $tulisan_judul;?></b> ?</p>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
-                    </div>
-                    </form>
-                </div>
+<?php foreach ($data->result_array() as $i) :
+    $tulisan_id=$i['tulisan_id'];
+    $tulisan_judul=$i['tulisan_judul'];
+    $tulisan_gambar=$i['tulisan_gambar'];
+?>
+<!-- Modal Hapus -->
+<div id="ModalHapus<?php echo $tulisan_id;?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden p-8 text-center font-serif">
+        <form action="<?php echo base_url().'admin/tulisan/hapus_tulisan'?>" method="post">
+            <div class="w-16 h-16 mx-auto bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-3xl">warning</span>
             </div>
-        </div>
-	<?php endforeach;?>
+            <h4 class="font-headline text-xl text-primary mb-2 uppercase tracking-wider">Hapus Berita?</h4>
+            <p class="text-gray-600 text-sm mb-8 px-4 font-serif leading-relaxed">Apakah Anda yakin mau menghapus postingan <strong><?php echo $tulisan_judul;?></strong>? Tindakan ini tidak dapat dibatalkan.</p>
+            
+            <input type="hidden" name="kode" value="<?php echo $tulisan_id;?>"/>
+            <input type="hidden" name="gambar" value="<?php echo $tulisan_gambar;?>"/>
+            
+            <div class="flex justify-center gap-3">
+                <button type="button" onclick="document.getElementById('ModalHapus<?php echo $tulisan_id;?>').classList.add('hidden')" class="px-6 py-2 bg-gray-100 text-gray-600 rounded-md hover:bg-gray-200 font-headline tracking-widest text-xs uppercase transition-colors">Batal</button>
+                <button type="submit" class="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 font-headline tracking-widest text-xs uppercase shadow-sm transition-colors">Ya, Hapus</button>
+            </div>
+        </form>
+    </div>
+</div>
+<?php endforeach;?>
 
-
-
-
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
-<!-- DataTables -->
-<script src="<?php echo base_url().'assets/plugins/datatables/jquery.dataTables.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/datatables/dataTables.bootstrap.min.js'?>"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
-<script type="text/javascript" src="<?php echo base_url().'assets/plugins/toast/jquery.toast.min.js'?>"></script>
-<!-- page script -->
+<!-- Notifications / Toasts -->
+<?php 
+$msg = $this->session->flashdata('msg');
+if($msg): 
+    $toastClass = "bg-green-500";
+    $toastIcon = "check_circle";
+    $toastText = "Berhasil memperbarui data.";
+    if($msg == 'success') {
+        $toastText = "Berita berhasil dipublikasikan.";
+    } elseif($msg == 'info') {
+        $toastText = "Berita berhasil diperbarui.";
+    } elseif($msg == 'success-hapus') {
+        $toastClass = "bg-red-600";
+        $toastIcon = "delete_sweep";
+        $toastText = "Berita berhasil dihapus.";
+    }
+?>
+<div id="toast-msg" class="fixed bottom-6 right-6 <?php echo $toastClass; ?> text-white px-6 py-4 rounded-xl shadow-2xl font-serif z-[100] flex items-center gap-3 transition-opacity duration-300">
+    <span class="material-symbols-outlined text-2xl"><?php echo $toastIcon; ?></span>
+    <span class="text-sm font-bold uppercase tracking-widest"><?php echo $toastText; ?></span>
+</div>
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-  });
+    setTimeout(() => {
+        const toast = document.getElementById('toast-msg');
+        if(toast) { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }
+    }, 4000);
 </script>
-<?php if($this->session->flashdata('msg')=='error'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Error',
-                    text: "Password dan Ulangi Password yang Anda masukan tidak sama.",
-                    showHideTransition: 'slide',
-                    icon: 'error',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#FF4859'
-                });
-        </script>
-
-    <?php elseif($this->session->flashdata('msg')=='success'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Berita Berhasil disimpan ke database.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='info'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Info',
-                    text: "Berita berhasil di update",
-                    showHideTransition: 'slide',
-                    icon: 'info',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#00C9E6'
-                });
-        </script>
-    <?php elseif($this->session->flashdata('msg')=='success-hapus'):?>
-        <script type="text/javascript">
-                $.toast({
-                    heading: 'Success',
-                    text: "Berita Berhasil dihapus.",
-                    showHideTransition: 'slide',
-                    icon: 'success',
-                    hideAfter: false,
-                    position: 'bottom-right',
-                    bgColor: '#7EC857'
-                });
-        </script>
-    <?php else:?>
-
-    <?php endif;?>
-</body>
-</html>
+<?php endif; ?>

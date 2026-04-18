@@ -104,8 +104,8 @@ class Informasi extends CI_Controller{
 		}else{
 			$x['data']=$this->m_informasi->get_all_renungan_admin();
             $x['menu']=$this->m_menu->get_all_menu_admin();
-            $this->load->view('admin/v_menu_admin',$x);
-            $this->load->view('admin/v_informasi',$x);
+            $x['content']='admin/v_informasi';
+            $this->load->view('admin/layout/main',$x);
 		}
 	}
 

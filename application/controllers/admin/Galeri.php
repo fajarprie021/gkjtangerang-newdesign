@@ -17,20 +17,19 @@ class Galeri extends CI_Controller{
 
 
 	function index(){
-		
 		$x['data']=$this->m_galeri->get_all_galeri();
 		$x['alb']=$this->m_album->get_all_album();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_galeri',$x);
+		$x['content']='admin/v_galeri';
+		$this->load->view('admin/layout/main',$x);
 	}
 
 	function add_galeri(){
 		// $x['kat']=$this->m_kategori->get_all_kategori();
 		$x['alb']=$this->m_album->get_all_album();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_add_galeri',$x);
+		$x['content']='admin/v_add_galeri';
+		$this->load->view('admin/layout/main',$x);
 	}
 	
 	// Proses upload menggunakan metode chunk

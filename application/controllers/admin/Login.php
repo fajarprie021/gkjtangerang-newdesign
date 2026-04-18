@@ -13,7 +13,6 @@ class Login extends CI_Controller{
         $u=$username;
         $p=$password;
         $cadmin=$this->m_login->cekadmin($u,$p);
-        echo json_encode($cadmin);
         if($cadmin->num_rows() > 0){
          $this->session->set_userdata('masuk',true);
          $this->session->set_userdata('user',$u);
@@ -35,7 +34,7 @@ class Login extends CI_Controller{
          }
 
        }else{
-         echo $this->session->set_flashdata('msg','<div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"><span class="fa fa-close"></span></button> Username Atau Password Salah</div>');
+         $this->session->set_flashdata('msg','Username atau Password Salah');
          redirect('admin/login');
        }
 

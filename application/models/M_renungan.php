@@ -7,10 +7,10 @@ class M_renungan extends CI_Model{
 	}
 	function simpan_renungan($judul,$deskripsi){
 		$author=$this->session->userdata('nama');
-		$hsl=$this->db->query("INSERT INTO tbl_renungan(renungan_judul,renungan_deskripsi,renungan_author) VALUES ('$judul','$deskripsi','$author')");
+		$hsl=$this->db->query("INSERT INTO tbl_renungan(renungan_judul,renungan_deskripsi,renungan_author,renungan_tanggal) VALUES ('$judul','$deskripsi','$author',NOW())");
 		return $hsl;
 	}
-	function update_renungan($kode,$judul,$deskripsi,$author){
+	function update_renungan($kode,$judul,$deskripsi){
 		$author=$this->session->userdata('nama');
 		$hsl=$this->db->query("UPDATE tbl_renungan SET renungan_judul='$judul',renungan_deskripsi='$deskripsi',renungan_author='$author' where renungan_id='$kode'");
 		return $hsl;

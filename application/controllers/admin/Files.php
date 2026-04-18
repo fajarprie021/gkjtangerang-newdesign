@@ -8,6 +8,7 @@ class Files extends CI_Controller{
         };
 		$this->load->model('m_files');
 		$this->load->model('m_pengguna');
+		$this->load->model('m_menu');
 		$this->load->library('upload');
 		$this->load->helper('download');
 	}
@@ -16,6 +17,7 @@ class Files extends CI_Controller{
 	function index(){
 		$x['title'] = 'Data Download';
 		$x['data']=$this->m_files->get_all_files();
+		$x['menu']=$this->m_menu->get_all_menu_admin();
 		$x['content'] = 'admin/v_files';
 		$this->load->view('admin/layout/main',$x);
 	}

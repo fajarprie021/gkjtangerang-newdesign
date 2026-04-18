@@ -28,15 +28,15 @@ class StrukturMajelis extends CI_Controller{
 			$selected_category_id = $x['datatentang']->tulisan_kategori_id;
 		}
 		$x['selected_category_id'] = $selected_category_id;
-		$this->load->view('admin/v_menu_admin',$x);
-		// $this->load->view('admin/v_struktur-majelis',$x);
-		$this->load->view('admin/v_struktur-majelis', compact('x', 'selected_category_id'));
+		
+		$x['content'] = 'admin/v_struktur-majelis';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function add_strukturmajelis(){
 		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_add_sejarah',$x);
+		$x['content']='admin/v_add_sejarah'; // Note: uses sejarah view as template?
+		$this->load->view('admin/layout/main',$x);
 	}
 	function get_edit(){
 		$kode=$this->uri->segment(4);
@@ -44,8 +44,8 @@ class StrukturMajelis extends CI_Controller{
         $x['data']=$this->m_tentang->get_struktur_majelis_by_kode($kode);
 		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_edit_strukturmajelis',$x);
+		$x['content']='admin/v_edit_strukturmajelis';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function simpan_strukturmajelis(){
 				$config['upload_path'] = './assets/images/'; //path folder

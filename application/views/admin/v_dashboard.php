@@ -1,381 +1,217 @@
-<!--Counter Inbox-->
 <?php
     error_reporting(0);
     $query=$this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
     $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
     $jum_comment=$query2->num_rows();
     $jum_pesan=$query->num_rows();
+
+    /* Mengambil query report*/
+    $bulan = [];
+    $value = [];
+    foreach($visitor as $result){
+        $bulan[] = $result->tgl; //ambil bulan
+        $value[] = (float) $result->jumlah; //ambil nilai
+    }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>GKJ Tangerang | Dashboard</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <!-- <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>"> -->
-  <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'theme/images/logo-gkj-tab.png'?>">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
-  <!-- Ionicons -->
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css'?>">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-  <?php
-        /* Mengambil query report*/
-        foreach($visitor as $result){
-            $bulan[] = $result->tgl; //ambil bulan
-            $value[] = (float) $result->jumlah; //ambil nilai
-        }
-        /* end mengambil query*/
 
-    ?>
-
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <!--Header-->
-  <?php
-    $this->load->view('admin/v_header');
-  ?>
-
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Dashboard
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-chrome"></i></span>
-              <?php
-                  $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Chrome'");
-                  $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Chrome</span>
-              <span class="info-box-number"><?php echo $jml;?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
+<div class="space-y-6 animate-fade-in">
+    <!-- Header Section -->
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-white tracking-tight">Dashboard Overview</h1>
+            <p class="text-gray-400 text-sm mt-1">Selamat datang kembali, Ringkasan statistik situs Anda.</p>
         </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-firefox"></i></span>
-            <?php
-                  $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Firefox' OR pengunjung_perangkat='Mozilla'");
-                  $jml=$query->num_rows();
-            ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Mozilla Firefox</span>
-              <span class="info-box-number"><?php echo $jml;?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
+        <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20">
+            <span class="material-symbols-outlined text-[16px]">calendar_today</span>
+            <span><?php echo date('d M Y'); ?></span>
         </div>
-        <!-- /.col -->
-
-        <!-- fix for small devices only -->
-        <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-bug"></i></span>
-              <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Googlebot'");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Googlebot</span>
-              <span class="info-box-number"><?php echo $jml;?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-yellow"><i class="fa fa-opera"></i></span>
-            <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Opera'");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Opera</span>
-              <span class="info-box-number"><?php echo $jml;?></span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Pengunjung bulan ini</h3>
-
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
-
-                  <div class="col-md-12">
-                          <canvas id="canvas" width="1000" height="280"></canvas>
-                  </div>
-                  <!-- /.chart-responsive -->
-                </div>
-                <!-- /.col -->
-
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./box-body -->
-
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-
-      <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <div class="col-md-8">
-          <!-- MAP & BOX PANE -->
-          <div class="box box-success">
-            <div class="box-header with-border">
-              <h3 class="box-title">Posting Populer</h3>
-
-              <table class="table">
-              <?php
-                  $query=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC");
-                  foreach ($query->result_array() as $i) :
-                      $tulisan_id=$i['tulisan_id'];
-                      $tulisan_judul=$i['tulisan_judul'];
-                      $tulisan_views=$i['tulisan_views'];
-              ?>
-                  <tr>
-                    <td><?php echo $tulisan_judul;?></td>
-                    <td><?php echo $tulisan_views.' Views';?></td>
-                  </tr>
-              <?php endforeach;?>
-              </table>
-            </div>
-
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-
-        <div class="col-md-4">
-          <!-- Info Boxes Style 2 -->
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-safari"></i></span>
-            <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Safari'");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Safari</span>
-              <span class="info-box-number"><?php echo number_format($jml);?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-                  <span class="progress-description">
-                    Penggunjung
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-green">
-            <span class="info-box-icon"><i class="fa fa-globe"></i></span>
-            <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Other' OR pengunjung_perangkat='Internet Explorer'");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Lainnya</span>
-              <span class="info-box-number"><?php echo number_format($jml);?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-                  <span class="progress-description">
-                    Pengunjung
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-users"></i></span>
-            <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE DATE_FORMAT(pengunjung_tanggal,'%m%y')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%m%y')");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Pengunjung Bulan Lalu</span>
-              <span class="info-box-number"><?php echo number_format($jml);?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-                  <span class="progress-description">
-                    Pengunjung
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-          <div class="info-box bg-aqua">
-            <span class="info-box-icon"><i class="fa fa-users"></i></span>
-             <?php
-                    $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE DATE_FORMAT(pengunjung_tanggal,'%m%y')=DATE_FORMAT(CURDATE(),'%m%y')");
-                    $jml=$query->num_rows();
-              ?>
-            <div class="info-box-content">
-              <span class="info-box-text">Pengunjung Bulan Ini</span>
-              <span class="info-box-number"><?php echo number_format($jml);?></span>
-
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-                  <span class="progress-description">
-                    Pengunjung
-                  </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-
-          <!-- PRODUCT LIST -->
-
-          <!-- /.box -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2017 <a href="http://mfikri.com">M Fikri Setiadi</a>.</strong> All rights reserved.
-  </footer>
 
+    <!-- Info Boxes Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Chrome Box -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Chrome'");
+            $jml_chrome=$query->num_rows();
+        ?>
+        <div class="bg-primary/50 backdrop-blur-sm border border-white/5 p-6 rounded-3xl flex items-center gap-5 transition hover:border-secondary/30 group">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition">
+                <i class="fab fa-chrome text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Google Chrome</p>
+                <h3 class="text-2xl font-bold text-white"><?php echo number_format($jml_chrome); ?></h3>
+            </div>
+        </div>
 
+        <!-- Firefox Box -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Firefox' OR pengunjung_perangkat='Mozilla'");
+            $jml_firefox=$query->num_rows();
+        ?>
+        <div class="bg-primary/50 backdrop-blur-sm border border-white/5 p-6 rounded-3xl flex items-center gap-5 transition hover:border-secondary/30 group">
+            <div class="w-12 h-12 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover:scale-110 transition">
+                <i class="fab fa-firefox text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Mozilla Firefox</p>
+                <h3 class="text-2xl font-bold text-white"><?php echo number_format($jml_firefox); ?></h3>
+            </div>
+        </div>
+
+        <!-- Safari (Replaced Googlebot with Safari for better consistency) -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Safari'");
+            $jml_safari=$query->num_rows();
+        ?>
+        <div class="bg-primary/50 backdrop-blur-sm border border-white/5 p-6 rounded-3xl flex items-center gap-5 transition hover:border-secondary/30 group">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-400 group-hover:scale-110 transition">
+                <i class="fab fa-safari text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Safari Browser</p>
+                <h3 class="text-2xl font-bold text-white"><?php echo number_format($jml_safari); ?></h3>
+            </div>
+        </div>
+
+        <!-- Opera -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE pengunjung_perangkat='Opera'");
+            $jml_opera=$query->num_rows();
+        ?>
+        <div class="bg-primary/50 backdrop-blur-sm border border-white/5 p-6 rounded-3xl flex items-center gap-5 transition hover:border-secondary/30 group">
+            <div class="w-12 h-12 rounded-2xl bg-red-500/10 flex items-center justify-center text-red-500 group-hover:scale-110 transition">
+                <i class="fab fa-opera text-2xl"></i>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Opera Browser</p>
+                <h3 class="text-2xl font-bold text-white"><?php echo number_format($jml_opera); ?></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Main Chart -->
+        <div class="lg:col-span-2 bg-primary/50 backdrop-blur-sm border border-white/5 p-8 rounded-3xl">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-lg font-bold text-white uppercase tracking-widest text-xs">Statistik Pengunjung (Bulan Ini)</h3>
+                <span class="text-[10px] text-gray-500">Live Updates</span>
+            </div>
+            <div class="relative w-full h-[300px]">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+
+        <!-- Popular Posts -->
+        <div class="bg-primary/50 backdrop-blur-sm border border-white/5 p-8 rounded-3xl overflow-hidden flex flex-col">
+            <div class="flex items-center justify-between mb-8">
+                <h3 class="text-lg font-bold text-white uppercase tracking-widest text-xs">Artikel Populer</h3>
+                <span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+            </div>
+            <div class="flex-1 space-y-4 overflow-y-auto pr-2 scrollbar-thin">
+                <?php
+                    $query=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 10");
+                    foreach ($query->result_array() as $i) :
+                        $tulisan_id=$i['tulisan_id'];
+                        $tulisan_judul=$i['tulisan_judul'];
+                        $tulisan_views=$i['tulisan_views'];
+                ?>
+                    <div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition border border-transparent hover:border-white/5 group">
+                        <div class="bg-secondary/10 text-secondary text-[10px] font-bold w-10 h-10 rounded-xl flex flex-shrink-0 items-center justify-center border border-secondary/20">
+                            <?php echo number_format($tulisan_views); ?>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-[11px] text-white font-medium line-clamp-1 group-hover:text-secondary transition uppercase tracking-wider"><?php echo $tulisan_judul;?></p>
+                            <p class="text-[9px] text-gray-500 mt-1 uppercase tracking-widest font-light">Views Artikel</p>
+                        </div>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Previous Month -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE DATE_FORMAT(pengunjung_tanggal,'%m%y')=DATE_FORMAT(DATE_SUB(CURDATE(), INTERVAL 1 MONTH),'%m%y')");
+            $jml_prev=$query->num_rows();
+        ?>
+        <div class="bg-red-500/5 border border-red-500/10 p-6 rounded-3xl flex items-center justify-between">
+            <div>
+                <p class="text-[9px] uppercase tracking-widest text-red-400/60 font-bold">Bulan Kemarin</p>
+                <h4 class="text-xl font-bold text-red-400 mt-1"><?php echo number_format($jml_prev); ?></h4>
+            </div>
+            <div class="text-red-400/20">
+                <span class="material-symbols-outlined text-[32px]">history</span>
+            </div>
+        </div>
+
+        <!-- This Month -->
+        <?php
+            $query=$this->db->query("SELECT * FROM tbl_pengunjung WHERE DATE_FORMAT(pengunjung_tanggal,'%m%y')=DATE_FORMAT(CURDATE(),'%m%y')");
+            $jml_now=$query->num_rows();
+        ?>
+        <div class="bg-green-500/5 border border-green-500/10 p-6 rounded-3xl flex items-center justify-between">
+            <div>
+                <p class="text-[9px] uppercase tracking-widest text-green-400/60 font-bold">Bulan Ini</p>
+                <h4 class="text-xl font-bold text-green-400 mt-1"><?php echo number_format($jml_now); ?></h4>
+            </div>
+            <div class="text-green-400/20">
+                <span class="material-symbols-outlined text-[32px]">trending_up</span>
+            </div>
+        </div>
+
+        <!-- Total Comments/Inbox -->
+        <div class="bg-blue-500/5 border border-blue-500/10 p-6 rounded-3xl flex items-center justify-between">
+            <div>
+                <p class="text-[9px] uppercase tracking-widest text-blue-400/60 font-bold">Komentar Belum Dibaca</p>
+                <h4 class="text-xl font-bold text-blue-400 mt-1"><?php echo number_format($jum_comment); ?></h4>
+            </div>
+            <div class="text-blue-400/20">
+                <span class="material-symbols-outlined text-[32px]">chat</span>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url().'assets/plugins/sparkline/jquery.sparkline.min.js'?>"></script>
-<!-- jvectormap -->
-<script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'?>"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
-<!-- ChartJS 1.0.1 -->
+<!-- Scripts - Injecting into main layout -->
 <script src="<?php echo base_url().'assets/plugins/chartjs/Chart.min.js'?>"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url().'assets/dist/js/pages/dashboard2.js'?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
-<?php $this->load->view("admin/modal.php") ?>
-
 <script>
-
-            var lineChartData = {
-                labels : <?php echo json_encode($bulan);?>,
-                datasets : [
-
-                    {
-                        fillColor: "rgba(60,141,188,0.9)",
-                        strokeColor: "rgba(60,141,188,0.8)",
-                        pointColor: "#3b8bba",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(152,235,239,1)",
-                        data : <?php echo json_encode($value);?>
-                    }
-
-                ]
-
+    var lineChartData = {
+        labels : <?php echo json_encode($bulan);?>,
+        datasets : [
+            {
+                fillColor: "rgba(226, 177, 71, 0.1)",
+                strokeColor: "rgba(226, 177, 71, 1)",
+                pointColor: "#E2B147",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(226, 177, 71, 1)",
+                data : <?php echo json_encode($value);?>
             }
+        ]
+    }
 
-        var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
-
-        var canvas = new Chart(myLine).Line(lineChartData, {
-            scaleShowGridLines : true,
-            scaleGridLineColor : "rgba(0,0,0,.005)",
-            scaleGridLineWidth : 0,
-            scaleShowHorizontalLines: true,
-            scaleShowVerticalLines: true,
-            bezierCurve : true,
-            bezierCurveTension : 0.4,
-            pointDot : true,
-            pointDotRadius : 4,
-            pointDotStrokeWidth : 1,
-            pointHitDetectionRadius : 2,
-            datasetStroke : true,
-            tooltipCornerRadius: 2,
-            datasetStrokeWidth : 2,
-            datasetFill : true,
-            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
-            responsive: true
-        });
-
-        </script>
-
-</body>
-</html>
+    var ctx = document.getElementById("canvas").getContext("2d");
+    var myLine = new Chart(ctx).Line(lineChartData, {
+        scaleShowGridLines : true,
+        scaleGridLineColor : "rgba(255,255,255,.05)",
+        scaleGridLineWidth : 1,
+        scaleShowHorizontalLines: true,
+        scaleShowVerticalLines: false,
+        bezierCurve : true,
+        bezierCurveTension : 0.4,
+        pointDot : true,
+        pointDotRadius : 5,
+        pointDotStrokeWidth : 2,
+        pointHitDetectionRadius : 20,
+        datasetStroke : true,
+        datasetStrokeWidth : 3,
+        datasetFill : true,
+        responsive: true,
+        maintainAspectRatio: false,
+        scaleFontColor: "#666",
+        scaleFontSize: 10
+    });
+</script>

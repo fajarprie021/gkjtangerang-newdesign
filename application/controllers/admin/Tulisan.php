@@ -17,22 +17,22 @@ class Tulisan extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_tulisan->get_all_tulisan();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_tulisan',$x);
+		$x['content']='admin/v_tulisan';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function add_tulisan(){
 		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_add_tulisan',$x);
+		$x['content']='admin/v_add_tulisan';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function get_edit(){
 		$kode=$this->uri->segment(4);
 		$x['data']=$this->m_tulisan->get_tulisan_by_kode($kode);
 		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
-		$this->load->view('admin/v_menu_admin',$x);
-		$this->load->view('admin/v_edit_tulisan',$x);
+		$x['content']='admin/v_edit_tulisan';
+		$this->load->view('admin/layout/main',$x);
 	}
 	function simpan_tulisan(){
 				$config['upload_path'] = './assets/images/'; //path folder
