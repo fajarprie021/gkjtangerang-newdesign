@@ -25,7 +25,7 @@
         </div>
 
         <?php 
-        $total_renungan = ($data instanceof CI_DB_result) ? $data->num_rows() : 0; 
+        $total_renungan = $data->num_rows(); 
         ?>
         <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div class="rounded-xl border border-primary/10 bg-white p-6 shadow-soft hover:shadow-lg transition-all border-l-4 border-l-primary/30">

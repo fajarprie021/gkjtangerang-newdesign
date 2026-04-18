@@ -1,106 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gallery Photo</title>
-  <!-- <link rel="shorcut icon" href="<?php echo base_url().'theme/images/icon.png'?>"> -->
-  <link rel="shorcut icon" href="<?php echo base_url().'theme/images/logo-gkj-tab.png'?>">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="<?php echo base_url().'theme/css/bootstrap.min.css'?>">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'theme/css/font-awesome.min.css'?>">
-  <!-- Simple Line Font -->
-  <link rel="stylesheet" href="<?php echo base_url().'theme/css/simple-line-icons.css'?>">
-  <!-- Magnific Popup CSS -->
-  <link rel="stylesheet" href="<?php echo base_url().'theme/css/magnific-popup.css'?>">
-  <!-- Image Hover CSS -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'theme/css/normalize.css'?>" />
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'theme/css/set2.css'?>" />
+<main class="bg-cream pt-24 pb-16 min-h-[70vh]">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        
+        <div class="text-center mb-16">
+            <span class="text-secondary font-bold tracking-[0.2em] uppercase text-xs">Dokumentasi</span>
+            <h1 class="mt-3 text-4xl md:text-5xl font-headline text-primary">Galeri Foto</h1>
+            <p class="mt-4 text-gray-600 font-serif max-w-2xl mx-auto">Kumpulan momen dan dokumentasi setiap kegiatan yang diadakan di lingkungan pelayanan kami.</p>
+        </div>
 
-  <!-- Masonry Gallery -->
-  <link href="<?php echo base_url().'theme/css/animated-masonry-gallery.css'?>" rel="stylesheet" type="text/css" />
-  <!-- Main CSS -->
-  <link href="<?php echo base_url().'theme/css/style.css'?>" rel="stylesheet">
-</head>
-
-<body>
-  <!--============================= HEADER =============================-->
-  
-<!--//END HEADER -->
-  <!--============================= Gallery =============================-->
-  <div class="gallery-wrap">
-    <div class="container">
-<!-- Style 2 -->
-<div class="row">
-  <div class="col-md-12">
-    <!-- <h3 class="gallery-style">Gallery Photo</h3> -->
-    <h2 class="gallery-style">Gallery Photo</h2>
-  </div>
-</div><br>
-<!-- <div class="row">
-  <div class="col-md-12">
-    <div id="gallery">
-      <div id="gallery-content">
-        <div id="gallery-content-center">
-          <?php foreach ($all_galeri->result() as $row) : ?>
-            <a href="<?php echo base_url().'assets/images/'.$row->galeri_gambar;?>" class="image-link2">
-             <img src="<?php echo base_url().'assets/images/'.$row->galeri_gambar;?>" class="all img-fluid" alt="#" />
-            </a>
-          <?php endforeach;?>
-       </div>
-     </div>
-   </div>
- </div>
-</div> -->
-
-<div class="row">
-                <?php foreach ($all_galeri->result() as $row) : ?>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div class="admission_insruction">
-                          <!-- <a href="<?php echo base_url().'assets/images/'.$row->galeri_gambar;?>" class="image-link2"> -->
-                          <a href="<?php echo base_url().'assets/images/galeri/'.$row->galeri_gambar;?>" class="image-link2">
-             <!-- <img src="<?php echo base_url().'assets/images/'.$row->galeri_gambar;?>" class="all img-fluid" alt="#" /> -->
-             <img src="<?php echo base_url().'assets/images/galeri/'.$row->galeri_gambar;?>" class="all img-fluid" alt="#" />
-            </a>
-                        </div>
+        <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+            <?php foreach ($all_galeri->result() as $row) : ?>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-500">
+                    <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white text-4xl transform scale-50 group-hover:scale-100 transition-transform duration-300">zoom_in</span>
                     </div>
-                <?php endforeach;?>
-              </div><br>
-<nav><?php echo $page;?></nav>
-<!--//End Style 2 -->
+                    <img 
+                        src="<?php echo base_url().'assets/images/galeri/'.$row->galeri_gambar;?>" 
+                        class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" 
+                        alt="Gallery Image" 
+                    />
+                </div>
+            <?php endforeach;?>
+        </div>
 
-</div>
-</div>
-<!--//End Gallery -->
-<!--============================= FOOTER =============================-->
+        <?php if($all_galeri->num_rows() == 0): ?>
+            <div class="text-center py-20 opacity-60">
+                <span class="material-symbols-outlined text-gray-400 text-6xl mb-4">photo_library</span>
+                <p class="font-serif text-gray-500 text-lg">Belum ada foto yang tersedia.</p>
+            </div>
+        <?php endif; ?>
 
-    <!--//END FOOTER -->
-    <!-- jQuery, Bootstrap JS. -->
-    <script src="<?php echo base_url().'theme/js/jquery.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/tether.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/bootstrap.min.js'?>"></script>
-    <!-- Plugins -->
-    <script src="<?php echo base_url().'theme/js/slick.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/waypoints.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/counterup.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/owl.carousel.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/validate.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/tweetie.min.js'?>"></script>
-    <!-- Subscribe -->
-    <script src="<?php echo base_url().'theme/js/subscribe.js'?>"></script>
-
-    <script src="<?php echo base_url().'theme/js/jquery-ui-1.10.4.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/jquery.isotope.min.js'?>"></script>
-    <script src="<?php echo base_url().'theme/js/animated-masonry-gallery.js'?>"></script>
-    <!-- Magnific popup JS -->
-    <script src="<?php echo base_url().'theme/js/jquery.magnific-popup.js'?>"></script>
-    <!-- Script JS -->
-    <script src="<?php echo base_url().'theme/js/script.js'?>"></script>
-
-  </body>
-
-  </html>
+        <!-- Pagination -->
+        <?php if(!empty($page)): ?>
+        <div class="mt-16 flex justify-center pagination-tailwind">
+            <?php echo $page;?>
+        </div>
+        <?php endif; ?>
+        
+    </div>
+</main>
+<style type="text/tailwindcss">
+    @layer components {
+        .pagination-tailwind ul { @apply flex flex-wrap items-center gap-2; }
+        .pagination-tailwind li { @apply list-none; }
+        .pagination-tailwind .page-item .page-link {
+            @apply flex h-10 min-w-[2.5rem] items-center justify-center rounded-lg border border-gray-200 bg-white px-3 font-bold text-primary transition-colors hover:border-secondary hover:bg-secondary hover:text-white !important;
+        }
+        .pagination-tailwind .page-item.active .page-link {
+            @apply border-primary bg-primary text-white pointer-events-none !important;
+        }
+    }
+</style>

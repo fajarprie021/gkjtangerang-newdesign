@@ -48,9 +48,8 @@ class Renungan extends CI_Controller{
             $this->pagination->initialize($config);
             $x['page'] =$this->pagination->create_links();
 						$x['data']=$this->m_renungan->renungan_perpage($offset,$limit);
-						$this->load->view('depan/v_menu',$x);
-						$this->load->view('depan/v_renungan',$x);
-						$this->load->view('depan/v_footer',$x);
+						$x['content'] = 'depan/v_renungan';
+						$this->load->view('layout/main', $x);
 	}
 
 	function detail($slugs)

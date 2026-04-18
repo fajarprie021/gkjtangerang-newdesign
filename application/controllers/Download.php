@@ -16,9 +16,8 @@ class Download extends CI_Controller{
 		$x['tlp']=$this->m_profil->get_tlp();
 		$x['email']=$this->m_profil->get_email();
 		$x['identitas']=$this->m_profil->get_identitas();
-		$this->load->view('depan/v_menu',$x);
-		$this->load->view('depan/v_download',$x);
-		$this->load->view('depan/v_footer',$x);
+		$x['content'] = 'depan/v_download';
+		$this->load->view('layout/main', $x);
 	}
 
 	function get_file(){

@@ -58,9 +58,8 @@ class Galeri extends CI_Controller{
 						// $x['data']=$this->m_siswa->siswa_perpage($offset,$limit);
             // $x['data']=$this->m_galeri->galeri_perpage($offset,$limit);
             $x['all_galeri']=$this->m_galeri->galeri_perpage($offset,$limit);
-						$this->load->view('depan/v_menu',$x);
-						$this->load->view('depan/v_galeri',$x);
-						$this->load->view('depan/v_footer',$x);
+						$x['content'] = 'depan/v_galeri';
+						$this->load->view('layout/main', $x);
 	}
 	function album(){
 		$idalbum=$this->uri->segment(3);

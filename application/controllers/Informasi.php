@@ -158,9 +158,8 @@ class Informasi extends CI_Controller{
 			$x['data']=$this->m_informasi->agenda_perpage($offset,$limit);
 			// $x['title']=ucfirst($current_url[4]);
 			$x['title']=ucfirst($name_page);
-			$this->load->view('depan/v_menu',$x);
-			$this->load->view('depan/v_informasi',$x);
-			$this->load->view('depan/v_footer',$x);
+			$x['content'] = 'depan/v_agenda';
+			$this->load->view('layout/main', $x);
 		}else{
 			$x['menu']=$this->m_menu->get_all_menu();
 			$x['alamat']=$this->m_profil->get_alamat();
@@ -203,9 +202,8 @@ class Informasi extends CI_Controller{
 			$x['data']=$this->m_informasi->renungan_perpage($offset,$limit);
 			// $x['title']=ucfirst($current_url[4]);
 			$x['title']=ucfirst($name_page);
-			$this->load->view('depan/v_menu',$x);
-			$this->load->view('depan/v_informasi',$x);
-			$this->load->view('depan/v_footer',$x);
+			$x['content'] = 'depan/v_renungan';
+			$this->load->view('layout/main', $x);
 		}
 	}
 

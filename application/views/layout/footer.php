@@ -25,10 +25,10 @@
     <div>
       <h5 class="mb-6 text-sm font-bold tracking-widest text-white">INFORMASI</h5>
       <ul class="space-y-4 font-serif text-sm italic text-slate-300">
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#berita">Warta Jemaat</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#jadwal">Jadwal Ibadah</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#kontak">Lokasi Gereja</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#tentang">Tentang Kami</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="<?php echo base_url('#berita');?>">Warta Jemaat</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="<?php echo base_url('#jadwal');?>">Jadwal Ibadah</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="<?php echo base_url('#kontak');?>">Lokasi Gereja</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="<?php echo base_url('#tentang');?>">Tentang Kami</a></li>
       </ul>
     </div>
 
@@ -36,10 +36,10 @@
     <div>
       <h5 class="mb-6 text-sm font-bold tracking-widest text-white">PELAYANAN</h5>
       <ul class="space-y-4 font-serif text-sm italic text-slate-300">
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#">Baptisan & Sidi</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#">Pernikahan Kudus</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#">Konseling Pastoral</a></li>
-        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="#">Pelayanan Kedukaan</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="javascript:void(0);">Baptisan & Sidi</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="javascript:void(0);">Pernikahan Kudus</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="javascript:void(0);">Konseling Pastoral</a></li>
+        <li><a class="block transition hover:translate-x-1 hover:text-secondary" href="javascript:void(0);">Pelayanan Kedukaan</a></li>
       </ul>
     </div>
 
