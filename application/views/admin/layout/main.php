@@ -20,3 +20,13 @@ $this->load->view('admin/layout/header');
         <?php $this->load->view('admin/layout/footer'); ?>
     </main>
 </div>
+
+<?php 
+// Fix CI3 flashdata persistence bug by forcefully unsetting the consumed msg.
+// This ensures the toast definitely will not persist across subsequent menu clicks.
+if($this->session->flashdata('msg')){
+    $this->session->unset_userdata('msg');
+}
+?>
+
+

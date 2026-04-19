@@ -50,19 +50,50 @@
                                         <ul class="dropdown-menu  sub-menu">
                                             <?php foreach($query->result() as $submenu) { ?>
                                                 <?php if ($submenu->id_halaman == 1): ?>
-                                                    <!-- <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.$submenu->sub_menu_href) ?>">
-                                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li> -->
-                                                    <?php if ($submenu->sub_menu_href == 'berita'): ?>
-                                                        <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog') ?>">
-                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
-                                                    <?php else: ?>
-                                                        <!-- <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.$submenu->sub_menu_href) ?>"> -->
-                                                        <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>">
-                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
-                                                    <?php endif; ?>
+                                                    <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                                        <?php
+                                                            $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                                            if(in_array($submenu->nama_sub_menu, $static_services)):
+                                                                $slug_map = [
+                                                                    'Baptisan & Sidi' => 'baptisan-sidi',
+                                                                    'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                                    'Konseling Pastoral' => 'konsekling-pastoral',
+                                                                    'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                                    'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                                                ];
+                                                                $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                                        ?>
+                                                                <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('pelayanan/'.$final_slug) ?>">
+                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                        <?php else: ?>
+                                                                <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>">
+                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                        <?php endif; ?>
+                                                    <?php elseif ($submenu->sub_menu_href == 'berita'): ?>
                                                 <?php elseif ($submenu->id_halaman == 2): ?>
-                                                        <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>">
-                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                        <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                                            <?php
+                                                                $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                                                if(in_array($submenu->nama_sub_menu, $static_services)):
+                                                                    $slug_map = [
+                                                                        'Baptisan & Sidi' => 'baptisan-sidi',
+                                                                        'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                                        'Konseling Pastoral' => 'konsekling-pastoral',
+                                                                        'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                                        'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                                                    ];
+                                                                    $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                                            ?>
+                                                                    <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('pelayanan/'.$final_slug) ?>">
+                                                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                            <?php else: ?>
+                                                                    <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>">
+                                                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                            <?php endif; ?>
+                                                        <?php else: ?>
+                                                            <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>">
+                                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                        <?php endif; ?>
                                                 <?php else: ?>
                                                         <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('tentang/halaman/'.$submenu->sub_menu_href) ?>">
                                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>

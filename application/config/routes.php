@@ -78,3 +78,5 @@ $route['admin/alamat'] = 'admin/identitas';
 $route['admin/tlp'] = 'admin/identitas';
 $route['admin/email'] = 'admin/identitas';
 $route['admin/socialmedia'] = 'admin/identitas';
+
+$route['pelayanan/(:any)'] = 'pelayanan/details/$1';

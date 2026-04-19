@@ -42,7 +42,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-soft">
                         <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Konten Berita</label>
                         <div class="prose max-w-none">
-                            <textarea id="ckeditor" name="xisi" required><?php echo $b['tulisan_isi'];?></textarea>
+                            <textarea id="ckeditor" name="xisi"><?php echo $b['tulisan_isi'];?></textarea>
                         </div>
                     </div>
                 </div>

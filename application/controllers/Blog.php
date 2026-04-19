@@ -56,6 +56,11 @@ class Blog extends CI_Controller
 		// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
 		$x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
 		$x['populer'] = $this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
+		
+		// Header Data
+		$x['header_title'] = "Warta Jemaat & Blog";
+		$x['header_subtitle'] = "Kumpulan artikel, berita, dan tulisan jemaat";
+
 		$x['content'] = 'depan/v_blog';
 		$this->load->view('layout/main', $x);
 	}
@@ -103,6 +108,22 @@ class Blog extends CI_Controller
 		$x['identitas'] = $this->m_profil->get_identitas();
 		$kategori = str_replace("-", " ", $this->uri->segment(3));
 		$query = $this->db->query("SELECT tbl_tulisan.*,DATE_FORMAT(tulisan_tanggal,'%d/%m/%Y') AS tanggal FROM tbl_tulisan WHERE tulisan_kategori_nama LIKE '%$kategori%' ORDER BY tulisan_views DESC LIMIT 5");
+		
+		// Mapping Judul Dinamis
+		if (stripos($kategori, 'Komisi') !== false) {
+			$x['header_title'] = "Kegiatan Komisi";
+			$x['header_subtitle'] = "Kumpulan kegiatan pelayanan komisi gereja";
+		} elseif (stripos($kategori, 'Wilayah') !== false) {
+			$x['header_title'] = "Kegiatan Wilayah";
+			$x['header_subtitle'] = "Kumpulan kegiatan pelayanan wilayah gereja";
+		} elseif (stripos($kategori, 'Pepanthan') !== false) {
+			$x['header_title'] = "Kegiatan Pepanthan";
+			$x['header_subtitle'] = "Kumpulan kegiatan pelayanan pepanthan";
+		} else {
+			$x['header_title'] = "Warta Jemaat & Blog";
+			$x['header_subtitle'] = "Kumpulan artikel, berita, dan tulisan jemaat";
+		}
+
 		if ($query->num_rows() > 0) {
 			$x['data'] = $query;
 			//  $x['category']=$this->db->get('tbl_kategori');
@@ -134,6 +155,11 @@ class Blog extends CI_Controller
 		$x['identitas'] = $this->m_profil->get_identitas();
 		$keyword = str_replace("'", "", htmlspecialchars($this->input->get('keyword', TRUE), ENT_QUOTES));
 		$query = $this->m_tulisan->cari_berita($keyword);
+		
+		// Header Data
+		$x['header_title'] = "Hasil Pencarian";
+		$x['header_subtitle'] = "Menampilkan hasil untuk kata kunci: $keyword";
+
 		if ($query->num_rows() > 0) {
 			$x['data'] = $query;
 			$x['category'] = $this->db->get('tbl_kategori');

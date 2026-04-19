@@ -14,14 +14,13 @@
                 </p>
             </div>
 
-            <button
-                type="button"
-                onclick="document.getElementById('myModal').classList.remove('hidden')"
+            <a
+                href="<?php echo base_url('admin/renungan/add_renungan'); ?>"
                 class="inline-flex items-center justify-center gap-2 rounded-full bg-secondary px-6 py-3 text-sm font-headline uppercase tracking-[0.2em] text-white shadow-soft transition hover:bg-primary"
             >
                 <span class="material-symbols-outlined text-[18px]">add</span>
                 Tambah Renungan
-            </button>
+            </a>
         </div>
 
         <?php 
@@ -109,14 +108,13 @@
                             </td>
                             <td class="px-6 py-6 text-right">
                                 <div class="inline-flex items-center gap-2">
-                                    <button
-                                        type="button"
-                                        onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.remove('hidden')"
+                                    <a
+                                        href="<?php echo base_url().'admin/renungan/get_edit/'.$renungan_id;?>"
                                         class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-blue-600 transition hover:bg-blue-600 hover:text-white group"
                                         title="Edit"
                                     >
                                         <span class="material-symbols-outlined text-[18px] group-hover:scale-110 transition-transform">edit</span>
-                                    </button>
+                                    </a>
                                     <button
                                         type="button"
                                         onclick="document.getElementById('ModalHapus<?php echo $renungan_id; ?>').classList.remove('hidden')"
@@ -146,57 +144,7 @@
     </div>
 </section>
 
-<!-- Modal Add -->
-<div id="myModal" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm transition-opacity">
-    <div class="flex max-h-[95vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
-        <form action="<?php echo base_url().'admin/renungan/simpan_renungan'?>" method="post" enctype="multipart/form-data" class="flex h-full flex-col font-serif">
-            <div class="flex items-center justify-between bg-primary px-8 py-5 text-white shrink-0">
-                <div>
-                    <h4 class="font-headline text-lg tracking-[0.2em] uppercase">Tambah Renungan</h4>
-                    <p class="text-[10px] text-white/60 tracking-widest uppercase mt-0.5">Input konten renungan harian baru</p>
-                </div>
-                <button type="button" onclick="document.getElementById('myModal').classList.add('hidden')" class="text-white/80 transition hover:text-white hover:rotate-90 transition-transform duration-300">
-                    <span class="material-symbols-outlined font-bold">close</span>
-                </button>
-            </div>
-
-            <div class="space-y-6 overflow-y-auto p-8 grow scrollbar-thin scrollbar-thumb-gray-100">
-                <div class="grid grid-cols-1 gap-6">
-                    <div>
-                        <label class="mb-2 block text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-primary">Judul Renungan <span class="text-red-500">*</span></label>
-                        <input
-                            type="text"
-                            name="xrenungan_judul"
-                            class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white"
-                            placeholder="Masukkan judul renungan yang inspiratif"
-                            required
-                        >
-                    </div>
-                    <div>
-                        <label class="mb-2 block text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-primary">Isi Renungan Pendek <span class="text-red-500">*</span></label>
-                        <textarea
-                            name="xdeskripsi"
-                            rows="10"
-                            class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white resize-none"
-                            placeholder="Tuliskan isi renungan di sini..."
-                            required
-                        ></textarea>
-                        <p class="mt-2 text-[10px] text-gray-400 italic font-serif">* Gunakan bahasa yang mudah dipahami jemaat.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-end gap-3 border-t border-gray-100 bg-gray-50/80 px-8 py-5 shrink-0 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
-                <button type="button" onclick="document.getElementById('myModal').classList.add('hidden')" class="px-6 py-2.5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-gray-500 transition hover:text-primary">
-                    Batal
-                </button>
-                <button type="submit" class="rounded-lg bg-secondary px-10 py-3.5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-primary active:scale-95">
-                    Publikasikan Sekarang
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
+<!-- Modal Add Removed -->
 
 <!-- Modals Edit -->
 <?php if($total_renungan > 0): ?>
@@ -205,54 +153,7 @@
     $renungan_judul=$i['renungan_judul'];
     $renungan_deskripsi=$i['renungan_deskripsi'];
 ?>
-<div id="ModalEdit<?php echo $renungan_id; ?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm transition-opacity border-none">
-    <div class="flex max-h-[95vh] w-full max-w-4xl flex-col overflow-hidden rounded-xl bg-white shadow-2xl">
-        <form action="<?php echo base_url().'admin/renungan/update_renungan'?>" method="post" enctype="multipart/form-data" class="flex h-full flex-col font-serif">
-            <div class="flex items-center justify-between bg-primary px-8 py-5 text-white shrink-0 shadow-sm">
-                <div>
-                    <h4 class="font-headline text-lg tracking-[0.2em] uppercase">Edit Konten Renungan</h4>
-                    <p class="text-[10px] text-white/60 tracking-widest uppercase mt-0.5">ID Ref: #REN-<?php echo $renungan_id; ?></p>
-                </div>
-                <button type="button" onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.add('hidden')" class="text-white/80 transition hover:text-white hover:rotate-90 transition-transform duration-300">
-                    <span class="material-symbols-outlined font-bold">close</span>
-                </button>
-            </div>
-
-            <div class="space-y-6 overflow-y-auto p-8 grow scrollbar-thin scrollbar-thumb-gray-100">
-                <input type="hidden" name="kode" value="<?php echo $renungan_id; ?>">
-                <div>
-                    <label class="mb-2 block text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-primary">Judul Renungan <span class="text-red-500">*</span></label>
-                    <input
-                        type="text"
-                        name="xrenungan_judul"
-                        value="<?php echo htmlspecialchars($renungan_judul); ?>"
-                        class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white"
-                        required
-                    >
-                </div>
-                <div>
-                    <label class="mb-2 block text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-primary">Isi Renungan <span class="text-red-500">*</span></label>
-                    <textarea
-                        name="xdeskripsi"
-                        rows="12"
-                        class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3.5 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white resize-none"
-                        required
-                    ><?php echo $renungan_deskripsi; ?></textarea>
-                </div>
-            </div>
-
-            <div class="flex justify-end gap-3 border-t border-gray-100 bg-gray-50/80 px-8 py-5 shrink-0 shadow-inner">
-                <button type="button" onclick="document.getElementById('ModalEdit<?php echo $renungan_id; ?>').classList.add('hidden')" class="px-6 py-2.5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-gray-500 transition hover:text-primary">
-                    Batal
-                </button>
-                <button type="submit" class="rounded-lg bg-secondary px-10 py-3.5 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-primary active:scale-95">
-                    Update Renungan
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
+<!-- Modals Edit Removed -->
 <div id="ModalHapus<?php echo $renungan_id; ?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm transition-opacity">
     <div class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl p-8 text-center font-serif">
         <form action="<?php echo base_url().'admin/renungan/hapus_renungan'?>" method="post" enctype="multipart/form-data">
@@ -287,7 +188,8 @@
 
 <?php
 $msg = $this->session->flashdata('msg');
-if($msg):
+$allowed_msgs = array('success', 'info', 'success-hapus');
+if (in_array($msg, $allowed_msgs, true)):
     $toastClass = 'bg-green-500';
     $toastIcon = 'check_circle';
     $toastText = 'Tindakan berhasil.';

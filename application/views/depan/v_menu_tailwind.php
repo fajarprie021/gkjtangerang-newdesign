@@ -107,13 +107,49 @@
                             <div class="py-1 flex flex-col">
                                 <?php foreach($query->result() as $submenu) { ?>
                                     <?php if ($submenu->id_halaman == 1): ?>
-                                        <?php if ($submenu->sub_menu_href == 'berita'): ?>
+                                        <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                            <?php
+                                                $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                                if(in_array($submenu->nama_sub_menu, $static_services)):
+                                                    $slug_map = [
+                                                        'Baptisan & Sidi' => 'baptisan-sidi',
+                                                        'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                        'Konseling Pastoral' => 'konseling-pastoral',
+                                                        'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                        'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                                    ];
+                                                    $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                            ?>
+                                                    <a href="<?php echo base_url('pelayanan/'.$final_slug) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                            <?php else: ?>
+                                                    <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                            <?php endif; ?>
+                                        <?php elseif ($submenu->sub_menu_href == 'berita'): ?>
                                             <a href="<?php echo base_url('blog') ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
                                         <?php else: ?>
                                             <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
                                         <?php endif; ?>
                                     <?php elseif ($submenu->id_halaman == 2): ?>
-                                        <a href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                        <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                            <?php
+                                                $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                                if(in_array($submenu->nama_sub_menu, $static_services)):
+                                                    $slug_map = [
+                                                        'Baptisan & Sidi' => 'baptisan-sidi',
+                                                        'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                        'Konseling Pastoral' => 'konseling-pastoral',
+                                                        'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                        'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                                    ];
+                                                    $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                            ?>
+                                                    <a href="<?php echo base_url('pelayanan/'.$final_slug) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                            <?php else: ?>
+                                                    <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <a href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                        <?php endif; ?>
                                     <?php else: ?>
                                         <a href="<?php echo base_url('tentang/halaman/'.$submenu->sub_menu_href) ?>" class="px-4 py-2 text-[10px] tracking-widest uppercase text-primary hover:bg-cream transition-colors"><i class="fas fa-angle-right text-secondary mr-3"></i><?php echo $submenu->nama_sub_menu ?></a>
                                     <?php endif; ?>
@@ -156,13 +192,49 @@
                     <div class="pl-4 pb-2 space-y-1">
                         <?php foreach($query->result() as $submenu) { ?>
                             <?php if ($submenu->id_halaman == 1): ?>
-                                <?php if ($submenu->sub_menu_href == 'berita'): ?>
+                                <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                    <?php
+                                        $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                        if(in_array($submenu->nama_sub_menu, $static_services)):
+                                            $slug_map = [
+                                                'Baptisan & Sidi' => 'baptisan-sidi',
+                                                'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                'Konseling Pastoral' => 'konseling-pastoral',
+                                                'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                            ];
+                                            $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                    ?>
+                                            <a href="<?php echo base_url('pelayanan/'.$final_slug) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                    <?php else: ?>
+                                            <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                    <?php endif; ?>
+                                <?php elseif ($submenu->sub_menu_href == 'berita'): ?>
                                     <a href="<?php echo base_url('blog') ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
                                 <?php else: ?>
                                     <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
                                 <?php endif; ?>
                             <?php elseif ($submenu->id_halaman == 2): ?>
-                                <a href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
+                                    <?php
+                                        $static_services = ['Baptisan & Sidi', 'Pernikahan Kudus', 'Konseling Pastoral', 'Pelayanan Kedukaan', 'Pelayanan Kesehatan'];
+                                        if(in_array($submenu->nama_sub_menu, $static_services)):
+                                            $slug_map = [
+                                                'Baptisan & Sidi' => 'baptisan-sidi',
+                                                'Pernikahan Kudus' => 'pernikahan-kudus',
+                                                'Konseling Pastoral' => 'konseling-pastoral',
+                                                'Pelayanan Kedukaan' => 'pelayanan-kedukaan',
+                                                'Pelayanan Kesehatan' => 'pelayanan-kesehatan'
+                                            ];
+                                            $final_slug = isset($slug_map[$submenu->nama_sub_menu]) ? $slug_map[$submenu->nama_sub_menu] : $submenu->sub_menu_href;
+                                    ?>
+                                            <a href="<?php echo base_url('pelayanan/'.$final_slug) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                    <?php else: ?>
+                                            <a href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <a href="<?php echo base_url('informasi/halaman/'.$submenu->sub_menu_href) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <a href="<?php echo base_url('tentang/halaman/'.$submenu->sub_menu_href) ?>" class="block px-3 py-2 text-[10px] font-bold tracking-widest text-muted hover:text-primary hover:bg-white uppercase transition-colors"><i class="fas fa-angle-right text-secondary mr-2 text-xs"></i><?php echo $submenu->nama_sub_menu ?></a>
                             <?php endif; ?>

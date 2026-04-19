@@ -129,7 +129,8 @@
 <!-- Toast Notifications -->
 <?php 
 $msg = $this->session->flashdata('msg');
-if($msg): 
+$allowed_msgs = array('success', 'error');
+if (in_array($msg, $allowed_msgs, true)): 
     $toastClass = "bg-green-500";
     $toastIcon = "check_circle";
     $toastText = "Tindakan berhasil.";

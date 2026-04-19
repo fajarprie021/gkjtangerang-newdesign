@@ -12,8 +12,8 @@
     <div class="mb-16">
       <?php 
       $this->load->view('components/section_header_left', array(
-          'eyebrow' => 'Kumpulan Artikel',
-          'title'   => 'WARTA JEMAAT & BLOG'
+          'eyebrow' => isset($header_subtitle) ? $header_subtitle : 'Kumpulan Artikel',
+          'title'   => isset($header_title) ? $header_title : 'WARTA JEMAAT & BLOG'
       )); 
       ?>
     </div>

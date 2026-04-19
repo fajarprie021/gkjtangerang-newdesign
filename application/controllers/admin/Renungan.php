@@ -20,6 +20,20 @@ class Renungan extends CI_Controller{
         $this->load->view('admin/layout/main',$x);
 	}
 
+	function add_renungan(){
+		$x['menu']=$this->m_menu->get_all_menu_admin();
+		$x['content']='admin/v_add_renungan';
+		$this->load->view('admin/layout/main',$x);
+	}
+
+	function get_edit(){
+		$kode=$this->uri->segment(4);
+		$x['data']=$this->m_renungan->get_renungan_by_kode($kode);
+        $x['menu']=$this->m_menu->get_all_menu_admin();
+        $x['content']='admin/v_edit_renungan';
+        $this->load->view('admin/layout/main',$x);
+	}
+
     function simpan_renungan(){
 		$renungan_judul=strip_tags($this->input->post('xrenungan_judul'));
 		$deskripsi=$this->input->post('xdeskripsi');

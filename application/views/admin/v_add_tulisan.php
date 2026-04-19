@@ -36,7 +36,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-soft">
                         <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Konten Berita</label>
                         <div class="prose max-w-none">
-                            <textarea id="ckeditor" name="xisi" required></textarea>
+                            <textarea id="ckeditor" name="xisi"></textarea>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <div class="space-y-2">
                                 <label class="text-[10px] uppercase tracking-widest text-gray-400 font-bold">Gambar Utama</label>
                                 <div class="relative group">
-                                    <input type="file" name="filefoto" id="filefoto" class="hidden" required onchange="previewImage(this)">
+                                    <input type="file" name="filefoto" id="filefoto" class="hidden" onchange="previewImage(this)">
                                     <label for="filefoto" class="cursor-pointer block w-full bg-cream border-2 border-dashed border-gray-200 rounded-xl p-6 text-center hover:border-secondary hover:bg-white transition-all group">
                                         <span class="material-symbols-outlined text-gray-400 group-hover:text-secondary text-3xl mb-2">add_photo_alternate</span>
                                         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-wider">Pilih File Gambar</p>

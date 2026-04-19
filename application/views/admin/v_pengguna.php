@@ -278,7 +278,8 @@
 <!-- Toasts -->
 <?php 
 $msg = $this->session->flashdata('msg');
-if($msg && $msg != 'show-modal'): 
+$allowed_msgs = array('success', 'info', 'success-hapus', 'error', 'warning');
+if (in_array($msg, $allowed_msgs, true) && $msg != 'show-modal'): 
     $toastClass = "bg-green-500";
     $toastIcon = "check_circle";
     $toastText = "Berhasil!";

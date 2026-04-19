@@ -16,6 +16,7 @@ class Tulisan extends CI_Controller{
 
 	function index(){
 		$x['data']=$this->m_tulisan->get_all_tulisan();
+		$x['kat']=$this->m_kategori->get_all_kategori();
 		$x['menu']=$this->m_menu->get_all_menu_admin();
 		$x['content']='admin/v_tulisan';
 		$this->load->view('admin/layout/main',$x);
@@ -58,40 +59,59 @@ class Tulisan extends CI_Controller{
 	                        $this->image_lib->resize();
 
 	                        $gambar=$gbr['file_name'];
-													$judul=strip_tags($this->input->post('xjudul'));
-													$isi=$this->input->post('xisi');
-													$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
-													$trim     = trim($string);
-													// $slug     = strtolower(str_replace(" ", "-", $trim));
-													// $slug = strtolower(str_replace([" ", "/", "?"], ["-", "-", ""], $trim)); // Mengganti spasi dan slash dengan "-", dan tanda tanya dihilangkan
-													// Mengganti karakter tertentu untuk slug yang cocok di URL
-													$slug = strtolower(
-														str_replace(
-															[" ", ",", "/", "(", ")", "?", "&", "%"],  // Karakter yang akan diganti
-															["-", "-", "-", "", "", "", "and", "percent"], // Penggantinya
-															$trim
-														)
-													);
-													$kategori_id=strip_tags($this->input->post('xkategori'));
-													$data=$this->m_kategori->get_kategori_byid($kategori_id);
-													$q=$data->row_array();
-													$kategori_nama=$q['kategori_nama'];
-													//$imgslider=$this->input->post('ximgslider');
-													$imgslider='0';
-													$kode=$this->session->userdata('idadmin');
-													$user=$this->m_pengguna->get_pengguna_login($kode);
-													$p=$user->row_array();
-													$user_id=$p['pengguna_id'];
-													$user_nama=$p['pengguna_nama'];
-													$this->m_tulisan->simpan_tulisan($judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
-													echo $this->session->set_flashdata('msg','success');
-													redirect('admin/tulisan');
-											}else{
+							$judul=strip_tags($this->input->post('xjudul'));
+							$isi=$this->input->post('xisi');
+							$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
+							$trim     = trim($string);
+							$slug = strtolower(
+								str_replace(
+									[" ", ",", "/", "(", ")", "?", "&", "%"],  // Karakter yang akan diganti
+									["-", "-", "-", "", "", "", "and", "percent"], // Penggantinya
+									$trim
+								)
+							);
+							$kategori_id=strip_tags($this->input->post('xkategori'));
+							$data=$this->m_kategori->get_kategori_byid($kategori_id);
+							$q=$data->row_array();
+							$kategori_nama=$q['kategori_nama'];
+							$imgslider='0';
+							$kode=$this->session->userdata('idadmin');
+							$user=$this->m_pengguna->get_pengguna_login($kode);
+							$p=$user->row_array();
+							$user_id=$p['pengguna_id'];
+							$user_nama=$p['pengguna_nama'];
+							$this->m_tulisan->simpan_tulisan($judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,$gambar,$slug);
+							echo $this->session->set_flashdata('msg','success');
+							redirect('admin/tulisan');
+					}else{
 	                    echo $this->session->set_flashdata('msg','warning');
 	                    redirect('admin/tulisan');
 	                }
 
 	            }else{
+					$judul=strip_tags($this->input->post('xjudul'));
+					$isi=$this->input->post('xisi');
+					$string   = preg_replace('/[^a-zA-Z0-9 \&%|{.}=,?!*()"-_+$@;<>\']/', '', $judul);
+					$trim     = trim($string);
+					$slug = strtolower(
+						str_replace(
+							[" ", ",", "/", "(", ")", "?", "&", "%"], 
+							["-", "-", "-", "", "", "", "and", "percent"], 
+							$trim
+						)
+					);
+					$kategori_id=strip_tags($this->input->post('xkategori'));
+					$data=$this->m_kategori->get_kategori_byid($kategori_id);
+					$q=$data->row_array();
+					$kategori_nama=$q['kategori_nama'];
+					$imgslider='0';
+					$kode=$this->session->userdata('idadmin');
+					$user=$this->m_pengguna->get_pengguna_login($kode);
+					$p=$user->row_array();
+					$user_id=$p['pengguna_id'];
+					$user_nama=$p['pengguna_nama'];
+					$this->m_tulisan->simpan_tulisan($judul,$isi,$kategori_id,$kategori_nama,$imgslider,$user_id,$user_nama,'',$slug);
+					echo $this->session->set_flashdata('msg','success');
 					redirect('admin/tulisan');
 				}
 
@@ -154,7 +174,7 @@ class Tulisan extends CI_Controller{
 
 	                }else{
 	                    echo $this->session->set_flashdata('msg','warning');
-	                    redirect('admin/pengguna');
+	                    redirect('admin/tulisan');
 	                }
 
 	            }else{

@@ -141,7 +141,8 @@
 <!-- Notifications / Toasts -->
 <?php 
 $msg = $this->session->flashdata('msg');
-if($msg): 
+$allowed_msgs = array('success', 'info', 'success-hapus');
+if (in_array($msg, $allowed_msgs, true)): 
     $toastClass = "bg-green-500";
     $toastIcon = "check_circle";
     $toastText = "Berhasil memperbarui data.";
