@@ -7,7 +7,7 @@
     <!-- Dynamic PHP Title -->
     <title>
         <?php foreach ($identitas->result() as $indexIdentitas) : ?>
-            Selamat Datang di <?php echo $indexIdentitas->nama_identitas; ?>
+            <?php echo isset($page_title) ? $page_title.' | ' : 'Selamat Datang di '; ?><?php echo $indexIdentitas->nama_identitas; ?>
         <?php endforeach; ?>
     </title>
     <!-- PHP Base URL for Favicon -->

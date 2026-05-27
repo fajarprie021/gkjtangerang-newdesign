@@ -35,6 +35,8 @@
           href="<?php echo base_url('#kontak'); ?>">Lokasi Gereja</a></li>
       <li><a class="block transition hover:translate-x-1 hover:text-secondary"
           href="<?php echo base_url('#tentang'); ?>">Tentang Kami</a></li>
+      <li><a class="block transition hover:translate-x-1 hover:text-secondary"
+          href="<?php echo base_url('pd-mppa'); ?>">PD MPPA</a></li>
     </ul>
   </div>
 
