@@ -28,3 +28,61 @@ if (!function_exists('limit_sentences')) {
         return trim($result);
     }
 }
+
+if (!function_exists('resolve_image')) {
+    function resolve_image($filename, $module = 'default')
+    {
+        $filename = trim($filename, '/');
+        if (empty($filename)) {
+            return get_default_image($module);
+        }
+
+        $candidates = [];
+        if ($module === 'header' || $module === 'hero' || $module === 'slider') {
+            $candidates[] = 'assets/images/header/' . $filename;
+            $candidates[] = 'assets/images/' . $filename;
+        } elseif ($module === 'galeri' || $module === 'gallery') {
+            $candidates[] = 'assets/images/galeri/' . $filename;
+            $candidates[] = 'assets/images/' . $filename;
+        } elseif ($module === 'berita' || $module === 'artikel' || $module === 'tulisan' || $module === 'tentang') {
+            $candidates[] = 'assets/images/' . $filename;
+            $candidates[] = 'assets/images/galeri/' . $filename;
+            $candidates[] = 'assets/images/header/' . $filename;
+        } elseif ($module === 'guru' || $module === 'majelis') {
+            $candidates[] = 'assets/images/' . $filename;
+            $candidates[] = 'assets/images/blank.png';
+        } elseif ($module === 'siswa' || $module === 'jemaat') {
+            $candidates[] = 'assets/images/' . $filename;
+            $candidates[] = 'assets/images/blank.png';
+        } else {
+            $candidates[] = 'assets/images/' . $filename;
+            $candidates[] = 'assets/images/galeri/' . $filename;
+            $candidates[] = 'assets/images/header/' . $filename;
+        }
+
+        foreach ($candidates as $path) {
+            if (file_exists(FCPATH . $path) && is_file(FCPATH . $path)) {
+                return base_url($path);
+            }
+        }
+
+        return get_default_image($module);
+    }
+}
+
+if (!function_exists('get_default_image')) {
+    function get_default_image($module)
+    {
+        if ($module === 'header' || $module === 'hero' || $module === 'slider') {
+            return base_url('assets/images/header/image-slide-1.jpg');
+        } elseif ($module === 'galeri' || $module === 'gallery') {
+            return base_url('assets/images/tangerang-tangerang01.jpg');
+        } elseif ($module === 'guru' || $module === 'majelis') {
+            return base_url('assets/images/user_blank.png');
+        } elseif ($module === 'siswa' || $module === 'jemaat') {
+            return base_url('assets/images/user_blank.png');
+        } else {
+            return base_url('assets/images/sejarah.jpg');
+        }
+    }
+}

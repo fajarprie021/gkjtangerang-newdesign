@@ -32,7 +32,7 @@
 
         <!-- Featured Image -->
         <div class="mb-12 overflow-hidden shadow-soft">
-            <img src="<?php echo base_url().'assets/images/'.$image?>" class="w-full h-auto object-cover" alt="<?php echo $title;?>">
+            <img src="<?php echo resolve_image($image, 'berita'); ?>" class="w-full h-auto object-cover" alt="<?php echo $title;?>">
         </div>
 
         <!-- Content -->
@@ -153,7 +153,7 @@
             <?php foreach ($populer->result() as $row) :?>
               <div class="flex gap-4 group cursor-pointer" onclick="window.location.href='<?php echo site_url('artikel/'.$row->tulisan_slug);?>'">
                   <div class="w-24 h-24 flex-shrink-0 overflow-hidden">
-                    <img src="<?php echo base_url().'assets/images/'.$row->tulisan_gambar;?>" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Thumbnail">
+                    <img src="<?php echo resolve_image($row->tulisan_gambar, 'berita'); ?>" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="Thumbnail">
                   </div>
                   <div>
                     <h5 class="font-headline text-primary text-sm leading-snug group-hover:text-secondary transition line-clamp-2 mb-2">

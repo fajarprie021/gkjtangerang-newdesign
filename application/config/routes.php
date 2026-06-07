@@ -81,3 +81,4 @@ $route['admin/socialmedia'] = 'admin/identitas';
 
 $route['pelayanan/(:any)'] = 'pelayanan/details/$1';
 $route['pd-mppa'] = 'pdmppa';
+$route['renungan/halaman/(:any)'] = 'renungan/halaman/$1';

@@ -2,7 +2,7 @@
 class M_informasi extends CI_Model{
 
 	function get_all_renungan(){
-		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC");
+		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_slug,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC");
 		return $hsl;
 	}
 	function simpan_renungan($judul,$deskripsi){
@@ -22,12 +22,12 @@ class M_informasi extends CI_Model{
 
 	//Front-end
 	function get_renungan_home(){
-		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC limit 3");
+		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_slug,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC limit 3");
 		return $hsl;
 	}
 
 	function renungan(){
-		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC");
+		$hsl=$this->db->query("SELECT renungan_id,renungan_judul,renungan_slug,renungan_deskripsi,DATE_FORMAT(renungan_tanggal,'%d/%m/%Y') AS tanggal,renungan_author FROM tbl_renungan ORDER BY renungan_id DESC");
 		return $hsl;
 	}
 	function renungan_perpage($offset,$limit){

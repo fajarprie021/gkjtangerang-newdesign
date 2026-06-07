@@ -9,12 +9,13 @@
 
         <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
             <?php foreach ($all_galeri->result() as $row) : ?>
-                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-500">
+                <?php $resolved_img = resolve_image($row->galeri_gambar, 'galeri'); ?>
+                <div class="break-inside-avoid relative group rounded-2xl overflow-hidden shadow-soft hover:shadow-xl transition-all duration-500 cursor-zoom-in" onclick="openLightbox('<?php echo $resolved_img; ?>')">
                     <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
                         <span class="material-symbols-outlined text-white text-4xl transform scale-50 group-hover:scale-100 transition-transform duration-300">zoom_in</span>
                     </div>
                     <img 
-                        src="<?php echo base_url().'assets/images/galeri/'.$row->galeri_gambar;?>" 
+                        src="<?php echo $resolved_img; ?>" 
                         class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" 
                         alt="Gallery Image" 
                     />
@@ -38,6 +39,56 @@
         
     </div>
 </main>
+
+<!-- Lightbox Modal Component -->
+<div id="lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors focus:outline-none z-50">
+        <span class="material-symbols-outlined text-4xl">close</span>
+    </button>
+    <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
+        <img id="lightbox-img" class="max-w-full max-h-[85vh] object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300" src="" alt="Gallery Image Full">
+    </div>
+</div>
+
+<script>
+function openLightbox(src) {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    if (!modal || !img) return;
+
+    img.src = src;
+    modal.classList.remove('hidden');
+    // Force a reflow to allow transition to run
+    modal.offsetWidth;
+    modal.classList.add('opacity-100');
+    modal.classList.add('flex');
+    img.classList.add('scale-100');
+    img.classList.remove('scale-95');
+}
+
+function closeLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const img = document.getElementById('lightbox-img');
+    if (!modal || !img) return;
+
+    modal.classList.remove('opacity-100');
+    img.classList.remove('scale-100');
+    img.classList.add('scale-95');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        img.src = '';
+    }, 300);
+}
+
+// Close on Escape key press
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
+</script>
+
 <style type="text/tailwindcss">
     @layer components {
         .pagination-tailwind ul { @apply flex flex-wrap items-center gap-2; }

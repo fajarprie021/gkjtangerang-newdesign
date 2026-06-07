@@ -28,7 +28,7 @@
     <!-- Featured Image -->
     <?php if(!empty($image)): ?>
     <div class="mb-16 overflow-hidden shadow-soft rounded-lg">
-        <img src="<?php echo base_url().'assets/images/'.$image?>" class="w-full h-auto object-cover" alt="Image">
+        <img src="<?php echo resolve_image($image, 'tentang'); ?>" class="w-full h-auto object-cover" alt="Image">
     </div>
     <?php endif; ?>
 

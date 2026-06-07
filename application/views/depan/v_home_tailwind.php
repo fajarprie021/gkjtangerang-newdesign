@@ -20,7 +20,7 @@ if (!function_exists('limit_sentences')) {
             <?php foreach ($galeriHeaderArray as $key => $image) : ?>
                 <div class="h-full w-full flex-shrink-0 relative">
                     <div class="absolute inset-0 z-0">
-                        <img class="h-full w-full object-cover" src="<?php echo base_url($image); ?>" alt="Background Header" />
+                        <img class="h-full w-full object-cover" src="<?php echo resolve_image($image, 'header'); ?>" alt="Background Header" />
                         <div class="absolute inset-0 bg-primary/65 mix-blend-multiply"></div>
                         <div class="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-primary/90"></div>
                     </div>
@@ -130,7 +130,18 @@ if (!function_exists('limit_sentences')) {
       <div class="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
         <div class="relative">
           <div class="relative z-10 aspect-[4/5] overflow-hidden bg-slate-200">
-            <img class="h-full w-full object-cover grayscale transition duration-700 hover:grayscale-0" src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1200&q=80" alt="Komunitas gereja" />
+            <?php 
+            $sejarah_img = 'sejarah.jpg';
+            if (isset($sejarah) && is_object($sejarah)) {
+                foreach ($sejarah->result() as $row_sej) {
+                    if (!empty($row_sej->tulisan_gambar)) {
+                        $sejarah_img = $row_sej->tulisan_gambar;
+                        break;
+                    }
+                }
+            }
+            ?>
+            <img class="h-full w-full object-cover grayscale transition duration-700 hover:grayscale-0" src="<?php echo resolve_image($sejarah_img, 'tentang'); ?>" alt="Komunitas gereja" />
           </div>
           <div class="absolute -left-8 -top-8 h-32 w-32 border-8 border-secondary"></div>
           <div class="absolute -bottom-8 -right-8 z-20 max-w-xs bg-primary p-8 text-white shadow-soft">
@@ -195,7 +206,8 @@ if (!function_exists('limit_sentences')) {
             </blockquote>
             <p class="mx-auto mt-10 max-w-3xl leading-relaxed text-white/80 line-clamp-4"><?php echo strip_tags($row->renungan_deskripsi); ?></p>
             <div class="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
-              <a class="border border-secondary px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-secondary transition hover:bg-secondary hover:text-white" href="<?php echo site_url('renungan/halaman/'.str_replace(" ","-",$row->renungan_judul));?>">BACA SEPENUHNYA</a>
+              <?php $r_slug = !empty($row->renungan_slug) ? $row->renungan_slug : $row->renungan_id; ?>
+              <a class="border border-secondary px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-secondary transition hover:bg-secondary hover:text-white" href="<?php echo site_url('renungan/halaman/'.$r_slug);?>">BACA SEPENUHNYA</a>
               <a class="bg-secondary px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-white hover:text-primary" href="<?php echo site_url('renungan'); ?>">ARSIP RENUNGAN</a>
             </div>
             <?php break; endif; ?>
@@ -242,7 +254,7 @@ if (!function_exists('limit_sentences')) {
     <section id="kontak" class="border-t border-primary/15 bg-cream py-24">
       <div class="mx-auto grid max-w-7xl grid-cols-1 overflow-hidden shadow-soft lg:grid-cols-2">
         <div class="h-[420px] bg-slate-200">
-           <iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126934.34188350118!2d106.5518296!3d-6.177402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8e84df9a28b%3A0xeab5e8ce169a83eb!2sTangerang%20City%2C%20Banten!5e0!3m2!1sen!2sid!4v1696860000000!5m2!1sen!2sid" style="border:0;" width="100%"></iframe>
+           <iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.618940227314!2d106.64112217504568!3d-6.1817284605710086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f927b69c0bc9%3A0xf454ec694d6433e8!2sGKJ%20Tangerang!5e0!3m2!1sid!2sid!4v1714467815763!5m2!1sid!2sid" style="border:0;" width="100%"></iframe>
         </div>
         <div class="border-l-8 border-secondary bg-primary p-12 text-white md:p-16 flex flex-col justify-center">
           <h2 class="font-headline text-3xl uppercase tracking-widest">Lokasi & Kontak</h2>
