@@ -134,7 +134,7 @@
 <!-- Modal Edit -->
 <div id="ModalEdit<?php echo $tulisan_id;?>" class="hidden fixed inset-0 z-[99] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-opacity">
     <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[95vh]">
-        <form action="<?php echo base_url().'admin/strukturmajelis/update_strukturmajelis'?>" method="post" enctype="multipart/form-data" class="flex flex-col min-h-0 h-full">
+        <form action="<?php echo base_url().'admin/Strukturmajelis/update_strukturmajelis'?>" method="post" enctype="multipart/form-data" class="flex flex-col min-h-0 h-full">
             <div class="bg-primary px-6 py-4 flex justify-between items-center text-white shrink-0 shadow-sm">
                 <h4 class="font-headline tracking-widest text-lg">Update Struktur Majelis</h4>
                 <button type="button" onclick="document.getElementById('ModalEdit<?php echo $tulisan_id;?>').classList.add('hidden')" class="text-white/80 hover:text-white transition-colors">

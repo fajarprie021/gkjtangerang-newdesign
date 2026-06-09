@@ -29,6 +29,41 @@
                            placeholder="Masukkan judul renungan yang inspiratif..." required>
                 </div>
 
+                <!-- Bacaan Alkitab & Nats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Bacaan Alkitab -->
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Bacaan Alkitab</label>
+                        <input type="text" name="xbacaan_alkitab" 
+                               class="w-full px-0 py-2 border-0 border-b-2 border-gray-100 focus:ring-0 focus:border-secondary text-base font-serif placeholder-gray-300 transition-colors bg-transparent"
+                               placeholder="Contoh: Matius 5:1-12">
+                    </div>
+
+                    <!-- Nats Ayat -->
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Nats Ayat</label>
+                        <textarea name="xnats" rows="2" 
+                                  class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white resize-y font-serif text-gray-700 text-sm leading-relaxed" 
+                                  placeholder="Contoh: Matius 5:3 - 'Berbahagialah orang yang miskin di hadapan Allah...'"></textarea>
+                    </div>
+                </div>
+
+                <!-- Doa Pembuka -->
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Doa Pembuka</label>
+                    <textarea name="xdoa_pembuka" rows="3" 
+                              class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white resize-y font-serif text-gray-700 text-sm leading-relaxed" 
+                              placeholder="Tuliskan doa pembuka di sini..."></textarea>
+                </div>
+
+                <!-- Pokok Doa -->
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Pokok Doa</label>
+                    <textarea name="xpokok_doa" rows="3" 
+                              class="w-full rounded-xl border border-gray-200 bg-gray-50/50 px-5 py-3 outline-none transition focus:border-secondary focus:ring-1 focus:ring-secondary focus:bg-white resize-y font-serif text-gray-700 text-sm leading-relaxed" 
+                              placeholder="Tuliskan pokok-pokok doa di sini..."></textarea>
+                </div>
+
                 <!-- Editor -->
                 <div>
                     <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Isi Renungan <span class="text-red-500">*</span></label>

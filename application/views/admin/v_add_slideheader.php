@@ -1,262 +1,182 @@
-<!--Counter Inbox-->
-<?php
-    $query=$this->db->query("SELECT * FROM tbl_inbox WHERE inbox_status='1'");
-    $query2=$this->db->query("SELECT * FROM tbl_komentar WHERE komentar_status='0'");
-    $jum_comment=$query2->num_rows();
-    $jum_pesan=$query->num_rows();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Add Post</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="shorcut icon" type="text/css" href="<?php echo base_url().'assets/images/favicon.png'?>">
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/bootstrap/css/bootstrap.min.css'?>">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/font-awesome/css/font-awesome.min.css'?>">
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.css'?>">
-  <!-- bootstrap datepicker -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/datepicker/datepicker3.css'?>">
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/iCheck/all.css'?>">
-  <!-- Bootstrap Color Picker -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/colorpicker/bootstrap-colorpicker.min.css'?>">
-  <!-- Bootstrap time Picker -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/timepicker/bootstrap-timepicker.min.css'?>">
-  <!-- Select2 -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/select2/select2.min.css'?>">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/skins/_all-skins.min.css'?>">
-
-
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-   <?php
-    
-  ?>
-
- 
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Berita
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Berita</a></li>
-        <li class="active">Add Berita</li>
-      </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-
-      <div class="box box-default">
-        <div class="box-header with-border">
-          <h3 class="box-title">Post Galeri</h3>
-        </div>
-
-		<div class="box-body">
-          <div class="row">
-            <div class="col-md-10">
-              <input type="text" name="judul" id="judul" class="form-control" placeholder="Judul galeri" required/>
-            </div>
-            <div class="col-md-2">
-              <div class="form-group">
-                <button type="submit" id="upload" class="btn btn-primary btn-flat pull-right"><span class="fa fa-pencil"></span> Publish</button>
-                <div id="console"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-	  </div>
-
-      <div class="row">
-        <!-- <div class="col-md-8">
-
-          <div class="box box-danger">
-            <div class="box-header">
-              <h3 class="box-title">Berita</h3>
-            </div>
-            <div class="box-body">
-
-			<textarea id="ckeditor" name="xisi" required></textarea>
-
-            </div>
-          </div>
-
-        </div> -->
+<section class="bg-cream px-6 py-24 min-h-screen">
+    <div class="mx-auto max-w-4xl">
         
-        <div class="col-md-4">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Pengaturan Lainnya</h3>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start mb-10 gap-4">
+            <div>
+                <?php 
+                $this->load->view('components/section_header_left', array(
+                    'eyebrow' => 'Administrator',
+                    'title'   => 'Tambah Slide Header'
+                )); 
+                ?>
+                <p class="text-gray-600 font-serif mt-2">Unggah dan atur gambar slider utama homepage.</p>
             </div>
-            <div class="box-body">
-
-              <!-- <div class="form-group">
-                <label>Kategori</label>
-                <select class="form-control select2" name="kategori" id="kategori" style="width: 100%;" required>
-                  <option value="">-Pilih-</option>
-				  <?php
-					$no=0;
-					foreach ($alb->result_array() as $i) :
-					   $no++;
-                       $album_id=$i['album_id'];
-                       $album_nama=$i['album_nama'];
-
-                    ?>
-                  <option value="<?php echo $album_id;?>"><?php echo $album_nama;?></option>
-				  <?php endforeach;?>
-                </select>
-              </div> -->
-
-			  <div class="form-group">
-                <label>Gambar</label>
-                <!-- <input type="file" name="filefoto" style="width: 100%;" required> -->
-                <input type="file" id="uploadFile" accept="image/*">
-                <canvas id="canvas" style="display:none;"></canvas>
-              </div>
-			 <div class="form-group">
-
-            </div>
-          </div>
-
-          <!-- /.box -->
+            <a href="<?php echo base_url('admin/slideheader'); ?>" class="flex items-center gap-2 text-primary hover:text-secondary transition-colors font-bold uppercase tracking-widest text-[10px]">
+                <span class="material-symbols-outlined text-base">arrow_back</span>
+                Kembali ke Daftar
+            </a>
         </div>
-        <!-- /.col (right) -->
-      </div>
-      <!-- /.row -->
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
+        <!-- Form Card -->
+        <div class="bg-white rounded-2xl shadow-soft border-t-4 border-secondary p-8 md:p-12">
+            <div class="space-y-8">
+                <!-- Title Input -->
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Judul Slide <span class="text-red-500">*</span></label>
+                    <input type="text" name="judul" id="judul" 
+                           class="w-full px-0 py-2 border-0 border-b-2 border-gray-100 focus:ring-0 focus:border-secondary text-2xl font-headline placeholder-gray-300 transition-colors bg-transparent outline-none"
+                           placeholder="Masukkan judul slide..." required>
+                </div>
+
+                <!-- File Input / Drag & Drop -->
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold mb-4">Gambar Slide <span class="text-red-500">*</span></label>
+                    <div class="relative group border-2 border-dashed border-gray-200 rounded-2xl p-8 bg-gray-50/30 hover:bg-gray-50 transition-all flex flex-col items-center justify-center min-h-[200px]">
+                        <div id="upload-placeholder" class="flex flex-col items-center text-center space-y-2">
+                            <span class="material-symbols-outlined text-4xl text-gray-400 group-hover:text-secondary transition-colors">add_photo_alternate</span>
+                            <div class="text-sm font-semibold text-primary">Pilih Gambar atau Tarik ke Sini</div>
+                            <div class="text-xs text-gray-400 font-serif">Format yang didukung: JPG, JPEG, PNG (rekomendasi resolusi tinggi)</div>
+                        </div>
+                        <div id="upload-preview-container" class="hidden w-full flex flex-col items-center">
+                            <img id="upload-preview" class="w-full max-h-[300px] object-cover rounded-xl shadow-md mb-4">
+                            <button type="button" id="remove-file-btn" class="text-xs font-bold text-red-500 hover:text-red-700 transition-colors uppercase tracking-wider flex items-center gap-1">
+                                <span class="material-symbols-outlined text-sm">delete</span> Hapus Gambar
+                            </button>
+                        </div>
+                        <input type="file" id="uploadFile" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                    </div>
+                    <canvas id="canvas" style="display:none;"></canvas>
+                </div>
+
+                <!-- Submit Area -->
+                <div class="pt-8 border-t border-gray-100 flex justify-end">
+                    <div class="flex gap-4 w-full md:w-auto">
+                        <a href="<?php echo base_url('admin/slideheader'); ?>" class="flex-1 md:flex-none text-center px-8 py-4 text-[10px] font-headline font-bold uppercase tracking-[0.2em] text-gray-500 transition hover:text-primary rounded-xl border border-transparent hover:border-gray-200">
+                            Batal
+                        </a>
+                        <button type="button" id="upload" class="flex-1 md:flex-none py-4 px-10 bg-secondary text-white font-headline tracking-[0.2em] text-xs uppercase rounded-xl hover:bg-primary transition-all shadow-lg active:scale-95 flex items-center justify-center gap-3 font-bold">
+                            <span class="material-symbols-outlined text-lg">publish</span>
+                            <span>Publikasikan Slide</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <strong>Copyright &copy; 2017 <a href="http://mfikri.com">M Fikri Setiadi</a>.</strong> All rights reserved.
-  </footer>
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
+</section>
 
-<!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url().'assets/plugins/jQuery/jquery-2.2.3.min.js'?>"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="<?php echo base_url().'assets/bootstrap/js/bootstrap.min.js'?>"></script>
-<!-- Select2 -->
-<script src="<?php echo base_url().'assets/plugins/select2/select2.full.min.js'?>"></script>
-<!-- InputMask -->
-<script src="<?php echo base_url().'assets/plugins/input-mask/jquery.inputmask.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/input-mask/jquery.inputmask.date.extensions.js'?>"></script>
-<script src="<?php echo base_url().'assets/plugins/input-mask/jquery.inputmask.extensions.js'?>"></script>
-<!-- date-range-picker -->
-<script src="<?php echo base_url().'assets/plugins/daterangepicker/daterangepicker.js'?>"></script>
-<!-- bootstrap datepicker -->
-<script src="<?php echo base_url().'assets/plugins/datepicker/bootstrap-datepicker.js'?>"></script>
-<!-- bootstrap color picker -->
-<script src="<?php echo base_url().'assets/plugins/colorpicker/bootstrap-colorpicker.min.js'?>"></script>
-<!-- bootstrap time picker -->
-<script src="<?php echo base_url().'assets/plugins/timepicker/bootstrap-timepicker.min.js'?>"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="<?php echo base_url().'assets/plugins/slimScroll/jquery.slimscroll.min.js'?>"></script>
-<!-- iCheck 1.0.1 -->
-<script src="<?php echo base_url().'assets/plugins/iCheck/icheck.min.js'?>"></script>
-<!-- FastClick -->
-<script src="<?php echo base_url().'assets/plugins/fastclick/fastclick.js'?>"></script>
-<!-- AdminLTE App -->
-<script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url().'assets/dist/js/demo.js'?>"></script>
-<script src="<?php echo base_url().'assets/ckeditor/ckeditor.js'?>"></script>
-<script src="<?=base_url();?>public/js/plupload/plupload.full.min.js"></script>
-<!-- <script type="text/javascript" src="<?=base_url();?>public/js/application.js"></script> -->
+<!-- Include Pica resizing library -->
 <script src="https://cdn.jsdelivr.net/npm/pica@8.0.0/dist/pica.min.js"></script>
-<!-- Page script -->
 
 <script>
-  $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
+    document.addEventListener("DOMContentLoaded", function() {
+        const uploadFile = document.getElementById('uploadFile');
+        const uploadPlaceholder = document.getElementById('upload-placeholder');
+        const uploadPreviewContainer = document.getElementById('upload-preview-container');
+        const uploadPreview = document.getElementById('upload-preview');
+        const removeFileBtn = document.getElementById('remove-file-btn');
+        const uploadBtn = document.getElementById('upload');
+        const canvas = document.getElementById('canvas');
+        const pica = window.pica();
 
-    CKEDITOR.replace('ckeditor');
+        // Handle image selection preview
+        uploadFile.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    uploadPreview.src = event.target.result;
+                    uploadPlaceholder.classList.add('hidden');
+                    uploadPreviewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
+        // Handle image removal
+        removeFileBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            uploadFile.value = '';
+            uploadPreview.src = '';
+            uploadPlaceholder.classList.remove('hidden');
+            uploadPreviewContainer.classList.add('hidden');
+        });
 
-  });
-</script>
-<script>
-    let uploadBtn = document.getElementById('upload');
-    let fileInput = document.getElementById('uploadFile');
-    let canvas = document.getElementById('canvas');
-    let ctx = canvas.getContext('2d');
-    let pica = window.pica();
+        // Resize and upload logic
+        uploadBtn.addEventListener('click', function () {
+            const file = uploadFile.files[0];
+            const judul = document.getElementById('judul').value.trim();
 
-    uploadBtn.addEventListener('click', function () {
-        let file = fileInput.files[0];
-        if (!file) return alert('Pilih gambar terlebih dahulu!');
+            if (!judul) {
+                alert('Silakan masukkan judul slide terlebih dahulu!');
+                return;
+            }
+            if (!file) {
+                alert('Silakan pilih gambar terlebih dahulu!');
+                return;
+            }
 
-        let img = new Image();
-        img.src = URL.createObjectURL(file);
+            // Disable button during upload
+            uploadBtn.disabled = true;
+            uploadBtn.innerHTML = `
+                <span class="animate-spin inline-block w-4 h-4 border-2 border-current border-t-transparent text-white rounded-full"></span>
+                <span>Mengunggah...</span>
+            `;
 
-        img.onload = function () {
-            // Set ukuran canvas sesuai ukuran yang diinginkan
-            let newWidth = 800;
-            let newHeight = img.height * (newWidth / img.width); // Maintain aspect ratio
-            canvas.width = newWidth;
-            canvas.height = newHeight;
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
 
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
+            img.onload = function () {
+                // Set canvas size to scale down image to max width 800px
+                let newWidth = 800;
+                let newHeight = img.height * (newWidth / img.width);
+                canvas.width = newWidth;
+                canvas.height = newHeight;
 
-            pica.resize(img, canvas, {
-                quality: 3,
-            }).then(result => {
-                return pica.toBlob(result, 'image/jpeg', 0.8); // Convert canvas to Blob
-            }).then(blob => {
-                let formData = new FormData();
-                formData.append('file', blob, file.name);
-                formData.append('judul', document.getElementById('judul').value);
-                // formData.append('kategori', document.getElementById('kategori').value);
-
-                // Upload the resized image to the server
-                fetch('<?= base_url("admin/slide/uploadtoserver") ?>', {
-                    method: 'POST',
-                    body: formData
-                }).then(response => {
-                    return response.json();
+                pica.resize(img, canvas, {
+                    quality: 3,
                 }).then(result => {
-                    console.log('Success:', result);
+                    return pica.toBlob(result, 'image/jpeg', 0.85); // Convert canvas to Blob
+                }).then(blob => {
+                    const formData = new FormData();
+                    formData.append('file', blob, file.name);
+                    formData.append('judul', judul);
 
-                    // Check if upload and resize is successful
-                    if (result.status === 'success') {
-                        alert(result.message); // Show success message
-                        // location.reload(); // Refresh page after success
-                        window.location.href = '<?= base_url("admin/slide"); ?>'; // Redirect ke halaman admin/galeri
-                    }
-                }).catch(error => {
-                    console.error('Error:', error);
+                    // Upload the resized image to the server
+                    fetch('<?= base_url("admin/slideheader/uploadtoserver") ?>', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        return response.json();
+                    }).then(result => {
+                        console.log('Success:', result);
+
+                        if (result.status === 'success') {
+                            window.location.href = '<?= base_url("admin/slideheader"); ?>'; // Redirect to list page
+                        } else {
+                            alert('Gagal mengunggah: ' + (result.message || 'Error tidak diketahui'));
+                            resetBtn();
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan koneksi saat mengunggah.');
+                        resetBtn();
+                    });
+                }).catch(err => {
+                    console.error('Resize error:', err);
+                    resetBtn();
                 });
-            });
-        };
+            };
+        });
+
+        function resetBtn() {
+            uploadBtn.disabled = false;
+            uploadBtn.innerHTML = `
+                <span class="material-symbols-outlined text-lg">publish</span>
+                <span>Publikasikan Slide</span>
+            `;
+        }
     });
 </script>
-</body>
-</html>

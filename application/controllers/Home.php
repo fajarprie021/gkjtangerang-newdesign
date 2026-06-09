@@ -89,9 +89,11 @@ class Home extends CI_Controller{
 				$x['jadwal_ibadah']=$this->db->query("SELECT * FROM tbl_jadwal_ibadah WHERE jadwal_ibadah_status=1");
 		        $galeriHeaderArray = array();
 		        foreach ($x['isiGaleriHeader']->result() as $row) {
-			        $galeriHeaderArray[] = 'assets/images/header/'.$row->gambar;
+			        $galeriHeaderArray[] = $row->gambar;
 			    }
-			    // Menyimpan array ke dalam array utama
+			    if (empty($galeriHeaderArray)) {
+			        $galeriHeaderArray = array('image-slide-1.jpg', 'image-slide-2.jpg', 'image-slide-3.jpg', 'image-slide-4.jpg');
+			    }
     			$x['galeriHeaderArray'] = $galeriHeaderArray;
 		        // $gambar=$this->m_galeri->beritaGetAll2();
 		        // $x['images2'] = array(

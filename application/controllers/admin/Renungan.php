@@ -37,7 +37,11 @@ class Renungan extends CI_Controller{
     function simpan_renungan(){
 		$renungan_judul=strip_tags($this->input->post('xrenungan_judul'));
 		$deskripsi=$this->input->post('xdeskripsi');
-        $this->m_renungan->simpan_renungan($renungan_judul,$deskripsi);
+		$bacaan_alkitab=strip_tags($this->input->post('xbacaan_alkitab'));
+		$nats=$this->input->post('xnats');
+		$doa_pembuka=$this->input->post('xdoa_pembuka');
+		$pokok_doa=$this->input->post('xpokok_doa');
+        $this->m_renungan->simpan_renungan($renungan_judul,$deskripsi,$bacaan_alkitab,$nats,$doa_pembuka,$pokok_doa);
 		echo $this->session->set_flashdata('msg','success');
 		redirect('admin/renungan');
 	}
@@ -46,7 +50,11 @@ class Renungan extends CI_Controller{
 		$kode=strip_tags($this->input->post('kode'));
 		$renungan_judul=strip_tags($this->input->post('xrenungan_judul'));
 		$deskripsi=$this->input->post('xdeskripsi');
-		$this->m_renungan->update_renungan($kode,$renungan_judul,$deskripsi);
+		$bacaan_alkitab=strip_tags($this->input->post('xbacaan_alkitab'));
+		$nats=$this->input->post('xnats');
+		$doa_pembuka=$this->input->post('xdoa_pembuka');
+		$pokok_doa=$this->input->post('xpokok_doa');
+		$this->m_renungan->update_renungan($kode,$renungan_judul,$deskripsi,$bacaan_alkitab,$nats,$doa_pembuka,$pokok_doa);
 		echo $this->session->set_flashdata('msg','info');
 		redirect('admin/renungan');
 	}

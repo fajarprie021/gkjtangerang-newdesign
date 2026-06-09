@@ -20,7 +20,7 @@
         <!-- Featured Image -->
         <?php if(!empty($main_post['tulisan_gambar'])): ?>
         <div class="mb-16 overflow-hidden shadow-soft rounded-lg">
-            <img src="<?php echo base_url().'assets/images/'.$main_post['tulisan_gambar']?>" class="w-full h-auto object-cover" alt="Service Image">
+            <img src="<?php echo resolve_image($main_post['tulisan_gambar'], 'berita'); ?>" class="w-full h-auto object-cover" alt="Service Image">
         </div>
         <?php endif; ?>
 

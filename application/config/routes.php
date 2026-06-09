@@ -80,3 +80,12 @@ $route['admin/email'] = 'admin/identitas';
 $route['admin/socialmedia'] = 'admin/identitas';
 
 $route['pelayanan/(:any)'] = 'pelayanan/details/$1';
+$route['admin/slideheader'] = 'admin/SlideHeader';
+$route['admin/slideheader/(:any)'] = 'admin/SlideHeader/$1';
+$route['admin/slideheader/(:any)/(:any)'] = 'admin/SlideHeader/$1/$2';
+
+// route fallback for legacy /admin/slide links
+$route['admin/slide'] = 'admin/SlideHeader';
+$route['admin/slide/(:any)'] = 'admin/SlideHeader/$1';
+$route['admin/slide/(:any)/(:any)'] = 'admin/SlideHeader/$1/$2';
+$route['renungan/halaman/(:any)'] = 'renungan/halaman/$1';

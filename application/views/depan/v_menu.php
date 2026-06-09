@@ -70,6 +70,12 @@
                                                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
                                                         <?php endif; ?>
                                                     <?php elseif ($submenu->sub_menu_href == 'berita'): ?>
+                                                        <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog') ?>">
+                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                    <?php else: ?>
+                                                        <li class="sub-active"><a class="nav-link js-scroll-trigger" href="<?php echo base_url('blog/kategori/'.str_replace(" ","-",$submenu->sub_menu_href)) ?>">
+                                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i> <?php echo $submenu->nama_sub_menu ?></a></li>
+                                                    <?php endif; ?>
                                                 <?php elseif ($submenu->id_halaman == 2): ?>
                                                         <?php if(strtoupper($indexAllMenu->menu_name) == 'PELAYANAN'): ?>
                                                             <?php

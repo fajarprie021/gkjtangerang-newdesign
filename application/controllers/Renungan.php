@@ -88,56 +88,48 @@ class Renungan extends CI_Controller{
 		}
 	}
 
-	function halaman($slugs){
-		// echo "Slug - ".$slugs;
+	public function halaman($slug = null)
+	{
+		if (empty($slug)) {
+			show_404();
+			return;
+		}
+
+		if (is_numeric($slug)) {
+			$renungan = $this->db
+				->get_where('tbl_renungan', ['renungan_id' => $slug])
+				->row();
+		} else {
+			$renungan = $this->db
+				->get_where('tbl_renungan', ['renungan_slug' => $slug])
+				->row();
+		}
+
+		if (!$renungan) {
+			show_404();
+			return;
+		}
+
+		$x['renungan'] = $renungan;
 		$x['menu'] = $this->m_menu->get_all_menu();
 		$x['alamat'] = $this->m_profil->get_alamat();
 		$x['tlp'] = $this->m_profil->get_tlp();
 		$x['email'] = $this->m_profil->get_email();
 		$x['identitas'] = $this->m_profil->get_identitas();
-		$slug = htmlspecialchars($slugs, ENT_QUOTES);
-		$query = $this->db->get_where('tbl_renungan', array('renungan_slug' => $slug));
-		// echo "ISI - ".$query;
-		// echo "<br>";
-		// echo "CHECK - ".$this->db->get_compiled_select();
-		// echo "<br>";
-		// echo "Num Rows - ".$query->num_rows();
-		// $this->db->from('tbl_renungan');
-        // // Menambahkan kondisi where untuk slug
-        // $this->db->where('renungan_slug', $slug);
-		// // Menampilkan query yang dihasilkan
-		// echo "<br>";
-        // echo "CHECK - 1 - ".$this->db->get_compiled_select();  // Ini hanya untuk debugging
-		// // Setelah melihat query, Anda dapat menjalankan query untuk mendapatkan hasilnya
-        // $query = $this->db->get();  // Eksekusi query
-		// // Menampilkan jumlah baris hasil query
-		// echo "<br>";
-        // echo "Num Rows: " . $query->num_rows();
-		if ($query->num_rows() > 0) {
-			$b = $query->row_array();
-			$kode = $b['renungan_id'];
-			// $this->db->query("UPDATE tbl_renungan SET renungan_views=renungan_views+1 WHERE renungan_id='$kode'");
-			$data = $this->m_renungan->get_renungan_by_kode($kode);
-			$row = $data->row_array();
-			$x['id'] = $row['renungan_id'];
-			$x['title'] = $row['renungan_judul'];
-			// $x['image'] = $row['renungan_gambar'];
-			$x['blog'] = $row['renungan_deskripsi'];
-			$x['tanggal'] = $row['tanggal'];
-			$x['author'] = $row['renungan_author'];
-			// $x['kategori'] = $row['renungan_kategori_nama'];
-			$x['slug'] = $row['renungan_slug'];
-			// $x['show_komentar'] = $this->m_tulisan->show_komentar_by_tulisan_id($kode);
-			// $x['category']=$this->db->get('tbl_kategori');
-			// $x['category']=$this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status=1");
-			// $x['category'] = $this->db->query("SELECT * FROM tbl_kategori WHERE kategori_status_tampil=1");
-			// $x['populer'] = $this->db->query("SELECT * FROM tbl_renungan ORDER BY renungan_views DESC LIMIT 5");
-			$this->load->view('depan/v_menu', $x);
-			$this->load->view('depan/v_renungan_detail', $x);
-			$this->load->view('depan/v_footer', $x);
-		} else {
-			redirect('informasi/halaman/renungan');
-		}
+
+		$x['id'] = $renungan->renungan_id;
+		$x['title'] = $renungan->renungan_judul;
+		$x['blog'] = $renungan->renungan_deskripsi;
+		$x['tanggal'] = date('d/m/Y', strtotime($renungan->renungan_tanggal));
+		$x['author'] = $renungan->renungan_author;
+		$x['slug'] = $renungan->renungan_slug;
+		$x['bacaan_alkitab'] = isset($renungan->bacaan_alkitab) ? $renungan->bacaan_alkitab : '';
+		$x['nats'] = isset($renungan->nats) ? $renungan->nats : '';
+		$x['doa_pembuka'] = isset($renungan->doa_pembuka) ? $renungan->doa_pembuka : '';
+		$x['pokok_doa'] = isset($renungan->pokok_doa) ? $renungan->pokok_doa : '';
+
+		$x['content'] = 'depan/v_renungan_detail';
+		$this->load->view('layout/main', $x);
 	}
 
 }
